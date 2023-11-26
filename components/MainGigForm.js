@@ -8,13 +8,22 @@ export default function MainGigForm({
   formType,
   handleUpdateGig,
   employer,
+  date,
   handleCreateGig,
+  invoiced,
+  paid,
 }) {
+  const gigInitialDate = date ? new Date(date) : new Date();
   return (
     <View style={{ backgroundColor: "blue" }}>
       <Formik
         enableReinitialize={true}
-        initialValues={{ employer: employer, date: new Date() }}
+        initialValues={{
+          employer: employer,
+          date: gigInitialDate || new Date(),
+          paid: paid || false,
+          invoiced: invoiced || false,
+        }}
         onSubmit={(values) =>
           formType === "create"
             ? handleCreateGig(values)
@@ -39,7 +48,7 @@ export default function MainGigForm({
                   <Field type="checkbox" name="paid">
                     {({ field, form }) => (
                       <Switch
-                        value={field.value}
+                        value={values?.paid}
                         onValueChange={(value) =>
                           form.setFieldValue(field.name, value)
                         }
@@ -52,7 +61,7 @@ export default function MainGigForm({
                   <Field type="checkbox" name="invoiced">
                     {({ field, form }) => (
                       <Switch
-                        value={field.value}
+                        value={values?.invoiced}
                         onValueChange={(value) =>
                           form.setFieldValue(field.name, value)
                         }

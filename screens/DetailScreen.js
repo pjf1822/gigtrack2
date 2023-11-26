@@ -77,6 +77,9 @@ const DetailScreen = ({ route }) => {
         formType={"update"}
         handleUpdateGig={handleUpdateGig}
         employer={pageData.employer}
+        date={pageData.date}
+        invoiced={pageData.invoiced}
+        paid={pageData.paid}
       />
       <Button
         buttonStyle={{
