@@ -4,9 +4,7 @@ import { View } from "react-native";
 
 export const MyDatePicker = ({ name = "", value }) => {
   const [field, meta, helpers] = useField(name);
-
   const { setValue } = helpers;
-
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || value;
     setValue(currentDate);
@@ -20,6 +18,7 @@ export const MyDatePicker = ({ name = "", value }) => {
         display="spinner"
         onChange={onChange}
         style={{ height: 200, zIndex: 99 }}
+        textColor="black"
       />
     </View>
   );
