@@ -1,7 +1,6 @@
 import { View } from "react-native";
 import React, { useState, useEffect } from "react";
 import Toast from "react-native-root-toast";
-import { Button } from "@rneui/themed";
 import { deleteGig, fetchSingleGig, updateGig } from "../api";
 import { useNavigation } from "@react-navigation/native";
 import MainGigForm from "../components/MainGigForm";
@@ -42,9 +41,9 @@ const DetailScreen = ({ route }) => {
       );
     }
   };
-  const handleDeleteGig = async (_id) => {
+  const handleDeleteGig = async () => {
     try {
-      const response = await deleteGig(_id);
+      const response = await deleteGig(itemId);
       if (response.message === "Gig deleted successfully!") {
         let toast = Toast.show("Gig deleted!", {
           duration: Toast.durations.LONG,
@@ -80,14 +79,7 @@ const DetailScreen = ({ route }) => {
         date={pageData.date}
         invoiced={pageData.invoiced}
         paid={pageData.paid}
-      />
-      <Button
-        buttonStyle={{
-          backgroundColor: "rgba(214, 61, 57, 1)",
-          marginTop: 20,
-        }}
-        onPress={() => handleDeleteGig(itemId)}
-        title="Delete Gig"
+        handleDeleteGig={handleDeleteGig}
       />
     </View>
   );

@@ -12,10 +12,12 @@ export default function MainGigForm({
   handleCreateGig,
   invoiced,
   paid,
+  handleDeleteGig,
 }) {
   const gigInitialDate = date ? new Date(date) : new Date();
+
   return (
-    <View style={{ backgroundColor: "blue" }}>
+    <View style={formType !== "create" ? styles.nonLayoutWrapper : ""}>
       <Formik
         enableReinitialize={true}
         initialValues={{
@@ -32,17 +34,28 @@ export default function MainGigForm({
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
-            <Text>{String(values.date)}</Text>
-            <Text>{String(new Date())}</Text>
             <Text style={styles.label}>Employer:</Text>
             <TextInput
               style={styles.textInput}
               onChangeText={handleChange("employer")}
               onBlur={handleBlur("employer")}
               value={values?.employer}
+              keyboardAppearance={"dark"}
             />
-            {values?.date < new Date() && (
-              <View>
+            {values.employer === "" && (
+              <Text style={styles.astrikWarning}>
+                * Need to add an employer to submit the form
+              </Text>
+            )}
+
+            {values?.date < new Date() && formType !== "create" && (
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
                 <View style={styles.switchWrapper}>
                   <Text style={styles.label}>Paid:</Text>
                   <Field type="checkbox" name="paid">
@@ -78,6 +91,16 @@ export default function MainGigForm({
               style={{ paddingTop: 10 }}
               disabled={!values?.employer}
             />
+            {formType === "update" && (
+              <Button
+                buttonStyle={{
+                  backgroundColor: "rgba(214, 61, 57, 1)",
+                  marginTop: 20,
+                }}
+                onPress={() => handleDeleteGig(itemId)}
+                title="Delete Gig"
+              />
+            )}
           </View>
         )}
       </Formik>
@@ -94,10 +117,15 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginBottom: 10,
   },
+  astrikWarning: {
+    color: "red",
+    fontSize: 12,
+  },
   label: {
     fontSize: 16,
     marginBottom: 5,
   },
+
   switchWrapper: {
     marginTop: 0,
     marginBottom: 0,
@@ -107,5 +135,10 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+  },
+  nonLayoutWrapper: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 20,
   },
 });

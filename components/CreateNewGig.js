@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Overlay } from "@rneui/themed";
 import { View, StyleSheet } from "react-native";
 import MainGigForm from "./MainGigForm";
+import { createGig } from "../api";
 
 export const CreateNewGig = ({ getAllGigs }) => {
   const [visible, setVisible] = useState(false);
@@ -50,6 +51,5 @@ const styles = StyleSheet.create({
   overlay: {
     width: "90%",
     maxHeight: "90%",
-    backgroundColor: "#919191",
   },
 });
