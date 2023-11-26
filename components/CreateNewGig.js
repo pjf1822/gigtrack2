@@ -26,6 +26,7 @@ export const CreateNewGig = ({ getAllGigs }) => {
           getAllGigs={getAllGigs}
           formType={"create"}
           toggleOverlay={toggleOverlay}
+          employer={""}
         />
       </Overlay>
     </View>

@@ -7,13 +7,14 @@ import { Formik, Field } from "formik";
 import { MyDatePicker } from "../components/MyDatePicker";
 import { deleteGig, fetchSingleGig, updateGig } from "../api";
 import { useNavigation } from "@react-navigation/native";
+import MainGigForm from "../components/MainGigForm";
 
 const DetailScreen = ({ route }) => {
   const { itemId } = route.params;
   const [pageData, setPageData] = useState({});
   const navigation = useNavigation();
 
-  const handleFormSubmit = async (values) => {
+  const handleUpdateGig = async (values) => {
     try {
       const response = await updateGig(itemId, values);
       if (response.message === "Gig updated successfully!") {
@@ -75,7 +76,7 @@ const DetailScreen = ({ route }) => {
         justifyContent: "space-between",
       }}
     >
-      {Object.keys(pageData).length > 0 && (
+      {/* {Object.keys(pageData).length > 0 && (
         <Formik
           initialValues={{
             employer: pageData?.employer,
@@ -83,7 +84,7 @@ const DetailScreen = ({ route }) => {
             paid: pageData?.paid,
             invoiced: pageData?.invoiced,
           }}
-          onSubmit={(values) => handleFormSubmit(values)}
+          onSubmit={(values) => handleUpdateGig(values)}
         >
           {({ handleChange, handleBlur, handleSubmit, values }) => (
             <View
@@ -144,7 +145,13 @@ const DetailScreen = ({ route }) => {
             </View>
           )}
         </Formik>
-      )}
+      )} */}
+
+      <MainGigForm
+        formType={"update"}
+        handleUpdateGig={handleUpdateGig}
+        employer={pageData.employer}
+      />
       <Button
         buttonStyle={{
           backgroundColor: "rgba(214, 61, 57, 1)",

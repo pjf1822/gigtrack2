@@ -5,23 +5,34 @@ import { MyDatePicker } from "./MyDatePicker";
 import { Formik, Field } from "formik";
 import { createGig } from "../api";
 
-export default function MainGigForm({ getAllGigs, formType, toggleOverlay }) {
-  const handleFormSubmit = async (values) => {
-    console.log(values, "the values");
+export default function MainGigForm({
+  getAllGigs,
+  formType,
+  toggleOverlay,
+  handleUpdateGig,
+  employer,
+}) {
+  console.log(employer);
+  const handleCreateGig = async (values) => {
     try {
       const response = await createGig(values);
-      console.log("response");
       await getAllGigs();
       toggleOverlay();
     } catch (error) {
       console.error("Error creating gig:", error);
     }
   };
+
   return (
     <View>
       <Formik
-        initialValues={{ employer: "", date: new Date() }}
-        onSubmit={(values) => handleFormSubmit(values)}
+        enableReinitialize={true}
+        initialValues={{ employer: employer, date: new Date() }}
+        onSubmit={(values) =>
+          formType === "create"
+            ? handleCreateGig(values)
+            : handleUpdateGig(values)
+        }
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
@@ -68,7 +79,7 @@ export default function MainGigForm({ getAllGigs, formType, toggleOverlay }) {
             <MyDatePicker name="date" value={values?.date} />
             <Button
               onPress={handleSubmit}
-              title={formType === "create" ? "Add Gig" : "idk"}
+              title={formType === "create" ? "Add Gig" : "Update Gig"}
               style={{ paddingTop: 10 }}
               disabled={!values?.employer}
             />
