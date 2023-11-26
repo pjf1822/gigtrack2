@@ -97,7 +97,7 @@ const DetailScreen = ({ route }) => {
               <TextInput
                 style={styles.textInput}
                 onChangeText={handleChange("employer")}
-                onBlur={handleBlur("employerrrrerer")}
+                onBlur={handleBlur("employer")}
                 value={values.employer}
               />
 
