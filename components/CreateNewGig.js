@@ -9,6 +9,15 @@ export const CreateNewGig = ({ getAllGigs }) => {
   const toggleOverlay = () => {
     setVisible(!visible);
   };
+  const handleCreateGig = async (values) => {
+    try {
+      const response = await createGig(values);
+      await getAllGigs();
+      toggleOverlay();
+    } catch (error) {
+      console.error("Error creating gig:", error);
+    }
+  };
 
   return (
     <View>
@@ -27,6 +36,7 @@ export const CreateNewGig = ({ getAllGigs }) => {
           formType={"create"}
           toggleOverlay={toggleOverlay}
           employer={""}
+          handleCreateGig={handleCreateGig}
         />
       </Overlay>
     </View>

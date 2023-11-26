@@ -3,28 +3,15 @@ import { Button } from "@rneui/themed";
 import { Switch } from "react-native-paper";
 import { MyDatePicker } from "./MyDatePicker";
 import { Formik, Field } from "formik";
-import { createGig } from "../api";
 
 export default function MainGigForm({
-  getAllGigs,
   formType,
-  toggleOverlay,
   handleUpdateGig,
   employer,
+  handleCreateGig,
 }) {
-  console.log(employer);
-  const handleCreateGig = async (values) => {
-    try {
-      const response = await createGig(values);
-      await getAllGigs();
-      toggleOverlay();
-    } catch (error) {
-      console.error("Error creating gig:", error);
-    }
-  };
-
   return (
-    <View>
+    <View style={{ backgroundColor: "blue" }}>
       <Formik
         enableReinitialize={true}
         initialValues={{ employer: employer, date: new Date() }}
@@ -38,7 +25,6 @@ export default function MainGigForm({
           <View>
             <Text>{String(values.date)}</Text>
             <Text>{String(new Date())}</Text>
-
             <Text style={styles.label}>Employer:</Text>
             <TextInput
               style={styles.textInput}
