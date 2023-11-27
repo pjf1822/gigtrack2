@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { colors } from "../theme";
-import { ListItem, Badge } from "@rneui/themed";
+import { ListItem, Badge, Icon } from "@rneui/themed";
 
 export const HomePageListItem = ({ item, navigation }) => {
   const itemDate = new Date(item.date);
@@ -48,14 +48,12 @@ export const HomePageListItem = ({ item, navigation }) => {
         {itemDate <= today && (
           <View style={styles?.badges}>
             <Badge
-              //   status={item?.paid ? "success" : "error"}
               value={item?.paid ? "paid" : "not paid"}
               badgeStyle={{
                 backgroundColor: item?.paid ? colors.green : colors.terraCotta,
               }}
             />
             <Badge
-              //   status={item?.invoiced ? "success" : "error"}
               value={item?.invoiced ? "Invoiced" : "Not Invoiced"}
               badgeStyle={{
                 backgroundColor: item?.invoiced
@@ -67,10 +65,11 @@ export const HomePageListItem = ({ item, navigation }) => {
         )}
 
         <Text>Edit</Text>
-        <ListItem.Chevron
+        <Icon
+          name="chevron-right"
           style={{
             alignSelf: "center",
-            transform: "translateY(4px)",
+            color: colors.blue,
           }}
         />
       </ListItem>

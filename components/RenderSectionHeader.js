@@ -26,11 +26,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.blue,
     borderTopColor: colors.blue,
+    borderTopWidth: 1,
   },
   headerText: {
     fontSize: 18,
-    fontWeight: "bold",
+    color: colors.blue,
   },
+
   defaultHeader: {
     backgroundColor: colors.terraCotta,
   },
