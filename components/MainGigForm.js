@@ -76,6 +76,7 @@ export default function MainGigForm({
                         onValueChange={(value) =>
                           form.setFieldValue(field.name, value)
                         }
+                        color={colors.green}
                       />
                     )}
                   </Field>
@@ -89,6 +90,7 @@ export default function MainGigForm({
                         onValueChange={(value) =>
                           form.setFieldValue(field.name, value)
                         }
+                        color={colors.green}
                       />
                     )}
                   </Field>
@@ -102,15 +104,11 @@ export default function MainGigForm({
               style={{ paddingTop: 10 }}
               disabled={!values?.employer}
               buttonStyle={{ backgroundColor: colors.green }}
-              // disabledStyle={{
-              //   backgroundColor: colors.terraCotta,
-              //   color: colors.blue,
-              // }}
             />
             {formType === "update" && (
               <Button
                 buttonStyle={{
-                  backgroundColor: "rgba(214, 61, 57, 1)",
+                  backgroundColor: colors.terraCotta,
                   marginTop: 20,
                 }}
                 onPress={() => handleDeleteGig()}
