@@ -1,18 +1,21 @@
 // format the data
-const generateSections = (dataList) => {
+export const generateSections = (dataList) => {
   const now = new Date();
-  const currentMonth = now.getUTCMonth(); // Get current month as a number
+  const currentMonth = now.getUTCMonth();
+  const currentYear = now.getUTCFullYear(); // Get current year
 
-  // Function to calculate the "weight" of a month relative to the current month
-  const monthWeight = (month) => {
-    const monthIndex = new Date(`${month} 1, 2000`).getUTCMonth();
-    return (monthIndex + 12 - currentMonth) % 12;
+  // Function to calculate the "weight" of a month relative to the current month and year
+  const monthWeight = (date) => {
+    const monthIndex = date.getUTCMonth();
+    const yearDiff = date.getUTCFullYear() - currentYear;
+    return monthIndex - currentMonth + 12 * yearDiff;
   };
 
   return dataList
     .reduce((acc, item) => {
       const date = new Date(item.date);
-      const month = date.toLocaleString("default", { month: "long" });
+      const month = date.toLocaleString("en-US", { month: "long" });
+
       if (date > now) {
         let upcomingSection = acc.find((sec) => sec.month === "Upcoming Dates");
 
@@ -25,18 +28,17 @@ const generateSections = (dataList) => {
           (a, b) => new Date(b.date) - new Date(a.date)
         );
       } else {
-        const section = acc.find((sec) => sec.month === month);
+        const section = acc.find((sec) => sec?.month === month);
         if (section) {
-          section.data.push(item);
+          section?.data?.push(item);
         } else {
           acc.push({
             month: month,
             data: [item],
-            weight: monthWeight(month),
+            weight: monthWeight(date),
           });
         }
       }
-
       return acc;
     }, [])
     .sort((a, b) => b.weight - a.weight); // Sort sections based on the weight

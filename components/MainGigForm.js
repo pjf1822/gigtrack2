@@ -97,7 +97,7 @@ export default function MainGigForm({
                   backgroundColor: "rgba(214, 61, 57, 1)",
                   marginTop: 20,
                 }}
-                onPress={() => handleDeleteGig(itemId)}
+                onPress={() => handleDeleteGig()}
                 title="Delete Gig"
               />
             )}
