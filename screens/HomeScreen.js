@@ -1,4 +1,4 @@
-import { View, SectionList } from "react-native";
+import { View, SectionList, ScrollView } from "react-native";
 import React, { useState, useEffect, useCallback } from "react";
 import "react-native-gesture-handler";
 import { fetchGigs } from "../api";
@@ -57,8 +57,8 @@ export default function HomeScreen({ navigation }) {
           <HomePageListItem item={item} navigation={navigation} />
         )}
         renderSectionHeader={RenderSectionHeader}
+        ListFooterComponent={<CreateNewGig getAllGigs={getAllGigs} />}
       />
-      <CreateNewGig getAllGigs={getAllGigs} />
     </View>
   );
 }

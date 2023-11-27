@@ -29,4 +29,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  defaultHeader: {
+    backgroundColor: "#807e7e",
+  },
+  upcomingHeader: {
+    backgroundColor: "#f0f0f0",
+  },
 });
