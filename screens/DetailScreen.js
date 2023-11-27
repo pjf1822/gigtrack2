@@ -4,6 +4,7 @@ import Toast from "react-native-root-toast";
 import { deleteGig, fetchSingleGig, updateGig } from "../api";
 import { useNavigation } from "@react-navigation/native";
 import MainGigForm from "../components/MainGigForm";
+import { colors } from "../theme";
 
 const DetailScreen = ({ route }) => {
   const { itemId } = route.params;
@@ -68,8 +69,9 @@ const DetailScreen = ({ route }) => {
   return (
     <View
       style={{
-        flex: 0.8,
+        flex: 1,
         justifyContent: "space-between",
+        backgroundColor: colors.blue,
       }}
     >
       <MainGigForm
