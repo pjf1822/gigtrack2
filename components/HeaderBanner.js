@@ -11,7 +11,8 @@ export default function HeaderBanner() {
     <Header
       containerStyle={{
         paddingTop: heightPercentageToDP(7),
-        height: heightPercentageToDP(35),
+        height: heightPercentageToDP(15),
+        backgroundColor: "#3D405B",
       }}
       centerComponent={{
         text: "GIG TRACK",
