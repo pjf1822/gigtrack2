@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-
+import { colors } from "../theme";
 import { ListItem, Badge } from "@rneui/themed";
 
 export const HomePageListItem = ({ item, navigation }) => {
@@ -19,7 +19,7 @@ export const HomePageListItem = ({ item, navigation }) => {
       <ListItem
         bottomDivider
         topDivider
-        containerStyle={{ backgroundColor: "#F4F1DE" }}
+        containerStyle={{ backgroundColor: colors.beige }}
       >
         <ListItem.Content style={{ maxWidth: 400 }}>
           {itemDate > today ? (
@@ -51,14 +51,16 @@ export const HomePageListItem = ({ item, navigation }) => {
               //   status={item?.paid ? "success" : "error"}
               value={item?.paid ? "paid" : "not paid"}
               badgeStyle={{
-                backgroundColor: item?.paid ? "#81B29A" : "#E07A5F",
+                backgroundColor: item?.paid ? colors.green : colors.terraCotta,
               }}
             />
             <Badge
               //   status={item?.invoiced ? "success" : "error"}
               value={item?.invoiced ? "Invoiced" : "Not Invoiced"}
               badgeStyle={{
-                backgroundColor: item?.invoiced ? "#81B29A" : "#E07A5F",
+                backgroundColor: item?.invoiced
+                  ? colors.green
+                  : colors.terraCotta,
               }}
             />
           </View>
@@ -80,7 +82,6 @@ const styles = StyleSheet.create({
   headerContainer: {
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#3D405B",
   },
   headerText: {
     fontSize: 18,
