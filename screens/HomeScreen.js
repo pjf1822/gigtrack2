@@ -1,4 +1,4 @@
-import { View, Text, SectionList, StyleSheet } from "react-native";
+import { View, SectionList } from "react-native";
 import React, { useState, useEffect, useCallback } from "react";
 import "react-native-gesture-handler";
 import { fetchGigs } from "../api";
@@ -6,6 +6,7 @@ import { CreateNewGig } from "../components/CreateNewGig";
 import { useFocusEffect } from "@react-navigation/native";
 import { generateSections } from "../helpers";
 import { HomePageListItem } from "../components/HomePageListItem";
+import { RenderSectionHeader } from "../components/RenderSectionHeader";
 
 export default function HomeScreen({ navigation }) {
   const [sections, setSections] = useState([]);
@@ -41,26 +42,6 @@ export default function HomeScreen({ navigation }) {
     }
   }, [allGigs]);
 
-  // SECTION HEADERS
-  const renderSectionHeader = ({ section }) => {
-    console.log(section);
-    const headerStyle =
-      section.month === "Upcoming Dates"
-        ? styles.upcomingHeader
-        : styles.defaultHeader;
-
-    return (
-      <View style={[styles.headerContainer, headerStyle]}>
-        {section.month !== "Upcoming Dates" ? (
-          <Text style={styles.headerText}>
-            {section.month} / {section.data[0].date.slice(2, 4)}
-          </Text>
-        ) : (
-          <Text style={styles.headerText}>{section.month} </Text>
-        )}
-      </View>
-    );
-  };
   useFocusEffect(
     useCallback(() => {
       getAllGigs();
@@ -75,36 +56,9 @@ export default function HomeScreen({ navigation }) {
         renderItem={({ item }) => (
           <HomePageListItem item={item} navigation={navigation} />
         )}
-        renderSectionHeader={renderSectionHeader}
+        renderSectionHeader={RenderSectionHeader}
       />
       <CreateNewGig getAllGigs={getAllGigs} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  headerContainer: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
-  },
-  headerText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  badges: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-end",
-  },
-  dates: {
-    display: "flex",
-    flexDirection: "row",
-  },
-  upcomingHeader: {
-    backgroundColor: "#f0f0f0",
-  },
-  defaultHeader: {
-    backgroundColor: "#807e7e",
-  },
-});
