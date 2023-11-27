@@ -6,14 +6,15 @@ export const generateSections = (dataList) => {
 
   // Function to calculate the "weight" of a month relative to the current month and year
   const monthWeight = (date) => {
-    const monthIndex = date.getUTCMonth();
     const yearDiff = date.getUTCFullYear() - currentYear;
-    return monthIndex - currentMonth + 12 * yearDiff;
+    const monthIndex = date.getUTCMonth();
+    return yearDiff * 12 + monthIndex - currentMonth;
   };
 
   return dataList
     .reduce((acc, item) => {
       const date = new Date(item.date);
+      const year = date.getUTCFullYear();
       const month = date.toLocaleString("en-US", { month: "long" });
 
       if (date > now) {
@@ -28,11 +29,14 @@ export const generateSections = (dataList) => {
           (a, b) => new Date(b.date) - new Date(a.date)
         );
       } else {
-        const section = acc.find((sec) => sec?.month === month);
+        const section = acc.find(
+          (sec) => sec?.year === year && sec?.month === month
+        );
         if (section) {
           section?.data?.push(item);
         } else {
           acc.push({
+            year: year,
             month: month,
             data: [item],
             weight: monthWeight(date),
