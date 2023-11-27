@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  SectionList,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 import { ListItem, Badge } from "@rneui/themed";
 
@@ -22,7 +16,11 @@ export const HomePageListItem = ({ item, navigation }) => {
     <TouchableOpacity
       onPress={() => navigation.navigate("Details", { itemId: item._id })}
     >
-      <ListItem bottomDivider topDivider>
+      <ListItem
+        bottomDivider
+        topDivider
+        containerStyle={{ backgroundColor: "#F4F1DE" }}
+      >
         <ListItem.Content style={{ maxWidth: 400 }}>
           {itemDate > today ? (
             <View style={styles.dates}>
@@ -50,12 +48,18 @@ export const HomePageListItem = ({ item, navigation }) => {
         {itemDate <= today && (
           <View style={styles?.badges}>
             <Badge
-              status={item?.paid ? "success" : "error"}
+              //   status={item?.paid ? "success" : "error"}
               value={item?.paid ? "paid" : "not paid"}
+              badgeStyle={{
+                backgroundColor: item?.paid ? "#81B29A" : "#E07A5F",
+              }}
             />
             <Badge
-              status={item?.invoiced ? "success" : "error"}
+              //   status={item?.invoiced ? "success" : "error"}
               value={item?.invoiced ? "Invoiced" : "Not Invoiced"}
+              badgeStyle={{
+                backgroundColor: item?.invoiced ? "#81B29A" : "#E07A5F",
+              }}
             />
           </View>
         )}
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
+    borderBottomColor: "#3D405B",
   },
   headerText: {
     fontSize: 18,
@@ -90,11 +94,5 @@ const styles = StyleSheet.create({
   dates: {
     display: "flex",
     flexDirection: "row",
-  },
-  upcomingHeader: {
-    backgroundColor: "#f0f0f0",
-  },
-  defaultHeader: {
-    backgroundColor: "#807e7e",
   },
 });

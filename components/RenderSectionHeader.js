@@ -30,9 +30,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   defaultHeader: {
-    backgroundColor: "#807e7e",
+    backgroundColor: "#E07A5F",
   },
   upcomingHeader: {
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#81B29A",
   },
 });
