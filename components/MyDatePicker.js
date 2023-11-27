@@ -1,6 +1,7 @@
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useField } from "formik";
 import { View } from "react-native";
+import { colors } from "../theme";
 
 export const MyDatePicker = ({ name = "", value }) => {
   const [field, meta, helpers] = useField(name);
@@ -18,7 +19,7 @@ export const MyDatePicker = ({ name = "", value }) => {
         display="spinner"
         onChange={onChange}
         style={{ height: 200, zIndex: 99 }}
-        textColor="black"
+        textColor={colors.beige}
       />
     </View>
   );

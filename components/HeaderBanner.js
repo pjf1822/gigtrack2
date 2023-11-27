@@ -14,6 +14,8 @@ export default function HeaderBanner() {
         paddingTop: heightPercentageToDP(7),
         height: heightPercentageToDP(15),
         backgroundColor: colors.blue,
+        borderBottomColor: colors.blue,
+        borderBottomWidth: 3,
       }}
       centerComponent={{
         text: "GIG TRACK",
