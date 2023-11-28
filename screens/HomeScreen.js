@@ -8,6 +8,7 @@ import { generateSections } from "../helpers";
 import { HomePageListItem } from "../components/HomePageListItem";
 import { RenderSectionHeader } from "../components/RenderSectionHeader";
 import { colors } from "../theme";
+import NoGigs from "../components/NoGigs";
 
 export default function HomeScreen({ navigation }) {
   const [sections, setSections] = useState([]);
@@ -49,6 +50,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={{ backgroundColor: colors.beige, flex: 1 }}>
+      {allGigs.length === 0 && <NoGigs />}
       <SectionList
         sections={sections}
         keyExtractor={(item, index) => index.toString()}
