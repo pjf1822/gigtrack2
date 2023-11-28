@@ -17,7 +17,7 @@ export default function HomeScreen({ navigation }) {
     try {
       const data = await fetchGigs();
 
-      const filteredData = data.map((item) => {
+      const filteredData = data?.map((item) => {
         const { __v, ...rest } = item;
         return rest;
       });
@@ -37,10 +37,8 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   useEffect(() => {
-    if (allGigs.length > 0) {
-      const generatedSections = generateSections(allGigs);
-      setSections(generatedSections);
-    }
+    const generatedSections = generateSections(allGigs);
+    setSections(generatedSections);
   }, [allGigs]);
 
   useFocusEffect(
@@ -55,7 +53,11 @@ export default function HomeScreen({ navigation }) {
         sections={sections}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <HomePageListItem item={item} navigation={navigation} />
+          <HomePageListItem
+            item={item}
+            navigation={navigation}
+            getAllGigs={getAllGigs}
+          />
         )}
         renderSectionHeader={RenderSectionHeader}
         ListFooterComponent={<CreateNewGig getAllGigs={getAllGigs} />}

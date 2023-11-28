@@ -4,10 +4,10 @@
     "slug": "expo-two",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/hijab.png",
+    "icon": "./assets/hijab.jpg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/hijab.png",
+      "image": "./assets/hijab.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#F4F1DE"
     },
