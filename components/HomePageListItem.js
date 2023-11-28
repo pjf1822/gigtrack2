@@ -82,7 +82,7 @@ export const HomePageListItem = ({ item, navigation }) => {
           </View>
         )}
 
-        <Text style={([styles.datesFont], { transform: "translateX(10px)" })}>
+        <Text style={[styles.datesFont, { transform: "translateX(10px)" }]}>
           Edit
         </Text>
         <Icon
