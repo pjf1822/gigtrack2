@@ -9,7 +9,7 @@ export const HomePageListItem = ({ item, navigation }) => {
   today.setHours(0, 0, 0, 0); // Reset time to compare dates only
 
   const dayOfMonth = itemDate.getUTCDate();
-  const monthNumber = itemDate.getUTCMonth() + 1; // Add 1 to get the correct month number
+  const monthNumber = itemDate.getUTCMonth() + 1;
   const year = itemDate.getUTCFullYear();
 
   return (
@@ -56,9 +56,14 @@ export const HomePageListItem = ({ item, navigation }) => {
             {item?.employer}
           </ListItem.Title>
         </ListItem.Content>
-        {/* <ListItem.Content>
-          <ListItem.Title>{item?.rate}</ListItem.Title>
-        </ListItem.Content> */}
+        {item?.rate && (
+          <ListItem.Content>
+            <ListItem.Title style={styles.datesFont}>
+              {item?.rate}$
+            </ListItem.Title>
+          </ListItem.Content>
+        )}
+
         {itemDate <= today && (
           <View style={styles?.badges}>
             <Badge

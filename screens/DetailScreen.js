@@ -77,10 +77,11 @@ const DetailScreen = ({ route }) => {
       <MainGigForm
         formType={"update"}
         handleUpdateGig={handleUpdateGig}
-        employer={pageData.employer}
-        date={pageData.date}
-        invoiced={pageData.invoiced}
-        paid={pageData.paid}
+        employer={pageData?.employer}
+        date={pageData?.date}
+        invoiced={pageData?.invoiced}
+        paid={pageData?.paid}
+        rate={pageData?.rate}
         handleDeleteGig={handleDeleteGig}
       />
     </View>
