@@ -64,6 +64,7 @@ export default function MainGigForm({
                 borderRadius: "10%",
               }}
             >
+              <Text style={styles.label}>Day Rate:</Text>
               <CurrencyInput
                 value={values?.rate}
                 onChangeValue={(input) => {
@@ -78,7 +79,6 @@ export default function MainGigForm({
                 minValue={0}
                 style={styles.textInput}
               />
-
               <Text style={styles.label}>Employer:</Text>
               <TextInput
                 style={styles.textInput}
@@ -92,7 +92,6 @@ export default function MainGigForm({
                   * Need to add an employer to submit the form
                 </Text>
               )}
-
               {values?.date < new Date() && formType !== "create" && (
                 <View
                   style={{
