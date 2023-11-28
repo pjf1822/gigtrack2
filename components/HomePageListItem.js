@@ -6,12 +6,11 @@ import { ListItem, Badge, Icon } from "@rneui/themed";
 export const HomePageListItem = ({ item, navigation }) => {
   const itemDate = new Date(item.date);
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // Reset time to compare dates only
-
+  today.setUTCHours(0, 0, 0, 0); // Reset time to compare dates only
+  itemDate.setUTCHours(0, 0, 0, 0);
   const dayOfMonth = itemDate.getUTCDate();
   const monthNumber = itemDate.getUTCMonth() + 1;
   const year = itemDate.getUTCFullYear();
-
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("Details", { itemId: item._id })}
@@ -22,6 +21,7 @@ export const HomePageListItem = ({ item, navigation }) => {
         containerStyle={{
           backgroundColor: colors.beige,
           display: "flex",
+          flexDirection: "row",
         }}
       >
         <ListItem.Content style={{ maxWidth: 80, flex: 2 }}>
@@ -37,7 +37,6 @@ export const HomePageListItem = ({ item, navigation }) => {
             <View style={styles.dateWrapper}>
               <Text style={styles.datesFont}>
                 {monthNumber}/{dayOfMonth}
-                {/* {`/${year}`} */}
               </Text>
             </View>
           )}
@@ -50,25 +49,25 @@ export const HomePageListItem = ({ item, navigation }) => {
                 flexDirection: "row",
                 textAlign: "left",
                 color: colors.blue,
-                fontSize: 13,
+                fontSize: itemDate < today ? 13 : 16,
               },
             ]}
           >
             {item?.employer}
           </ListItem.Title>
         </ListItem.Content>
-        {/* {item?.rate && (
-          <ListItem.Content style={{ flex: 1, backgroundColor: "white" }}>
+        {item?.rate && itemDate < today && (
+          <ListItem.Content style={{ flex: 2 }}>
             <ListItem.Title style={styles.datesFont}>
               {item?.rate}$
             </ListItem.Title>
           </ListItem.Content>
-        )} */}
+        )}
 
         {itemDate <= today && (
-          <ListItem.Content style={[styles.badges, { flex: 2.3 }]}>
+          <ListItem.Content style={[styles.badges, { flex: 2.6 }]}>
             <Badge
-              value={item?.paid ? "paid" : "not paid"}
+              value={item?.paid ? "Paid" : "Not Paid"}
               badgeStyle={{
                 backgroundColor: item?.paid ? colors.green : colors.terraCotta,
                 padding: 2,
@@ -92,7 +91,8 @@ export const HomePageListItem = ({ item, navigation }) => {
           style={{
             display: "flex",
             flexDirection: "row",
-            flex: 2,
+            flex: 1.5,
+            justifyContent: "flex-end",
           }}
         >
           <Text style={[styles.datesFont, styles.editFont]}>Edit</Text>
