@@ -40,7 +40,7 @@ export const createGig = [
 
     try {
       await gig.save();
-      return res.json({ gig });
+      return res.json({ gig, message: "Gig created successfully!" });
     } catch (error) {
       res.status(500).json({ message: "Error creating gig" });
     }
