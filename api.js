@@ -54,7 +54,6 @@ const createGig = async (payload) => {
 };
 
 const updateGig = async (_id, payload) => {
-  console.log("are we in here");
   try {
     const res = await fetch(`http://${serverIp}:8000/api/gigs/${_id}`, {
       method: "PUT",

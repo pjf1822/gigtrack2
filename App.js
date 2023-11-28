@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#F4F1DE" }}>
       <RootSiblingParent>
         <NavigationContainer>
           <HeaderBanner />

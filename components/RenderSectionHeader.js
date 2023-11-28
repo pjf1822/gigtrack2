@@ -1,5 +1,6 @@
 // SECTION HEADERS
 import { View, Text, StyleSheet } from "react-native";
+import { colors } from "../theme";
 
 export const RenderSectionHeader = ({ section }) => {
   const headerStyle =
@@ -23,16 +24,19 @@ const styles = StyleSheet.create({
   headerContainer: {
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
+    borderBottomColor: colors.blue,
+    borderTopColor: colors.blue,
+    borderTopWidth: 1,
   },
   headerText: {
     fontSize: 18,
-    fontWeight: "bold",
+    color: colors.blue,
   },
+
   defaultHeader: {
-    backgroundColor: "#E07A5F",
+    backgroundColor: colors.terraCotta,
   },
   upcomingHeader: {
-    backgroundColor: "#81B29A",
+    backgroundColor: colors.green,
   },
 });
