@@ -59,7 +59,7 @@ export default function MainGigForm({
                 borderRadius: "10%",
               }}
             >
-              <Text style={styles.label}>Rate:</Text>
+              <Text style={styles.label}>Rate: {values?.rate}$</Text>
 
               <TextInput
                 style={styles.textInput}
