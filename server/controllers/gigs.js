@@ -12,7 +12,7 @@ export const getAllGigs = async (req, res, next) => {
 
 export const getSingleGig = async (req, res, next) => {
   try {
-    const gig = await Gig.findById(req.params._id);
+    const gig = await Gig.findById(req?.params?._id);
     res.json(gig);
   } catch (error) {
     res.status(400).json({ message: "Error fetching gig" });
@@ -21,7 +21,6 @@ export const getSingleGig = async (req, res, next) => {
 export const createGig = [
   body("employer").notEmpty().withMessage("Employer is required"),
   body("date").isISO8601().withMessage("Invalid date format"),
-  body("rate").optional().isNumeric().withMessage("Invalid rate"),
 
   async (req, res, next) => {
     // Check for validation errors
@@ -48,14 +47,21 @@ export const createGig = [
 ];
 
 export const updateGig = [
-  // Validate the request parameter
   param("_id").isMongoId().withMessage("Invalid MongoDB ID"),
-  body("employer").optional().notEmpty().withMessage("Employer is required"),
-  body("date").optional().isISO8601().withMessage("Invalid date format"),
-  body("rate").optional().isNumeric().withMessage("Invalid rate"),
+  body("employer").notEmpty().withMessage("Employer is required"),
+  body("date").isISO8601().withMessage("Invalid date format"),
+  body("rate")
+    .optional()
+    .isString()
+    .isDecimal()
+    .withMessage("Rate must be a string containing a valid decimal number"),
+  body("paid").optional().isBoolean().withMessage("Paid must be a boolean"),
+  body("invoiced")
+    .optional()
+    .isBoolean()
+    .withMessage("Invoiced must be a boolean"),
 
   async (req, res, next) => {
-    // Check for validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -64,13 +70,15 @@ export const updateGig = [
     const { _id } = req.params;
     try {
       const updatedFields = {
-        ...(req.body.employer && { employer: req.body.employer }),
-        ...(req.body.date && { date: req.body.date }),
-        ...(typeof req.body.paid !== "undefined" && { paid: req.body.paid }),
-        ...(typeof req.body.invoiced !== "undefined" && {
-          invoiced: req.body.invoiced,
+        ...(req?.body?.employer && { employer: req?.body?.employer }),
+        ...(req?.body?.date && { date: req?.body?.date }),
+        ...(typeof req?.body?.paid !== "undefined" && {
+          paid: req?.body?.paid,
         }),
-        ...(req.body.rate && { rate: req.body.rate }),
+        ...(typeof req?.body?.invoiced !== "undefined" && {
+          invoiced: req?.body?.invoiced,
+        }),
+        ...(req?.body?.rate && { rate: req?.body?.rate }),
       };
 
       const gig = await Gig.findByIdAndUpdate(_id, updatedFields, {
@@ -89,16 +97,13 @@ export const updateGig = [
 ];
 
 export const deleteGig = [
-  // Validate the request parameter
   param("_id").isMongoId().withMessage("Invalid MongoDB ID"),
 
   async (req, res, next) => {
-    // Check for validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
     const { _id } = req.params;
 
     try {
