@@ -3,6 +3,7 @@ import { Button } from "@rneui/themed";
 import { Switch } from "react-native-paper";
 import { MyDatePicker } from "./MyDatePicker";
 import { Formik, Field } from "formik";
+import { colors } from "../theme";
 
 export default function MainGigForm({
   formType,
@@ -17,7 +18,12 @@ export default function MainGigForm({
   const gigInitialDate = date ? new Date(date) : new Date();
 
   return (
-    <View style={formType !== "create" ? styles.nonLayoutWrapper : ""}>
+    <View
+      style={[
+        formType !== "create" ? styles.nonLayoutWrapper : "",
+        styles.formWrapper,
+      ]}
+    >
       <Formik
         enableReinitialize={true}
         initialValues={{
@@ -33,7 +39,12 @@ export default function MainGigForm({
         }
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
-          <View>
+          <View
+            style={{
+              padding: 10,
+              borderRadius: "10%",
+            }}
+          >
             <Text style={styles.label}>Employer:</Text>
             <TextInput
               style={styles.textInput}
@@ -65,6 +76,7 @@ export default function MainGigForm({
                         onValueChange={(value) =>
                           form.setFieldValue(field.name, value)
                         }
+                        color={colors.green}
                       />
                     )}
                   </Field>
@@ -78,6 +90,7 @@ export default function MainGigForm({
                         onValueChange={(value) =>
                           form.setFieldValue(field.name, value)
                         }
+                        color={colors.green}
                       />
                     )}
                   </Field>
@@ -90,11 +103,12 @@ export default function MainGigForm({
               title={formType === "create" ? "Add Gig" : "Update Gig"}
               style={{ paddingTop: 10 }}
               disabled={!values?.employer}
+              buttonStyle={{ backgroundColor: colors.green }}
             />
             {formType === "update" && (
               <Button
                 buttonStyle={{
-                  backgroundColor: "rgba(214, 61, 57, 1)",
+                  backgroundColor: colors.terraCotta,
                   marginTop: 20,
                 }}
                 onPress={() => handleDeleteGig()}
@@ -109,21 +123,28 @@ export default function MainGigForm({
 }
 
 const styles = StyleSheet.create({
+  formWrapper: {
+    backgroundColor: colors.blue,
+    padding: 10,
+    borderRadius: "10%",
+  },
   textInput: {
     height: 40,
-    borderColor: "gray",
+    borderColor: colors.beige,
     borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 10,
     marginBottom: 10,
+    color: colors.beige,
   },
   astrikWarning: {
-    color: "red",
+    color: colors.terraCotta,
     fontSize: 12,
   },
   label: {
     fontSize: 16,
     marginBottom: 5,
+    color: colors.beige,
   },
 
   switchWrapper: {
@@ -137,8 +158,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   nonLayoutWrapper: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 20,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 20,
   },
 });

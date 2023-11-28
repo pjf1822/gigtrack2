@@ -3,6 +3,7 @@ import { Button, Overlay } from "@rneui/themed";
 import { View, StyleSheet } from "react-native";
 import MainGigForm from "./MainGigForm";
 import { createGig } from "../api";
+import { colors } from "../theme";
 
 export const CreateNewGig = ({ getAllGigs }) => {
   const [visible, setVisible] = useState(false);
@@ -26,6 +27,7 @@ export const CreateNewGig = ({ getAllGigs }) => {
         title="Add New Gig"
         onPress={toggleOverlay}
         buttonStyle={styles.button}
+        titleStyle={styles.buttonText}
       />
       <Overlay
         isVisible={visible}
@@ -47,9 +49,16 @@ export const CreateNewGig = ({ getAllGigs }) => {
 const styles = StyleSheet.create({
   button: {
     margin: 10,
+    backgroundColor: colors.green,
+    color: colors.beige,
+  },
+  buttonText: {
+    color: colors.beige,
   },
   overlay: {
-    width: "90%",
-    maxHeight: "90%",
+    width: "93%",
+    maxHeight: "93%",
+    backgroundColor: colors.blue,
+    borderRadius: "10%",
   },
 });

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-
-import { ListItem, Badge } from "@rneui/themed";
+import { colors } from "../theme";
+import { ListItem, Badge, Icon } from "@rneui/themed";
 
 export const HomePageListItem = ({ item, navigation }) => {
   const itemDate = new Date(item.date);
@@ -19,20 +19,23 @@ export const HomePageListItem = ({ item, navigation }) => {
       <ListItem
         bottomDivider
         topDivider
-        containerStyle={{ backgroundColor: "#F4F1DE" }}
+        containerStyle={{
+          backgroundColor: colors.beige,
+          display: "flex",
+        }}
       >
-        <ListItem.Content style={{ maxWidth: 400 }}>
+        <ListItem.Content style={{ maxWidth: 80 }}>
           {itemDate > today ? (
-            <View style={styles.dates}>
-              <Text>{monthNumber}</Text>
-              <Text>/</Text>
-              <Text>{dayOfMonth}</Text>
-              <Text>/</Text>
-              <Text>{year.toString()}</Text>
+            <View style={styles.dateWrapper}>
+              <Text style={styles.datesFont}>{monthNumber}</Text>
+              <Text style={styles.datesFont}>/</Text>
+              <Text style={styles.datesFont}>{dayOfMonth}</Text>
+              <Text style={styles.datesFont}>/</Text>
+              <Text style={styles.datesFont}>{year.toString()}</Text>
             </View>
           ) : (
-            <View>
-              <Text>
+            <View style={styles.dateWrapper}>
+              <Text style={styles.datesFont}>
                 {monthNumber}/{dayOfMonth}
                 {`/${year}`}
               </Text>
@@ -40,7 +43,18 @@ export const HomePageListItem = ({ item, navigation }) => {
           )}
         </ListItem.Content>
         <ListItem.Content>
-          <ListItem.Title>{item?.employer}</ListItem.Title>
+          <ListItem.Title
+            style={[
+              {
+                display: "flex",
+                flexDirection: "row",
+                textAlign: "left",
+              },
+              styles.datesFont,
+            ]}
+          >
+            {item?.employer}
+          </ListItem.Title>
         </ListItem.Content>
         {/* <ListItem.Content>
           <ListItem.Title>{item?.rate}</ListItem.Title>
@@ -48,27 +62,34 @@ export const HomePageListItem = ({ item, navigation }) => {
         {itemDate <= today && (
           <View style={styles?.badges}>
             <Badge
-              //   status={item?.paid ? "success" : "error"}
               value={item?.paid ? "paid" : "not paid"}
               badgeStyle={{
-                backgroundColor: item?.paid ? "#81B29A" : "#E07A5F",
+                backgroundColor: item?.paid ? colors.green : colors.terraCotta,
+                padding: 2,
+                marginBottom: 4,
               }}
             />
             <Badge
-              //   status={item?.invoiced ? "success" : "error"}
               value={item?.invoiced ? "Invoiced" : "Not Invoiced"}
               badgeStyle={{
-                backgroundColor: item?.invoiced ? "#81B29A" : "#E07A5F",
+                padding: 2,
+
+                backgroundColor: item?.invoiced
+                  ? colors.green
+                  : colors.terraCotta,
               }}
             />
           </View>
         )}
 
-        <Text>Edit</Text>
-        <ListItem.Chevron
+        <Text style={([styles.datesFont], { transform: "translateX(10px)" })}>
+          Edit
+        </Text>
+        <Icon
+          name="chevron-right"
           style={{
             alignSelf: "center",
-            transform: "translateY(4px)",
+            color: colors.blue,
           }}
         />
       </ListItem>
@@ -80,7 +101,6 @@ const styles = StyleSheet.create({
   headerContainer: {
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#3D405B",
   },
   headerText: {
     fontSize: 18,
@@ -91,8 +111,12 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-end",
   },
-  dates: {
+  dateWrapper: {
     display: "flex",
     flexDirection: "row",
+  },
+  datesFont: {
+    fontSize: 15,
+    color: colors.blue,
   },
 });

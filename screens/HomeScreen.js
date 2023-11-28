@@ -1,4 +1,4 @@
-import { View, SectionList, ScrollView } from "react-native";
+import { View, SectionList } from "react-native";
 import React, { useState, useEffect, useCallback } from "react";
 import "react-native-gesture-handler";
 import { fetchGigs } from "../api";
@@ -7,6 +7,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { generateSections } from "../helpers";
 import { HomePageListItem } from "../components/HomePageListItem";
 import { RenderSectionHeader } from "../components/RenderSectionHeader";
+import { colors } from "../theme";
 
 export default function HomeScreen({ navigation }) {
   const [sections, setSections] = useState([]);
@@ -49,7 +50,7 @@ export default function HomeScreen({ navigation }) {
   );
 
   return (
-    <View>
+    <View style={{ backgroundColor: colors.beige }}>
       <SectionList
         sections={sections}
         keyExtractor={(item, index) => index.toString()}
