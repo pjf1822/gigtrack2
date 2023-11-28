@@ -19,20 +19,23 @@ export const HomePageListItem = ({ item, navigation }) => {
       <ListItem
         bottomDivider
         topDivider
-        containerStyle={{ backgroundColor: colors.beige }}
+        containerStyle={{
+          backgroundColor: colors.beige,
+          display: "flex",
+        }}
       >
-        <ListItem.Content style={{ maxWidth: 400 }}>
+        <ListItem.Content style={{ maxWidth: 80 }}>
           {itemDate > today ? (
-            <View style={styles.dates}>
-              <Text>{monthNumber}</Text>
-              <Text>/</Text>
-              <Text>{dayOfMonth}</Text>
-              <Text>/</Text>
-              <Text>{year.toString()}</Text>
+            <View style={styles.dateWrapper}>
+              <Text style={styles.datesFont}>{monthNumber}</Text>
+              <Text style={styles.datesFont}>/</Text>
+              <Text style={styles.datesFont}>{dayOfMonth}</Text>
+              <Text style={styles.datesFont}>/</Text>
+              <Text style={styles.datesFont}>{year.toString()}</Text>
             </View>
           ) : (
-            <View>
-              <Text>
+            <View style={styles.dateWrapper}>
+              <Text style={styles.datesFont}>
                 {monthNumber}/{dayOfMonth}
                 {`/${year}`}
               </Text>
@@ -40,7 +43,18 @@ export const HomePageListItem = ({ item, navigation }) => {
           )}
         </ListItem.Content>
         <ListItem.Content>
-          <ListItem.Title>{item?.employer}</ListItem.Title>
+          <ListItem.Title
+            style={[
+              {
+                display: "flex",
+                flexDirection: "row",
+                textAlign: "left",
+              },
+              styles.datesFont,
+            ]}
+          >
+            {item?.employer}
+          </ListItem.Title>
         </ListItem.Content>
         {/* <ListItem.Content>
           <ListItem.Title>{item?.rate}</ListItem.Title>
@@ -51,11 +65,15 @@ export const HomePageListItem = ({ item, navigation }) => {
               value={item?.paid ? "paid" : "not paid"}
               badgeStyle={{
                 backgroundColor: item?.paid ? colors.green : colors.terraCotta,
+                padding: 2,
+                marginBottom: 4,
               }}
             />
             <Badge
               value={item?.invoiced ? "Invoiced" : "Not Invoiced"}
               badgeStyle={{
+                padding: 2,
+
                 backgroundColor: item?.invoiced
                   ? colors.green
                   : colors.terraCotta,
@@ -64,7 +82,9 @@ export const HomePageListItem = ({ item, navigation }) => {
           </View>
         )}
 
-        <Text>Edit</Text>
+        <Text style={([styles.datesFont], { transform: "translateX(10px)" })}>
+          Edit
+        </Text>
         <Icon
           name="chevron-right"
           style={{
@@ -91,8 +111,12 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-end",
   },
-  dates: {
+  dateWrapper: {
     display: "flex",
     flexDirection: "row",
+  },
+  datesFont: {
+    fontSize: 15,
+    color: colors.blue,
   },
 });
