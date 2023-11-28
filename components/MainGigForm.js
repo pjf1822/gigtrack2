@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import CurrencyInput from "react-native-currency-input";
 import { Button } from "@rneui/themed";
 import { Switch } from "react-native-paper";
 import { MyDatePicker } from "./MyDatePicker";
@@ -44,13 +45,17 @@ export default function MainGigForm({
             date: gigInitialDate || new Date(),
             paid: paid || false,
             invoiced: invoiced || false,
-            rate: rate || "",
+            rate: rate ? parseFloat(rate) : 0,
           }}
-          onSubmit={(values) =>
-            formType === "create"
-              ? handleCreateGig(values)
-              : handleUpdateGig(values)
-          }
+          onSubmit={(values) => {
+            const rateAsString = values.rate.toString();
+            const updatedValues = { ...values, rate: rateAsString };
+            if (formType === "create") {
+              handleCreateGig(updatedValues);
+            } else {
+              handleUpdateGig(updatedValues);
+            }
+          }}
         >
           {({ handleChange, handleBlur, handleSubmit, values }) => (
             <View
@@ -59,17 +64,21 @@ export default function MainGigForm({
                 borderRadius: "10%",
               }}
             >
-              <Text style={styles.label}>Rate: {values?.rate}$</Text>
-
-              <TextInput
-                style={styles.textInput}
-                keyboardType="decimal-pad"
+              <CurrencyInput
                 value={values?.rate}
-                inputMode="decimal"
-                onChangeText={(input) => {
-                  handleChange("rate")(input);
+                onChangeValue={(input) => {
+                  handleChange("rate")({
+                    target: { name: "rate", value: input },
+                  });
                 }}
+                prefix="USD $"
+                delimiter=","
+                separator="."
+                precision={2}
+                minValue={0}
+                style={styles.textInput}
               />
+
               <Text style={styles.label}>Employer:</Text>
               <TextInput
                 style={styles.textInput}
@@ -187,5 +196,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginTop: 20,
+  },
+  rateWrapper: {
+    border: colors.beige,
   },
 });

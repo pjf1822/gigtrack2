@@ -14,6 +14,7 @@ const DetailScreen = ({ route }) => {
   const handleUpdateGig = async (values) => {
     try {
       const response = await updateGig(itemId, values);
+      console.log(response, "the response ");
       if (response.message === "Gig updated successfully!") {
         let toast = Toast.show("Gig updated!", {
           duration: Toast.durations.LONG,
