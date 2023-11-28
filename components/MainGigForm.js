@@ -1,4 +1,11 @@
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { Button } from "@rneui/themed";
 import { Switch } from "react-native-paper";
 import { MyDatePicker } from "./MyDatePicker";
@@ -14,6 +21,7 @@ export default function MainGigForm({
   invoiced,
   paid,
   handleDeleteGig,
+  rate,
 }) {
   const gigInitialDate = date ? new Date(date) : new Date();
 
@@ -31,6 +39,7 @@ export default function MainGigForm({
           date: gigInitialDate || new Date(),
           paid: paid || false,
           invoiced: invoiced || false,
+          rate: rate || "",
         }}
         onSubmit={(values) =>
           formType === "create"
@@ -45,6 +54,14 @@ export default function MainGigForm({
               borderRadius: "10%",
             }}
           >
+            <Text style={styles.label}>Rate:</Text>
+
+            <TextInput
+              style={styles.textInput}
+              keyboardType="numeric"
+              value={values?.rate}
+              onChangeText={handleChange("rate")}
+            />
             <Text style={styles.label}>Employer:</Text>
             <TextInput
               style={styles.textInput}
