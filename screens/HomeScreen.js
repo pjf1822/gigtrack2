@@ -50,7 +50,7 @@ export default function HomeScreen({ navigation }) {
   );
 
   return (
-    <View style={{ backgroundColor: colors.beige }}>
+    <View style={{ backgroundColor: colors.beige, flex: 1 }}>
       <SectionList
         sections={sections}
         keyExtractor={(item, index) => index.toString()}
