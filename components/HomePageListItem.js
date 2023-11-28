@@ -82,9 +82,7 @@ export const HomePageListItem = ({ item, navigation }) => {
           </View>
         )}
 
-        <Text style={[styles.datesFont, { transform: "translateX(10px)" }]}>
-          Edit
-        </Text>
+        <Text style={[styles.datesFont, styles.editFont]}>Edit</Text>
         <Icon
           name="chevron-right"
           style={{
@@ -118,5 +116,8 @@ const styles = StyleSheet.create({
   datesFont: {
     fontSize: 15,
     color: colors.blue,
+  },
+  editFont: {
+    transform: [{ translateX: 10 }],
   },
 });
