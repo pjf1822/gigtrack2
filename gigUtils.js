@@ -1,6 +1,22 @@
 import Toast from "react-native-root-toast";
-import { deleteGig, updateGig } from "./api";
+import { createGig, deleteGig, updateGig } from "./api";
 
+export const handleCreateGig = async (values, getAllGigs, toggleOverlay) => {
+  try {
+    const response = await createGig(values);
+    if (response.message === "Gig created successfully!") {
+      let toast = Toast.show("Gig created!", {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.TOP,
+      });
+      setTimeout(() => {}, 1000);
+    }
+    await getAllGigs();
+    toggleOverlay();
+  } catch (error) {
+    console.error("Error creating gig:", error);
+  }
+};
 export const handleUpdateGig = async (id, values, navigation) => {
   try {
     const response = await updateGig(id, values);

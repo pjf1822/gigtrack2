@@ -11,26 +11,6 @@ const DetailScreen = ({ route }) => {
   const [pageData, setPageData] = useState({});
   const navigation = useNavigation();
 
-  // const handleUpdateGig = async (values) => {
-  //   try {
-  //     const response = await updateGig(itemId, values);
-  //     if (response.message === "Gig updated successfully!") {
-  //       let toast = Toast.show("Gig updated!", {
-  //         duration: Toast.durations.LONG,
-  //         position: Toast.positions.TOP,
-  //       });
-  //       setTimeout(() => {
-  //         navigation.removeListener;
-  //         navigation.goBack();
-  //       }, 1000);
-  //     }
-  //   } catch (error) {
-  //     let toast = Toast.show("Could not update", {
-  //       duration: Toast.durations.LONG,
-  //       position: Toast.positions.TOP,
-  //     });
-  //   }
-  // };
   const getSingleGig = async () => {
     try {
       const data = await fetchSingleGig(itemId);

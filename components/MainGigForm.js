@@ -12,18 +12,19 @@ import { Switch } from "react-native-paper";
 import { MyDatePicker } from "./MyDatePicker";
 import { Formik, Field } from "formik";
 import { colors } from "../theme";
-import { handleDeleteGig, handleUpdateGig } from "../gigUtils";
+import { handleCreateGig, handleDeleteGig, handleUpdateGig } from "../gigUtils";
 
 export default function MainGigForm({
   formType,
   employer,
   date,
-  handleCreateGig,
   invoiced,
   paid,
   rate,
   itemId,
   navigation,
+  getAllGigs,
+  toggleOverlay,
 }) {
   const gigInitialDate = date ? new Date(date) : new Date();
 
@@ -53,7 +54,7 @@ export default function MainGigForm({
               values?.rate === null ? "0" : values?.rate?.toString();
             const updatedValues = { ...values, rate: rateAsString };
             if (formType === "create") {
-              handleCreateGig(updatedValues);
+              handleCreateGig(updatedValues, getAllGigs, toggleOverlay);
             } else {
               handleUpdateGig(itemId, updatedValues, navigation);
             }
