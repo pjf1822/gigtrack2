@@ -2,8 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { colors } from "../theme";
 import { ListItem, Badge, Icon, Button } from "@rneui/themed";
-import Toast from "react-native-root-toast";
-import { deleteGig } from "../api";
+import { handleDeleteGig } from "../gigUtils";
 
 export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
   const itemDate = new Date(item.date);
@@ -14,26 +13,6 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
   const monthNumber = itemDate.getUTCMonth() + 1;
   const year = itemDate.getUTCFullYear();
 
-  const handleDeleteGig = async () => {
-    try {
-      const response = await deleteGig(item._id);
-      if (response.message === "Gig deleted successfully!") {
-        let toast = Toast.show("Gig deleted!", {
-          duration: Toast.durations.LONG,
-          position: Toast.positions.TOP,
-        });
-        setTimeout(() => {
-          navigation.removeListener;
-        }, 1000);
-        getAllGigs();
-      }
-    } catch (error) {
-      let toast = Toast.show("Could not delete", {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
-      });
-    }
-  };
   return (
     <ListItem.Swipeable
       leftContent={(reset) => (
@@ -50,7 +29,9 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
       rightContent={(reset) => (
         <Button
           title="Delete"
-          onPress={handleDeleteGig}
+          onPress={() =>
+            handleDeleteGig(item._id, "HomePage", navigation, getAllGigs)
+          }
           icon={{ name: "delete", color: colors.beige }}
           buttonStyle={{
             minHeight: "100%",

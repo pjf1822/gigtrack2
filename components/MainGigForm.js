@@ -23,6 +23,8 @@ export default function MainGigForm({
   paid,
   handleDeleteGig,
   rate,
+  itemId,
+  navigation,
 }) {
   const gigInitialDate = date ? new Date(date) : new Date();
 
@@ -144,7 +146,9 @@ export default function MainGigForm({
                     backgroundColor: colors.terraCotta,
                     marginTop: 20,
                   }}
-                  onPress={() => handleDeleteGig()}
+                  onPress={() => {
+                    handleDeleteGig(itemId, "DetailsPage", navigation, "");
+                  }}
                   title="Delete Gig"
                 />
               )}
