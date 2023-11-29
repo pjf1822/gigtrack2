@@ -18,7 +18,10 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
       leftContent={(reset) => (
         <Button
           title="Edit"
-          onPress={() => navigation.navigate("Details", { itemId: item._id })}
+          onPress={() => {
+            navigation.navigate("Details", { itemId: item._id });
+            reset();
+          }}
           buttonStyle={{
             minHeight: "100%",
             backgroundColor: colors.green,
