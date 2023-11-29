@@ -12,17 +12,19 @@ import { Switch } from "react-native-paper";
 import { MyDatePicker } from "./MyDatePicker";
 import { Formik, Field } from "formik";
 import { colors } from "../theme";
+import { handleCreateGig, handleDeleteGig, handleUpdateGig } from "../gigUtils";
 
 export default function MainGigForm({
   formType,
-  handleUpdateGig,
   employer,
   date,
-  handleCreateGig,
   invoiced,
   paid,
-  handleDeleteGig,
   rate,
+  itemId,
+  navigation,
+  getAllGigs,
+  toggleOverlay,
 }) {
   const gigInitialDate = date ? new Date(date) : new Date();
 
@@ -48,12 +50,13 @@ export default function MainGigForm({
             rate: rate ? parseFloat(rate) : 0,
           }}
           onSubmit={(values) => {
-            const rateAsString = values.rate.toString();
+            const rateAsString =
+              values?.rate === null ? "0" : values?.rate?.toString();
             const updatedValues = { ...values, rate: rateAsString };
             if (formType === "create") {
-              handleCreateGig(updatedValues);
+              handleCreateGig(updatedValues, getAllGigs, toggleOverlay);
             } else {
-              handleUpdateGig(updatedValues);
+              handleUpdateGig(itemId, updatedValues, navigation);
             }
           }}
         >
@@ -144,7 +147,9 @@ export default function MainGigForm({
                     backgroundColor: colors.terraCotta,
                     marginTop: 20,
                   }}
-                  onPress={() => handleDeleteGig()}
+                  onPress={() => {
+                    handleDeleteGig(itemId, "DetailsPage", navigation, "");
+                  }}
                   title="Delete Gig"
                 />
               )}
