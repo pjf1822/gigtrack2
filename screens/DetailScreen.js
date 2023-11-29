@@ -5,26 +5,15 @@ import { fetchSingleGig, updateGig } from "../api";
 import { useNavigation } from "@react-navigation/native";
 import MainGigForm from "../components/MainGigForm";
 import { colors } from "../theme";
+import { getSingleGig } from "../gigUtils";
 
 const DetailScreen = ({ route }) => {
   const { itemId } = route.params;
   const [pageData, setPageData] = useState({});
   const navigation = useNavigation();
 
-  const getSingleGig = async () => {
-    try {
-      const data = await fetchSingleGig(itemId);
-      setPageData(data);
-    } catch (error) {
-      console.error(
-        "An error occurred while fetching the transactions:",
-        error
-      );
-    }
-  };
-
   useEffect(() => {
-    getSingleGig();
+    getSingleGig(itemId, setPageData);
   }, []);
 
   return (

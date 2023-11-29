@@ -1,6 +1,14 @@
 import Toast from "react-native-root-toast";
-import { createGig, deleteGig, updateGig } from "./api";
+import { createGig, deleteGig, fetchSingleGig, updateGig } from "./api";
 
+export const getSingleGig = async (id, setPageData) => {
+  try {
+    const data = await fetchSingleGig(id);
+    setPageData(data);
+  } catch (error) {
+    console.error("An error occurred while fetching the transactions:", error);
+  }
+};
 export const handleCreateGig = async (values, getAllGigs, toggleOverlay) => {
   try {
     const response = await createGig(values);
