@@ -72,7 +72,7 @@ export default function App() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F4F1DE" }}>
       <RootSiblingParent>
         <NavigationContainer>
-          {user && <HeaderBanner />}
+          {user && <HeaderBanner user={user} />}
 
           <Stack.Navigator
             screenOptions={{

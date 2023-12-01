@@ -1,12 +1,12 @@
 import React from "react";
-import { Header, Icon, Text } from "@rneui/themed";
-import { TouchableOpacity } from "react-native";
+import { Header, Icon } from "@rneui/themed";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import { heightPercentageToDP } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../theme";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
 
-export default function HeaderBanner() {
+export default function HeaderBanner({ user }) {
   const navigation = useNavigation();
 
   const signOut = async () => {
@@ -48,13 +48,22 @@ export default function HeaderBanner() {
         </TouchableOpacity>
       }
       rightComponent={
-        <TouchableOpacity
-          style={{ marginTop: 4 }}
-          onPress={handleSignOutAndNavigate}
-        >
-          <Text style={{ color: colors.terraCotta }}>Sign Out</Text>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity
+            style={{ marginTop: 4 }}
+            onPress={handleSignOutAndNavigate}
+          >
+            <Text style={styles.text}>Sign Out</Text>
+          </TouchableOpacity>
+          <Text style={styles.text}>{user.email}</Text>
+        </View>
       }
     />
   );
 }
+
+const styles = StyleSheet.create({
+  text: {
+    color: colors.terraCotta,
+  },
+});
