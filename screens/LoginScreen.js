@@ -20,8 +20,8 @@ const LoginScreen = ({ setUser }) => {
       const userCredentials = JSON.stringify({
         email: response?.user?.email,
         uid: response?.user?.uid,
-        // other relevant user information
       });
+      console.log(userCredentials);
       await AsyncStorage.setItem("userCredentials", userCredentials);
       setUser(response.user);
     } catch (error) {
@@ -35,14 +35,14 @@ const LoginScreen = ({ setUser }) => {
         email,
         password
       );
-      // console.log(response);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <View>
+    <View style={{ marginTop: 100 }}>
       <TextInput
         style={styles.input}
         placeholder="Email"
