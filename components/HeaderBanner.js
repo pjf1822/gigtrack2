@@ -49,13 +49,15 @@ export default function HeaderBanner({ user }) {
       }
       rightComponent={
         <View>
-          <TouchableOpacity
-            style={{ marginTop: 4 }}
-            onPress={handleSignOutAndNavigate}
-          >
-            <Text style={styles.text}>Sign Out</Text>
-          </TouchableOpacity>
-          <Text style={styles.text}>{user.email}</Text>
+          <Text style={[styles.text, { marginBottom: 10 }]}>
+            <TouchableOpacity
+              style={{ marginTop: 4 }}
+              onPress={handleSignOutAndNavigate}
+            >
+              <Text style={styles.text}>Sign Out</Text>
+            </TouchableOpacity>
+            {user.email.split("@")[0]}
+          </Text>
         </View>
       }
     />
