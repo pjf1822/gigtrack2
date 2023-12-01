@@ -8,12 +8,22 @@ import HeaderBanner from "./components/HeaderBanner";
 import * as SplashScreen from "expo-splash-screen";
 import { useState, useEffect, useCallback } from "react";
 import { Image } from "react-native";
+import LoginScreen from "./screens/LoginScreen";
+import { onAuthStateChanged } from "firebase/auth";
+import { FIREBASE_AUTH } from "./FirebaseConfig";
 
 const Stack = createStackNavigator();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
+  const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    onAuthStateChanged(FIREBASE_AUTH, (user) => {
+      console.log("user", user?.email);
+      setUser(user);
+    });
+  }, []);
   useEffect(() => {
     async function prepare() {
       try {
@@ -63,7 +73,14 @@ export default function App() {
               headerShown: false,
             }}
           >
-            <Stack.Screen name="Home" component={HomeScreen} />
+            {!user ? (
+              <Stack.Screen name="Login">
+                {(props) => <LoginScreen {...props} setUser={setUser} />}
+              </Stack.Screen>
+            ) : (
+              <Stack.Screen name="Home" component={HomeScreen} />
+            )}
+
             <Stack.Screen name="Details" component={DetailScreen} />
           </Stack.Navigator>
         </NavigationContainer>
