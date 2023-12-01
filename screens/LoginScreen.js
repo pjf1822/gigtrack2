@@ -35,7 +35,12 @@ const LoginScreen = ({ setUser }) => {
         email,
         password
       );
-      console.log(response);
+      const userCredentials = JSON.stringify({
+        email: response?.user?.email,
+        uid: response?.user?.uid,
+      });
+      await AsyncStorage.setItem("userCredentials", userCredentials);
+      setUser(response.user);
     } catch (error) {
       console.log(error);
     }

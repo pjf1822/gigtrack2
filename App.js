@@ -19,11 +19,15 @@ export default function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      console.log("user", user?.email);
-      setUser(user);
+    const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (authUser) => {
+      console.log("user", authUser?.email);
+      setUser(authUser);
     });
+
+    return () => unsubscribe();
   }, []);
+
+  // SPLASH SCREEN THINGS
   useEffect(() => {
     async function prepare() {
       try {
@@ -63,6 +67,7 @@ export default function App() {
       />
     );
   }
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F4F1DE" }}>
       <RootSiblingParent>
