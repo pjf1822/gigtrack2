@@ -17,7 +17,6 @@ const LoginScreen = ({ setUser }) => {
   const signIn = async () => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      // console.log(response);
       const userCredentials = JSON.stringify({
         email: response?.user?.email,
         uid: response?.user?.uid,
@@ -41,6 +40,7 @@ const LoginScreen = ({ setUser }) => {
       console.log(error);
     }
   };
+
   return (
     <View>
       <TextInput
