@@ -35,8 +35,12 @@ const LoginScreen = () => {
       await AsyncStorage.setItem("userCredentials", userCredentials);
       setUser(response.user);
     } catch (error) {
-      console.log("we are in here it isnt working");
-      console.log(error);
+      console.log("Sign-in error:", error.message);
+
+      let toast = Toast.show("Sign-in failed. Check your credentials.", {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.TOP,
+      });
     }
   };
 
