@@ -11,7 +11,6 @@ export default function HeaderBanner() {
   const navigation = useNavigation();
   const { user } = useUser();
 
-  console.log(user.email, "the user email");
   const signOut = async () => {
     try {
       await FIREBASE_AUTH.signOut();
