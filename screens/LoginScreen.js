@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useUser } from "../UserContext";
+import Toast from "react-native-root-toast";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -18,6 +19,15 @@ const LoginScreen = () => {
   const signIn = async () => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
+      if (response?.user?.email) {
+        let toast = Toast.show("Sign-in successful!", {
+          duration: Toast.durations.LONG,
+          position: Toast.positions.TOP,
+        });
+
+        setTimeout(() => {}, 1000);
+      }
+
       const userCredentials = JSON.stringify({
         email: response?.user?.email,
         uid: response?.user?.uid,
@@ -25,9 +35,11 @@ const LoginScreen = () => {
       await AsyncStorage.setItem("userCredentials", userCredentials);
       setUser(response.user);
     } catch (error) {
+      console.log("we are in here it isnt working");
       console.log(error);
     }
   };
+
   const signUp = async () => {
     try {
       const response = await createUserWithEmailAndPassword(
@@ -58,6 +70,7 @@ const LoginScreen = () => {
         style={styles.input}
         placeholder="Password"
         onChangeText={(text) => setPassword(text)}
+        secureTextEntry={true}
       />
       <Button title="Login" onPress={signIn} />
       <Button title="Signup" onPress={signUp} />
