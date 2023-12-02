@@ -3,7 +3,9 @@ import { body, param, validationResult } from "express-validator";
 
 export const getAllGigs = async (req, res, next) => {
   try {
-    const gigs = await Gig.find({});
+    const email = req?.query?.email;
+    const filter = email ? { email } : {};
+    const gigs = await Gig.find(filter);
     res.json(gigs);
   } catch (error) {
     res.status(400).json({ message: "Error fetching gigs " });
@@ -21,6 +23,11 @@ export const getSingleGig = async (req, res, next) => {
 export const createGig = [
   body("employer").notEmpty().withMessage("Employer is required"),
   body("date").isISO8601().withMessage("Invalid date format"),
+  body("email")
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Invalid email format"),
 
   async (req, res, next) => {
     // Check for validation errors
@@ -35,6 +42,7 @@ export const createGig = [
       paid: req?.body?.paid,
       invoiced: req?.body?.invoiced,
       rate: req?.body?.rate,
+      email: req?.body?.email,
     });
 
     try {

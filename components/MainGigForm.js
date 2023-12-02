@@ -13,6 +13,7 @@ import { MyDatePicker } from "./MyDatePicker";
 import { Formik, Field } from "formik";
 import { colors } from "../theme";
 import { handleCreateGig, handleDeleteGig, handleUpdateGig } from "../gigUtils";
+import { useUser } from "../UserContext";
 
 export default function MainGigForm({
   formType,
@@ -26,6 +27,8 @@ export default function MainGigForm({
   getAllGigs,
   toggleOverlay,
 }) {
+  const { user } = useUser();
+
   const gigInitialDate = date ? new Date(date) : new Date();
 
   const handleTouchableWithoutFeedbackPress = () => {
@@ -48,6 +51,7 @@ export default function MainGigForm({
             paid: paid || false,
             invoiced: invoiced || false,
             rate: rate ? parseFloat(rate) : 0,
+            email: user?.email,
           }}
           onSubmit={(values) => {
             const rateAsString =
