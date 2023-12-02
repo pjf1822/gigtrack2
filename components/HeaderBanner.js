@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { colors } from "../theme";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
 import { useUser } from "../UserContext";
+import Toast from "react-native-root-toast";
 
 export default function HeaderBanner() {
   const navigation = useNavigation();
@@ -21,6 +22,11 @@ export default function HeaderBanner() {
 
   const handleSignOutAndNavigate = async () => {
     await signOut();
+    let toast = Toast.show("Signed out successfully!", {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.TOP,
+    });
+    setTimeout(() => {}, 1000);
     navigation.navigate("Login");
   };
 
