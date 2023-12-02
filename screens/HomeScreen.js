@@ -9,14 +9,16 @@ import { HomePageListItem } from "../components/HomePageListItem";
 import { RenderSectionHeader } from "../components/RenderSectionHeader";
 import { colors } from "../theme";
 import NoGigs from "../components/NoGigs";
+import { useUser } from "../UserContext";
 
 export default function HomeScreen({ navigation }) {
   const [sections, setSections] = useState([]);
   const [allGigs, setAllGigs] = useState([]);
+  const { user } = useUser();
 
   const getAllGigs = async () => {
     try {
-      const data = await fetchGigs();
+      const data = await fetchGigs(user?.email);
 
       const filteredData = data?.map((item) => {
         const { __v, ...rest } = item;

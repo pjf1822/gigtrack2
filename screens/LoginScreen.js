@@ -38,6 +38,7 @@ const LoginScreen = () => {
       const userCredentials = JSON.stringify({
         email: response?.user?.email,
         uid: response?.user?.uid,
+        // displayName: response?.user?.displayName,
       });
       await AsyncStorage.setItem("userCredentials", userCredentials);
       setUser(response.user);

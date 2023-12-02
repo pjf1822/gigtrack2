@@ -1,9 +1,18 @@
 const serverIp = "192.168.50.224"; // Your machine's local IP address
 
-const fetchGigs = async () => {
+const fetchGigs = async (email) => {
   try {
-    const res = await fetch(`http://${serverIp}:8000/api/gigs/getall`);
-
+    const res = await fetch(
+      `http://${serverIp}:8000/api/gigs/getall?email=${encodeURIComponent(
+        email
+      )}`,
+      {
+        method: "GET", // or 'POST' depending on your API endpoint
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch gigs");
     }
