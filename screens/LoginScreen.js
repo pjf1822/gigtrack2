@@ -1,6 +1,5 @@
 import { View, TextInput, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import React, { useState } from "react";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
 import { Button } from "react-native";
@@ -8,11 +7,13 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { useUser } from "../UserContext";
 
-const LoginScreen = ({ setUser }) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const auth = FIREBASE_AUTH;
+  const { setUser } = useUser();
 
   const signIn = async () => {
     try {
@@ -21,7 +22,6 @@ const LoginScreen = ({ setUser }) => {
         email: response?.user?.email,
         uid: response?.user?.uid,
       });
-      console.log(userCredentials);
       await AsyncStorage.setItem("userCredentials", userCredentials);
       setUser(response.user);
     } catch (error) {

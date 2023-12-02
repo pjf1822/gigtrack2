@@ -1,31 +1,15 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "./screens/HomeScreen";
-import DetailScreen from "./screens/DetailScreen";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderBanner from "./components/HeaderBanner";
 import * as SplashScreen from "expo-splash-screen";
 import { useState, useEffect, useCallback } from "react";
 import { Image } from "react-native";
-import LoginScreen from "./screens/LoginScreen";
-import { onAuthStateChanged } from "firebase/auth";
-import { FIREBASE_AUTH } from "./FirebaseConfig";
-
-const Stack = createStackNavigator();
+import { UserProvider } from "./UserContext";
+import StackNavigator from "./components/StackNavigator";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (authUser) => {
-      // console.log("user", authUser?.email);
-      setUser(authUser);
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   // SPLASH SCREEN THINGS
   useEffect(() => {
@@ -72,23 +56,11 @@ export default function App() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F4F1DE" }}>
       <RootSiblingParent>
         <NavigationContainer>
-          {user && <HeaderBanner user={user} />}
+          <UserProvider>
+            <HeaderBanner />
 
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}
-          >
-            {!user ? (
-              <Stack.Screen name="Login">
-                {(props) => <LoginScreen {...props} setUser={setUser} />}
-              </Stack.Screen>
-            ) : (
-              <Stack.Screen name="Home" component={HomeScreen} />
-            )}
-
-            <Stack.Screen name="Details" component={DetailScreen} />
-          </Stack.Navigator>
+            <StackNavigator />
+          </UserProvider>
         </NavigationContainer>
       </RootSiblingParent>
     </SafeAreaView>
