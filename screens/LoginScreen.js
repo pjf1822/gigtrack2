@@ -1,20 +1,19 @@
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, Button } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
-import { Button } from "react-native";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useUser } from "../UserContext";
 import Toast from "react-native-root-toast";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const auth = FIREBASE_AUTH;
   const { setUser } = useUser();
+  const navigation = useNavigation();
 
   const signIn = async () => {
     try {
@@ -44,25 +43,6 @@ const LoginScreen = () => {
     }
   };
 
-  const signUp = async () => {
-    try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const userCredentials = JSON.stringify({
-        email: response?.user?.email,
-        uid: response?.user?.uid,
-        // displayName: response?.user?.displayName,
-      });
-      await AsyncStorage.setItem("userCredentials", userCredentials);
-      setUser(response.user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <View style={{ marginTop: 100 }}>
       <TextInput
@@ -77,7 +57,10 @@ const LoginScreen = () => {
         secureTextEntry={true}
       />
       <Button title="Login" onPress={signIn} />
-      <Button title="Signup" onPress={signUp} />
+      <Button
+        title="Go to Signup Page"
+        onPress={() => navigation.navigate("Signup")}
+      />
     </View>
   );
 };
