@@ -5,10 +5,13 @@ import { heightPercentageToDP } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../theme";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
+import { useUser } from "../UserContext";
 
-export default function HeaderBanner({ user }) {
+export default function HeaderBanner() {
   const navigation = useNavigation();
+  const { user } = useUser();
 
+  console.log(user.email, "the user email");
   const signOut = async () => {
     try {
       await FIREBASE_AUTH.signOut();
@@ -30,6 +33,7 @@ export default function HeaderBanner({ user }) {
         backgroundColor: colors.blue,
         borderBottomColor: colors.blue,
         borderBottomWidth: 3,
+        display: user ? "flex" : "none",
       }}
       centerComponent={{
         text: "GIG TRACK",
@@ -49,14 +53,14 @@ export default function HeaderBanner({ user }) {
       }
       rightComponent={
         <View>
+          <TouchableOpacity
+            style={{ marginTop: 4 }}
+            onPress={handleSignOutAndNavigate}
+          >
+            <Text style={styles.text}>Sign Out</Text>
+          </TouchableOpacity>
           <Text style={[styles.text, { marginBottom: 10 }]}>
-            <TouchableOpacity
-              style={{ marginTop: 4 }}
-              onPress={handleSignOutAndNavigate}
-            >
-              <Text style={styles.text}>Sign Out</Text>
-            </TouchableOpacity>
-            {user.email.split("@")[0]}
+            {user && user?.email.split("@")[0]}
           </Text>
         </View>
       }
