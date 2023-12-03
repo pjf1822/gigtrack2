@@ -45,9 +45,13 @@ const SignupScreen = () => {
         email,
         password
       );
+      const userWithDisplayName = { ...response.user, displayName };
+
       await updateProfile(response.user, {
         displayName: displayName,
       });
+      setUser(userWithDisplayName);
+
       const userCredentials = JSON.stringify({
         email: response?.user?.email,
         uid: response?.user?.uid,
@@ -60,7 +64,6 @@ const SignupScreen = () => {
         position: Toast.positions.TOP,
         type: "success",
       });
-      setUser(response.user);
     } catch (error) {
       if (error.message === "Firebase: Error (auth/invalid-email).") {
         let toast = Toast.show("Invalid Email", {
