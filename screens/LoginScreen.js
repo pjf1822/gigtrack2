@@ -1,4 +1,4 @@
-import { View, TextInput, StyleSheet, Button } from "react-native";
+import { View, TextInput, StyleSheet, Button, Text } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
@@ -6,6 +6,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useUser } from "../UserContext";
 import Toast from "react-native-root-toast";
 import { useNavigation } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { colors } from "../theme";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +16,8 @@ const LoginScreen = () => {
   const auth = FIREBASE_AUTH;
   const { setUser } = useUser();
   const navigation = useNavigation();
+
+  const isLoginDisabled = !email || !password;
 
   const signIn = async () => {
     try {
@@ -44,23 +48,40 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={{ marginTop: 100 }}>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        onChangeText={(text) => setEmail(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        onChangeText={(text) => setPassword(text)}
-        secureTextEntry={true}
-      />
-      <Button title="Login" onPress={signIn} />
-      <Button
-        title="Go to Signup Page"
-        onPress={() => navigation.navigate("Signup")}
-      />
+    <View style={{ marginTop: 100, flex: 1, justifyContent: "space-between" }}>
+      <View>
+        <TextInput
+          style={email !== "" ? styles.input : styles.inputEmpty}
+          placeholder="Email"
+          onChangeText={(text) => setEmail(text)}
+          placeholderTextColor={colors.terraCotta}
+        />
+        <TextInput
+          style={password !== "" ? styles.input : styles.inputEmpty}
+          placeholder="Password"
+          onChangeText={(text) => setPassword(text)}
+          placeholderTextColor={colors.terraCotta}
+          secureTextEntry={true}
+        />
+        <TouchableOpacity
+          style={[isLoginDisabled ? styles.disabledButton : styles.button]}
+          onPress={signIn}
+        >
+          <Text
+            style={
+              isLoginDisabled ? styles.buttonDisabledText : styles.buttonText
+            }
+          >
+            Login
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View style={{ marginBottom: 40 }}>
+        <Button
+          title="Go to Signup Page"
+          onPress={() => navigation.navigate("Signup")}
+        />
+      </View>
     </View>
   );
 };
@@ -71,9 +92,51 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     width: "100%",
-    borderColor: "gray",
-    borderWidth: 1,
+    borderColor: colors.blue,
+    borderWidth: 2,
     marginBottom: 12,
     paddingHorizontal: 8,
+    backgroundColor: colors.beige,
+  },
+  inputEmpty: {
+    height: 40,
+    width: "100%",
+    borderColor: colors.terraCotta,
+    borderWidth: 4,
+    marginBottom: 12,
+    paddingHorizontal: 8,
+    backgroundColor: colors.beige,
+  },
+  button: {
+    backgroundColor: colors.green,
+    height: 40,
+    width: "100%",
+    borderWidth: 4,
+    paddingHorizontal: 8,
+    borderColor: colors.blue,
+    color: colors.beige,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  disabledButton: {
+    backgroundColor: colors.beige,
+    height: 40,
+    width: "100%",
+    borderWidth: 2,
+    paddingHorizontal: 8,
+    borderColor: colors.terraCotta,
+    color: colors.terraCotta,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonDisabledText: {
+    color: colors.terraCotta,
+    fontWeight: "bold",
+  },
+  buttonText: {
+    color: colors.beige,
+    fontWeight: "bold",
   },
 });
