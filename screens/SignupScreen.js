@@ -1,4 +1,4 @@
-import { View, StyleSheet, Button } from "react-native";
+import { View, StyleSheet, Button, TouchableOpacity, Text } from "react-native";
 import React, { useState } from "react";
 import { useUser } from "../UserContext";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
@@ -15,6 +15,11 @@ const SignupScreen = () => {
   const [password2, setPassword2] = useState("");
   const [displayName, setDisplayName] = useState("");
 
+  console.log(
+    password2,
+    "this is password too ",
+    password2 === "" ? "hey yeah its empty " : "its apparently not empty"
+  );
   const auth = FIREBASE_AUTH;
   const { setUser } = useUser();
   const navigation = useNavigation();
@@ -22,13 +27,21 @@ const SignupScreen = () => {
   const isSignupDisabled = !email || !displayName || !password || !password2;
 
   const signUp = async () => {
+    if (isSignupDisabled) {
+      console.log("jhey");
+      let toast = Toast.show("Please fill out all of the fields", {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.TOP,
+        type: "error",
+      });
+      return;
+    }
     if (password !== password2) {
       let toast = Toast.show("Passwords dont match", {
         duration: Toast.durations.LONG,
         position: Toast.positions.TOP,
         type: "error",
       });
-      console.log("Passwords do not match");
       return;
     }
 
@@ -80,32 +93,44 @@ const SignupScreen = () => {
   return (
     <View style={{ marginTop: 100 }}>
       <TextInput
-        style={styles.input}
+        style={email !== "" ? styles.input : styles.inputEmpty}
         placeholder="Email"
         placeholderTextColor={colors.terraCotta}
         onChangeText={(text) => setEmail(text)}
       />
       <TextInput
-        style={styles.input}
+        style={displayName !== "" ? styles.input : styles.inputEmpty}
         placeholder="User name"
         placeholderTextColor={colors.terraCotta}
         onChangeText={(text) => setDisplayName(text)}
       />
       <TextInput
-        style={styles.input}
+        style={password !== "" ? styles.input : styles.inputEmpty}
         placeholder="Password"
         placeholderTextColor={colors.terraCotta}
         onChangeText={(text) => setPassword(text)}
         secureTextEntry={true}
       />
       <TextInput
-        style={styles.input}
+        style={password2 !== "" ? styles.input : styles.inputEmpty}
         placeholder="Type Your Password Again"
         onChangeText={(text) => setPassword2(text)}
         secureTextEntry={true}
         placeholderTextColor={colors.terraCotta}
       />
-      <Button title="Signup" disabled={isSignupDisabled} onPress={signUp} />
+      <TouchableOpacity
+        style={[isSignupDisabled ? styles.disabledButton : styles.button]}
+        onPress={signUp}
+      >
+        <Text
+          style={
+            isSignupDisabled ? styles.buttonDisabledText : styles.buttonText
+          }
+        >
+          Signup
+        </Text>
+      </TouchableOpacity>
+      <View style={{ height: 300 }}></View>
       <Button
         title="Got to the Login Page"
         onPress={() => navigation.navigate("Login")}
@@ -120,9 +145,51 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     width: "100%",
-    borderColor: "gray",
-    borderWidth: 1,
+    borderColor: colors.blue,
+    borderWidth: 2,
     marginBottom: 12,
     paddingHorizontal: 8,
+    backgroundColor: colors.beige,
+  },
+  inputEmpty: {
+    height: 40,
+    width: "100%",
+    borderColor: colors.terraCotta,
+    borderWidth: 2,
+    marginBottom: 12,
+    paddingHorizontal: 8,
+    backgroundColor: colors.beige,
+  },
+  button: {
+    backgroundColor: colors.green,
+    height: 40,
+    width: "100%",
+    borderWidth: 2,
+    paddingHorizontal: 8,
+    borderColor: colors.blue,
+    color: colors.beige,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  disabledButton: {
+    backgroundColor: colors.beige,
+    height: 40,
+    width: "100%",
+    borderWidth: 2,
+    paddingHorizontal: 8,
+    borderColor: colors.terraCotta,
+    color: colors.terraCotta,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonDisabledText: {
+    color: colors.terraCotta,
+    fontWeight: "bold",
+  },
+  buttonText: {
+    color: colors.beige,
+    fontWeight: "bold",
   },
 });

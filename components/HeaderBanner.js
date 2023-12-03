@@ -64,7 +64,7 @@ export default function HeaderBanner() {
           >
             <Text style={styles.text}>Sign Out</Text>
           </TouchableOpacity>
-          <Text style={[styles.text, { marginBottom: 10 }]}>
+          <Text style={{ marginBottom: 10, color: colors.beige }}>
             {user && user?.email.split("@")[0]}
           </Text>
         </View>
