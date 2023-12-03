@@ -5,20 +5,23 @@ import HeaderBanner from "./components/HeaderBanner";
 import * as SplashScreen from "expo-splash-screen";
 import { useState, useEffect, useCallback } from "react";
 import { Image } from "react-native";
-import { UserProvider } from "./UserContext";
+import { UserProvider, useUser } from "./UserContext";
 import StackNavigator from "./components/StackNavigator";
+import { colors } from "./theme";
+import * as Font from "expo-font";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-
   // SPLASH SCREEN THINGS
   useEffect(() => {
     async function prepare() {
       try {
         // Pre-load fonts, make any API calls you need to do here
         // await Font.loadAsync(Entypo.font);
-        // Artificially delay for two seconds to simulate a slow loading
-        // experience. Please remove this if you copy and paste the code!
+
+        await Font.loadAsync({
+          Mont: require("./assets/Montserrat/static/Montserrat-Regular.ttf"),
+        });
         await new Promise((resolve) => setTimeout(resolve, 400));
       } catch (e) {
         console.warn(e);
@@ -37,13 +40,12 @@ export default function App() {
       // `setAppIsReady`, then we may see a blank screen while the app is
       // loading its initial state and rendering its first pixels. So instead,
       // we hide the splash screen once we know the root view has already
-      // performed layout.
+      // performed layout
       await SplashScreen.hideAsync();
     }
   }, [appIsReady]);
 
   if (!appIsReady) {
-    // Customize the SplashScreenImage component with your image source
     return (
       <SplashScreenImage
         source={require("./assets/hijab.jpg")}
@@ -53,19 +55,28 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#F4F1DE" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.beige }}>
       <RootSiblingParent>
         <NavigationContainer>
           <UserProvider>
-            <HeaderBanner />
-
-            <StackNavigator />
+            <MainContent />
           </UserProvider>
         </NavigationContainer>
       </RootSiblingParent>
     </SafeAreaView>
   );
 }
+
+const MainContent = () => {
+  const { user } = useUser();
+
+  return (
+    <>
+      {user && <HeaderBanner />}
+      <StackNavigator />
+    </>
+  );
+};
 
 const SplashScreenImage = ({ source, resizeMode }) => (
   <Image

@@ -3,9 +3,10 @@ import { Header, Icon } from "@rneui/themed";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import { heightPercentageToDP } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
-import { colors } from "../theme";
+import { colors, regFont } from "../theme";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
 import { useUser } from "../UserContext";
+import Toast from "react-native-root-toast";
 
 export default function HeaderBanner() {
   const navigation = useNavigation();
@@ -21,6 +22,14 @@ export default function HeaderBanner() {
 
   const handleSignOutAndNavigate = async () => {
     await signOut();
+    let toast = Toast.show("Signed out successfully!", {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.TOP,
+      backgroundColor: colors.green,
+      textColor: colors.beige,
+      opacity: 1,
+    });
+    setTimeout(() => {}, 1000);
     navigation.navigate("Login");
   };
 
@@ -28,7 +37,7 @@ export default function HeaderBanner() {
     <Header
       containerStyle={{
         paddingTop: heightPercentageToDP(7),
-        height: heightPercentageToDP(15),
+        height: heightPercentageToDP(12),
         backgroundColor: colors.blue,
         borderBottomColor: colors.blue,
         borderBottomWidth: 3,
@@ -40,11 +49,12 @@ export default function HeaderBanner() {
         style: {
           color: colors.beige,
           fontSize: 28,
+          fontFamily: regFont.fontFamily,
         },
       }}
       leftComponent={
         <TouchableOpacity
-          style={{ marginTop: 4 }}
+          style={{ marginTop: 4, transform: [{ translate: [5, 4] }] }}
           onPress={() => navigation.navigate("Home")}
         >
           <Icon name="home" color={colors.beige} />
@@ -56,10 +66,16 @@ export default function HeaderBanner() {
             style={{ marginTop: 4 }}
             onPress={handleSignOutAndNavigate}
           >
-            <Text style={styles.text}>Sign Out</Text>
+            <Text style={[styles.text, regFont.fontFamily]}>Sign Out</Text>
           </TouchableOpacity>
-          <Text style={[styles.text, { marginBottom: 10 }]}>
-            {user && user?.email.split("@")[0]}
+          <Text
+            style={{
+              marginBottom: 10,
+              color: colors.beige,
+              fontFamily: regFont.fontFamily,
+            }}
+          >
+            {user && user?.displayName}
           </Text>
         </View>
       }
@@ -70,5 +86,6 @@ export default function HeaderBanner() {
 const styles = StyleSheet.create({
   text: {
     color: colors.terraCotta,
+    fontFamily: regFont.fontFamily,
   },
 });

@@ -45,5 +45,5 @@ export const generateSections = (dataList) => {
       }
       return acc;
     }, [])
-    .sort((a, b) => b.weight - a.weight); // Sort sections based on the weight
+    .sort((a, b) => b.weight - a.weight);
 };
