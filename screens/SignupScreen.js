@@ -28,7 +28,6 @@ const SignupScreen = () => {
 
   const signUp = async () => {
     if (isSignupDisabled) {
-      console.log("jhey");
       let toast = Toast.show("Please fill out all of the fields", {
         duration: Toast.durations.LONG,
         position: Toast.positions.TOP,
@@ -52,7 +51,6 @@ const SignupScreen = () => {
         password,
         displayName
       );
-      console.log(response, "the sign in response");
       const userCredentials = JSON.stringify({
         email: response?.user?.email,
         uid: response?.user?.uid,
@@ -61,7 +59,6 @@ const SignupScreen = () => {
       await AsyncStorage.setItem("userCredentials", userCredentials);
       setUser(response.user);
     } catch (error) {
-      console.log(error.message, "this is the error message");
       if (error.message === "Firebase: Error (auth/invalid-email).") {
         let toast = Toast.show("Invalid Email", {
           duration: Toast.durations.LONG,
