@@ -11,7 +11,6 @@ import Toast from "react-native-root-toast";
 export default function HeaderBanner() {
   const navigation = useNavigation();
   const { user } = useUser();
-  console.log(user, "this is our user");
 
   const signOut = async () => {
     try {
