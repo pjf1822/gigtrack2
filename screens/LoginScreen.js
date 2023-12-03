@@ -2,7 +2,10 @@ import { View, TextInput, StyleSheet, Button, Text } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { useUser } from "../UserContext";
 import Toast from "react-native-root-toast";
 import { useNavigation } from "@react-navigation/native";
@@ -47,6 +50,30 @@ const LoginScreen = () => {
     }
   };
 
+  const handleForgotPassword = async () => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+
+      let toast = Toast.show("Sent a reset email successfully!", {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.TOP,
+        backgroundColor: "green", // Customize background color
+        textColor: "white", // Customize text color
+        opacity: 0.8,
+      });
+    } catch (error) {
+      console.error("Password reset error:", error.message);
+      if (error.message === "Firebase: Error (auth/missing-email).") {
+        let toast = Toast.show("We dont have an account with this email", {
+          duration: Toast.durations.LONG,
+          position: Toast.positions.TOP,
+          backgroundColor: "green", // Customize background color
+          textColor: "white", // Customize text color
+          opacity: 0.8,
+        });
+      }
+    }
+  };
   return (
     <View style={{ marginTop: 100, flex: 1, justifyContent: "space-between" }}>
       <View>
@@ -75,6 +102,7 @@ const LoginScreen = () => {
             Login
           </Text>
         </TouchableOpacity>
+        <Button title="Forgot Password" onPress={handleForgotPassword} />
       </View>
       <View style={{ marginBottom: 40 }}>
         <Button
@@ -102,7 +130,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: "100%",
     borderColor: colors.terraCotta,
-    borderWidth: 4,
+    borderWidth: 2,
     marginBottom: 12,
     paddingHorizontal: 8,
     backgroundColor: colors.beige,
@@ -123,7 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.beige,
     height: 40,
     width: "100%",
-    borderWidth: 2,
+    borderWidth: 4,
     paddingHorizontal: 8,
     borderColor: colors.terraCotta,
     color: colors.terraCotta,
