@@ -25,6 +25,9 @@ export default function HeaderBanner() {
     let toast = Toast.show("Signed out successfully!", {
       duration: Toast.durations.LONG,
       position: Toast.positions.TOP,
+      backgroundColor: colors.green,
+      textColor: colors.beige,
+      opacity: 1,
     });
     setTimeout(() => {}, 1000);
     navigation.navigate("Login");
@@ -46,6 +49,7 @@ export default function HeaderBanner() {
         style: {
           color: colors.beige,
           fontSize: 28,
+          fontFamily: "Inter-Black",
         },
       }}
       leftComponent={

@@ -26,7 +26,9 @@ const SignupScreen = () => {
       let toast = Toast.show("Please fill out all of the fields", {
         duration: Toast.durations.LONG,
         position: Toast.positions.TOP,
-        type: "error",
+        backgroundColor: colors.terraCotta,
+        textColor: colors.beige,
+        opacity: 1,
       });
       return;
     }
@@ -34,7 +36,9 @@ const SignupScreen = () => {
       let toast = Toast.show("Passwords dont match", {
         duration: Toast.durations.LONG,
         position: Toast.positions.TOP,
-        type: "error",
+        backgroundColor: colors.terraCotta,
+        textColor: colors.beige,
+        opacity: 1,
       });
       return;
     }
@@ -62,14 +66,18 @@ const SignupScreen = () => {
       let toast = Toast.show("Account created!", {
         duration: Toast.durations.LONG,
         position: Toast.positions.TOP,
-        type: "success",
+        backgroundColor: colors.green,
+        textColor: colors.beige,
+        opacity: 1,
       });
     } catch (error) {
       if (error.message === "Firebase: Error (auth/invalid-email).") {
         let toast = Toast.show("Invalid Email", {
           duration: Toast.durations.LONG,
           position: Toast.positions.TOP,
-          type: "error",
+          backgroundColor: colors.terraCotta,
+          textColor: colors.beige,
+          opacity: 1,
         });
       } else if (
         error.message ===
@@ -80,7 +88,9 @@ const SignupScreen = () => {
           {
             duration: Toast.durations.LONG,
             position: Toast.positions.TOP,
-            type: "error",
+            backgroundColor: colors.terraCotta,
+            textColor: colors.beige,
+            opacity: 1,
           }
         );
       } else {
@@ -88,14 +98,23 @@ const SignupScreen = () => {
         let toast = Toast.show(error.message, {
           duration: Toast.durations.LONG,
           position: Toast.positions.TOP,
-          type: "error",
+          backgroundColor: colors.terraCotta,
+          textColor: colors.beige,
+          opacity: 1,
         });
       }
     }
   };
 
   return (
-    <View style={{ marginTop: 100, flex: 1, justifyContent: "space-between" }}>
+    <View
+      style={{
+        paddingTop: 100,
+        flex: 1,
+        justifyContent: "space-between",
+        backgroundColor: colors.beige,
+      }}
+    >
       <View>
         <TextInput
           style={email !== "" ? styles.input : styles.inputEmpty}
@@ -138,10 +157,12 @@ const SignupScreen = () => {
       </View>
 
       <View style={{ marginBottom: 40 }}>
-        <Button
-          title="Got to the Login Page"
+        <TouchableOpacity
+          style={styles.button}
           onPress={() => navigation.navigate("Login")}
-        />
+        >
+          <Text style={styles.signupButtonText}>Go to Login Page</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
