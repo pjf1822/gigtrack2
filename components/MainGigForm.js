@@ -11,7 +11,7 @@ import { Button } from "@rneui/themed";
 import { Switch } from "react-native-paper";
 import { MyDatePicker } from "./MyDatePicker";
 import { Formik, Field } from "formik";
-import { colors } from "../theme";
+import { colors, regFont } from "../theme";
 import { handleCreateGig, handleDeleteGig, handleUpdateGig } from "../gigUtils";
 import { useUser } from "../UserContext";
 
@@ -131,6 +131,7 @@ export default function MainGigForm({
                             form.setFieldValue(field.name, value)
                           }
                           color={colors.green}
+                          fontFamily={regFont.fontFamily}
                         />
                       )}
                     </Field>
@@ -143,7 +144,12 @@ export default function MainGigForm({
                 title={formType === "create" ? "Add Gig" : "Update Gig"}
                 style={{ paddingTop: 10 }}
                 disabled={!values?.employer}
-                buttonStyle={{ backgroundColor: colors.green }}
+                buttonStyle={{
+                  backgroundColor: colors.green,
+                }}
+                titleStyle={{
+                  fontFamily: regFont.fontFamily,
+                }}
               />
               {formType === "update" && (
                 <Button
@@ -155,6 +161,9 @@ export default function MainGigForm({
                     handleDeleteGig(itemId, "DetailsPage", navigation, "");
                   }}
                   title="Delete Gig"
+                  titleStyle={{
+                    fontFamily: regFont.fontFamily,
+                  }}
                 />
               )}
             </View>
@@ -179,15 +188,18 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginBottom: 10,
     color: colors.beige,
+    fontfamily: regFont.fontFamily,
   },
   astrikWarning: {
     color: colors.terraCotta,
     fontSize: 12,
+    fontFamily: regFont.fontFamily,
   },
   label: {
     fontSize: 16,
     marginBottom: 5,
     color: colors.beige,
+    fontFamily: regFont.fontFamily,
   },
 
   switchWrapper: {

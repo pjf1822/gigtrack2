@@ -3,7 +3,7 @@ import { Header, Icon } from "@rneui/themed";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import { heightPercentageToDP } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
-import { colors } from "../theme";
+import { colors, regFont } from "../theme";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
 import { useUser } from "../UserContext";
 import Toast from "react-native-root-toast";
@@ -49,7 +49,7 @@ export default function HeaderBanner() {
         style: {
           color: colors.beige,
           fontSize: 28,
-          fontFamily: "Inter-Black",
+          fontFamily: regFont.fontFamily,
         },
       }}
       leftComponent={
@@ -66,9 +66,15 @@ export default function HeaderBanner() {
             style={{ marginTop: 4 }}
             onPress={handleSignOutAndNavigate}
           >
-            <Text style={styles.text}>Sign Out</Text>
+            <Text style={[styles.text, regFont.fontFamily]}>Sign Out</Text>
           </TouchableOpacity>
-          <Text style={{ marginBottom: 10, color: colors.beige }}>
+          <Text
+            style={{
+              marginBottom: 10,
+              color: colors.beige,
+              fontFamily: regFont.fontFamily,
+            }}
+          >
             {user && user?.displayName}
           </Text>
         </View>
@@ -80,5 +86,6 @@ export default function HeaderBanner() {
 const styles = StyleSheet.create({
   text: {
     color: colors.terraCotta,
+    fontFamily: regFont.fontFamily,
   },
 });
