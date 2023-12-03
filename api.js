@@ -7,7 +7,7 @@ const fetchGigs = async (email) => {
         email
       )}`,
       {
-        method: "GET", // or 'POST' depending on your API endpoint
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },

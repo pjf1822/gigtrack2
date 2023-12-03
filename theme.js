@@ -4,3 +4,7 @@ export const colors = {
   blue: "#3D405B",
   green: "#81B29A",
 };
+
+export const regFont = {
+  fontFamily: "Mont",
+};

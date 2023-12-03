@@ -1,13 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { colors } from "../theme";
-import { ListItem, Badge, Icon, Button } from "@rneui/themed";
+import { colors, regFont } from "../theme";
+import { ListItem, Badge, Button } from "@rneui/themed";
 import { handleDeleteGig } from "../gigUtils";
 
 export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
   const itemDate = new Date(item.date);
   const today = new Date();
-  today.setUTCHours(0, 0, 0, 0); // Reset time to compare dates only
+  today.setUTCHours(0, 0, 0, 0);
   itemDate.setUTCHours(0, 0, 0, 0);
   const dayOfMonth = itemDate.getUTCDate();
   const monthNumber = itemDate.getUTCMonth() + 1;
@@ -27,6 +27,9 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
             backgroundColor: colors.green,
             color: colors.beige,
           }}
+          titleStyle={{
+            fontFamily: regFont.fontFamily,
+          }}
         />
       )}
       rightContent={(reset) => (
@@ -40,6 +43,9 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
             minHeight: "100%",
             backgroundColor: colors.terraCotta,
             color: colors.beige,
+          }}
+          titleStyle={{
+            fontFamily: regFont.fontFamily,
           }}
         />
       )}
@@ -76,7 +82,8 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
               flexDirection: "row",
               textAlign: "left",
               color: colors.blue,
-              fontSize: itemDate < today ? 13 : 16,
+              fontSize: itemDate < today ? 14 : 16,
+              fontFamily: regFont.fontFamily,
             },
           ]}
         >
@@ -99,16 +106,17 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
               backgroundColor: item?.paid ? colors.green : colors.terraCotta,
               padding: 2,
               marginBottom: 4,
+              fontFamily: regFont?.fontFamily,
             }}
           />
           <Badge
             value={item?.invoiced ? "Invoiced" : "Not Invoiced"}
             badgeStyle={{
               padding: 2,
-
               backgroundColor: item?.invoiced
                 ? colors.green
                 : colors.terraCotta,
+              fontFamily: regFont.fontFamily,
             }}
           />
         </ListItem.Content>
@@ -125,6 +133,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 18,
     fontWeight: "bold",
+    fontFamily: regFont.fontFamily,
   },
   badges: {
     display: "flex",
@@ -136,8 +145,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   datesFont: {
-    fontSize: 15,
+    fontSize: 14,
     color: colors.blue,
+    fontFamily: regFont.fontFamily,
   },
   editFont: {
     transform: [{ translateY: 3 }],
