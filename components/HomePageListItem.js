@@ -27,6 +27,9 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
             backgroundColor: colors.green,
             color: colors.beige,
           }}
+          titleStyle={{
+            fontFamily: regFont.fontFamily,
+          }}
         />
       )}
       rightContent={(reset) => (
@@ -40,6 +43,9 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
             minHeight: "100%",
             backgroundColor: colors.terraCotta,
             color: colors.beige,
+          }}
+          titleStyle={{
+            fontFamily: regFont.fontFamily,
           }}
         />
       )}
