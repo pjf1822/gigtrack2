@@ -95,50 +95,54 @@ const SignupScreen = () => {
   };
 
   return (
-    <View style={{ marginTop: 100 }}>
-      <TextInput
-        style={email !== "" ? styles.input : styles.inputEmpty}
-        placeholder="Email"
-        placeholderTextColor={colors.terraCotta}
-        onChangeText={(text) => setEmail(text)}
-      />
-      <TextInput
-        style={displayName !== "" ? styles.input : styles.inputEmpty}
-        placeholder="User name"
-        placeholderTextColor={colors.terraCotta}
-        onChangeText={(text) => setDisplayName(text)}
-      />
-      <TextInput
-        style={password !== "" ? styles.input : styles.inputEmpty}
-        placeholder="Password"
-        placeholderTextColor={colors.terraCotta}
-        onChangeText={(text) => setPassword(text)}
-        secureTextEntry={true}
-      />
-      <TextInput
-        style={password2 !== "" ? styles.input : styles.inputEmpty}
-        placeholder="Type Your Password Again"
-        onChangeText={(text) => setPassword2(text)}
-        secureTextEntry={true}
-        placeholderTextColor={colors.terraCotta}
-      />
-      <TouchableOpacity
-        style={[isSignupDisabled ? styles.disabledButton : styles.button]}
-        onPress={signUp}
-      >
-        <Text
-          style={
-            isSignupDisabled ? styles.buttonDisabledText : styles.buttonText
-          }
+    <View style={{ marginTop: 100, flex: 1, justifyContent: "space-between" }}>
+      <View>
+        <TextInput
+          style={email !== "" ? styles.input : styles.inputEmpty}
+          placeholder="Email"
+          placeholderTextColor={colors.terraCotta}
+          onChangeText={(text) => setEmail(text)}
+        />
+        <TextInput
+          style={displayName !== "" ? styles.input : styles.inputEmpty}
+          placeholder="User name"
+          placeholderTextColor={colors.terraCotta}
+          onChangeText={(text) => setDisplayName(text)}
+        />
+        <TextInput
+          style={password !== "" ? styles.input : styles.inputEmpty}
+          placeholder="Password"
+          placeholderTextColor={colors.terraCotta}
+          onChangeText={(text) => setPassword(text)}
+          secureTextEntry={true}
+        />
+        <TextInput
+          style={password2 !== "" ? styles.input : styles.inputEmpty}
+          placeholder="Type Your Password Again"
+          onChangeText={(text) => setPassword2(text)}
+          secureTextEntry={true}
+          placeholderTextColor={colors.terraCotta}
+        />
+        <TouchableOpacity
+          style={[isSignupDisabled ? styles.disabledButton : styles.button]}
+          onPress={signUp}
         >
-          Signup
-        </Text>
-      </TouchableOpacity>
-      <View style={{ height: 300 }}></View>
-      <Button
-        title="Got to the Login Page"
-        onPress={() => navigation.navigate("Login")}
-      />
+          <Text
+            style={
+              isSignupDisabled ? styles.buttonDisabledText : styles.buttonText
+            }
+          >
+            Signup
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={{ marginBottom: 40 }}>
+        <Button
+          title="Got to the Login Page"
+          onPress={() => navigation.navigate("Login")}
+        />
+      </View>
     </View>
   );
 };
@@ -168,7 +172,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.green,
     height: 40,
     width: "100%",
-    borderWidth: 2,
+    borderWidth: 4,
     paddingHorizontal: 8,
     borderColor: colors.blue,
     color: colors.beige,
@@ -180,7 +184,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.beige,
     height: 40,
     width: "100%",
-    borderWidth: 2,
+    borderWidth: 4,
     paddingHorizontal: 8,
     borderColor: colors.terraCotta,
     color: colors.terraCotta,
