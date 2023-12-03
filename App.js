@@ -5,12 +5,11 @@ import HeaderBanner from "./components/HeaderBanner";
 import * as SplashScreen from "expo-splash-screen";
 import { useState, useEffect, useCallback } from "react";
 import { Image } from "react-native";
-import { UserProvider } from "./UserContext";
+import { UserProvider, useUser } from "./UserContext";
 import StackNavigator from "./components/StackNavigator";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-
   // SPLASH SCREEN THINGS
   useEffect(() => {
     async function prepare() {
@@ -57,15 +56,24 @@ export default function App() {
       <RootSiblingParent>
         <NavigationContainer>
           <UserProvider>
-            <HeaderBanner />
-
-            <StackNavigator />
+            <MainContent />
           </UserProvider>
         </NavigationContainer>
       </RootSiblingParent>
     </SafeAreaView>
   );
 }
+
+const MainContent = () => {
+  const { user } = useUser();
+
+  return (
+    <>
+      {user && <HeaderBanner />}
+      <StackNavigator />
+    </>
+  );
+};
 
 const SplashScreenImage = ({ source, resizeMode }) => (
   <Image
