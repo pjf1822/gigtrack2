@@ -37,7 +37,7 @@ export default function HeaderBanner() {
     <Header
       containerStyle={{
         paddingTop: heightPercentageToDP(7),
-        height: heightPercentageToDP(15),
+        height: heightPercentageToDP(12),
         backgroundColor: colors.blue,
         borderBottomColor: colors.blue,
         borderBottomWidth: 3,
@@ -54,7 +54,7 @@ export default function HeaderBanner() {
       }}
       leftComponent={
         <TouchableOpacity
-          style={{ marginTop: 4 }}
+          style={{ marginTop: 4, transform: [{ translate: [5, 4] }] }}
           onPress={() => navigation.navigate("Home")}
         >
           <Icon name="home" color={colors.beige} />

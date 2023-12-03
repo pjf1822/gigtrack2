@@ -84,11 +84,29 @@ export default function MainGigForm({
                 separator="."
                 precision={2}
                 minValue={0}
-                style={styles.textInput}
+                style={{
+                  fontFamily: regFont.fontFamily,
+                  height: 40,
+                  borderColor: colors.beige,
+                  borderWidth: 1,
+                  borderRadius: 5,
+                  paddingLeft: 10,
+                  marginBottom: 10,
+                  color: colors.beige,
+                }}
               />
               <Text style={styles.label}>Employer:</Text>
               <TextInput
-                style={styles.textInput}
+                style={{
+                  fontFamily: regFont.fontFamily,
+                  height: 40,
+                  borderColor: colors.beige,
+                  borderWidth: 1,
+                  borderRadius: 5,
+                  paddingLeft: 10,
+                  marginBottom: 10,
+                  color: colors.beige,
+                }}
                 onChangeText={handleChange("employer")}
                 onBlur={handleBlur("employer")}
                 value={values?.employer}
@@ -188,7 +206,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginBottom: 10,
     color: colors.beige,
-    fontfamily: regFont.fontFamily,
   },
   astrikWarning: {
     color: colors.terraCotta,
