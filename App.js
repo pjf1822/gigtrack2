@@ -18,13 +18,9 @@ export default function App() {
       try {
         // Pre-load fonts, make any API calls you need to do here
         // await Font.loadAsync(Entypo.font);
-        // Artificially delay for two seconds to simulate a slow loading
-        // experience. Please remove this if you copy and paste the code!
 
         await Font.loadAsync({
-          // Your custom font
-          "Inter-Black": require("./assets/Inter/static/Inter-Black.ttf"),
-          // Other fonts if needed
+          Mont: require("./assets/Montserrat/static/Montserrat-Regular.ttf"),
         });
         await new Promise((resolve) => setTimeout(resolve, 400));
       } catch (e) {

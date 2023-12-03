@@ -31,6 +31,7 @@ const LoginScreen = () => {
           position: Toast.positions.TOP,
           backgroundColor: colors.green,
           textColor: colors.beige,
+          opacity: 1,
         });
 
         setTimeout(() => {}, 1000);
@@ -50,6 +51,7 @@ const LoginScreen = () => {
         position: Toast.positions.TOP,
         backgroundColor: colors.terraCotta,
         textColor: colors.beige,
+        opacity: 1,
       });
     }
   };
@@ -143,7 +145,6 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     paddingHorizontal: 8,
     backgroundColor: colors.beige,
-    fontFamily: "Inter-Black",
   },
   inputEmpty: {
     height: 40,
@@ -185,7 +186,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: colors.beige,
     fontWeight: "bold",
-    fontFamily: "Inter-Black",
   },
   forgotPasswordText: {
     color: colors.terraCotta,
