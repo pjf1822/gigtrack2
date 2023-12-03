@@ -7,6 +7,8 @@ import { useState, useEffect, useCallback } from "react";
 import { Image } from "react-native";
 import { UserProvider, useUser } from "./UserContext";
 import StackNavigator from "./components/StackNavigator";
+import { colors } from "./theme";
+import * as Font from "expo-font";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -18,6 +20,12 @@ export default function App() {
         // await Font.loadAsync(Entypo.font);
         // Artificially delay for two seconds to simulate a slow loading
         // experience. Please remove this if you copy and paste the code!
+
+        await Font.loadAsync({
+          // Your custom font
+          "Inter-Black": require("./assets/Inter/static/Inter-Black.ttf"),
+          // Other fonts if needed
+        });
         await new Promise((resolve) => setTimeout(resolve, 400));
       } catch (e) {
         console.warn(e);
@@ -42,7 +50,6 @@ export default function App() {
   }, [appIsReady]);
 
   if (!appIsReady) {
-    // Customize the SplashScreenImage component with your image source
     return (
       <SplashScreenImage
         source={require("./assets/hijab.jpg")}
@@ -52,7 +59,7 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#F4F1DE" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.beige }}>
       <RootSiblingParent>
         <NavigationContainer>
           <UserProvider>
