@@ -11,6 +11,7 @@ import Toast from "react-native-root-toast";
 export default function HeaderBanner() {
   const navigation = useNavigation();
   const { user } = useUser();
+  console.log(user, "this is the user");
 
   const signOut = async () => {
     try {
@@ -65,7 +66,7 @@ export default function HeaderBanner() {
             <Text style={styles.text}>Sign Out</Text>
           </TouchableOpacity>
           <Text style={{ marginBottom: 10, color: colors.beige }}>
-            {user && user?.email.split("@")[0]}
+            {user && user?.displayName}
           </Text>
         </View>
       }

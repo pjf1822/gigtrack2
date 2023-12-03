@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
 import Toast from "react-native-root-toast";
 import { colors } from "../theme";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SignupScreen = () => {
@@ -15,11 +15,6 @@ const SignupScreen = () => {
   const [password2, setPassword2] = useState("");
   const [displayName, setDisplayName] = useState("");
 
-  console.log(
-    password2,
-    "this is password too ",
-    password2 === "" ? "hey yeah its empty " : "its apparently not empty"
-  );
   const auth = FIREBASE_AUTH;
   const { setUser } = useUser();
   const navigation = useNavigation();
@@ -48,15 +43,23 @@ const SignupScreen = () => {
       const response = await createUserWithEmailAndPassword(
         auth,
         email,
-        password,
-        displayName
+        password
       );
+      await updateProfile(response.user, {
+        displayName: displayName,
+      });
       const userCredentials = JSON.stringify({
         email: response?.user?.email,
         uid: response?.user?.uid,
         displayName: response?.user?.displayName,
       });
+
       await AsyncStorage.setItem("userCredentials", userCredentials);
+      let toast = Toast.show("Account created!", {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.TOP,
+        type: "success",
+      });
       setUser(response.user);
     } catch (error) {
       if (error.message === "Firebase: Error (auth/invalid-email).") {
@@ -78,6 +81,7 @@ const SignupScreen = () => {
           }
         );
       } else {
+        console.log(error.message, "thi si the firbase problem");
         let toast = Toast.show(error.message, {
           duration: Toast.durations.LONG,
           position: Toast.positions.TOP,
