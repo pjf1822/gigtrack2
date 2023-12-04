@@ -4,7 +4,7 @@ export const generateSections = (dataList) => {
   const currentMonth = now.getUTCMonth();
   const currentYear = now.getUTCFullYear(); // Get current year
 
-  // Function to calculate the "weight" of a month relative to the current month and year
+  // Function to calculate the "weight" of a month r elative to the current month and year
   const monthWeight = (date) => {
     const yearDiff = date.getUTCFullYear() - currentYear;
     const monthIndex = date.getUTCMonth();
