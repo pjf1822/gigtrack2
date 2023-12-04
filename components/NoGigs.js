@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { regFont } from "../theme";
+import { regFont, colors } from "../theme";
 
 export default function NoGigs() {
   return (
@@ -13,7 +13,15 @@ export default function NoGigs() {
         fontFamily: regFont.fontFamily,
       }}
     >
-      <Text>ADD SOME GIGS</Text>
+      <Text
+        style={{
+          fontFamily: regFont.fontFamily,
+          fontSize: 30,
+          color: colors.blue,
+        }}
+      >
+        ADD SOME GIGS!
+      </Text>
     </View>
   );
 }

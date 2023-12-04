@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderBanner from "./components/HeaderBanner";
 import * as SplashScreen from "expo-splash-screen";
 import { useState, useEffect, useCallback } from "react";
-import { Image } from "react-native";
+import { Image, ActivityIndicator, View } from "react-native";
 import { UserProvider, useUser } from "./UserContext";
 import StackNavigator from "./components/StackNavigator";
 import { colors } from "./theme";
@@ -22,7 +22,7 @@ export default function App() {
         await Font.loadAsync({
           Mont: require("./assets/Montserrat/static/Montserrat-Regular.ttf"),
         });
-        await new Promise((resolve) => setTimeout(resolve, 400));
+        // await new Promise((resolve) => setTimeout(resolve, 400));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -36,22 +36,12 @@ export default function App() {
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
-      // This tells the splash screen to hide immediately! If we call this after
-      // `setAppIsReady`, then we may see a blank screen while the app is
-      // loading its initial state and rendering its first pixels. So instead,
-      // we hide the splash screen once we know the root view has already
-      // performed layout
       await SplashScreen.hideAsync();
     }
   }, [appIsReady]);
 
   if (!appIsReady) {
-    return (
-      <SplashScreenImage
-        source={require("./assets/hijab.jpg")}
-        resizeMode="contain"
-      />
-    );
+    return <Loader />;
   }
 
   return (
@@ -79,9 +69,18 @@ const MainContent = () => {
 };
 
 const SplashScreenImage = ({ source, resizeMode }) => (
-  <Image
-    source={source}
-    resizeMode={resizeMode}
-    style={{ flex: 1, width: undefined, height: undefined }}
-  />
+  <Image source={source} resizeMode={resizeMode} />
+);
+
+const Loader = () => (
+  <View
+    style={{
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: colors.blue,
+    }}
+  >
+    <ActivityIndicator size="large" color={colors.green} />
+  </View>
 );

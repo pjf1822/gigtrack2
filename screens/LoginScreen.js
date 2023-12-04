@@ -1,4 +1,4 @@
-import { View, TextInput, StyleSheet, Button, Text } from "react-native";
+import { View, TextInput, StyleSheet, Text, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
@@ -86,13 +86,25 @@ const LoginScreen = () => {
   return (
     <View
       style={{
-        paddingTop: 100,
+        paddingTop: 180,
+        display: "flex",
         flex: 1,
         justifyContent: "space-between",
-        backgroundColor: colors.beige,
+        backgroundColor: colors.blue,
+        alignItems: "center",
+        flexDirection: "column",
       }}
     >
-      <View>
+      <Image
+        source={require("../assets/logo-no-background.png")}
+        style={{
+          width: "60%",
+          height: 80,
+          borderRadius: 10,
+        }}
+        resizeMode="contain"
+      />
+      <View style={{ width: "80%" }}>
         <TextInput
           style={email !== "" ? styles.input : styles.inputEmpty}
           placeholder="Email"
@@ -122,12 +134,12 @@ const LoginScreen = () => {
           <Text style={styles.forgotPasswordText}>Forgot Password</Text>
         </TouchableOpacity>
       </View>
-      <View style={{ marginBottom: 40 }}>
+      <View style={{ marginBottom: 40, width: "80%" }}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("Signup")}
         >
-          <Text style={styles.signupButtonText}>Go to Signup Page</Text>
+          <Text style={{ color: colors.beige }}>Go to Signup Page</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -145,36 +157,36 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     paddingHorizontal: 8,
     backgroundColor: colors.beige,
+    borderRadius: 10,
   },
   inputEmpty: {
     height: 40,
     width: "100%",
-    borderColor: colors.terraCotta,
-    borderWidth: 2,
     marginBottom: 12,
     paddingHorizontal: 8,
     backgroundColor: colors.beige,
+    borderRadius: 10,
   },
   button: {
     backgroundColor: colors.green,
     height: 40,
     width: "100%",
-    borderWidth: 4,
     paddingHorizontal: 8,
-    borderColor: colors.blue,
     color: colors.beige,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    outline: "none",
+    borderRadius: 10,
   },
   disabledButton: {
     backgroundColor: colors.beige,
     height: 40,
     width: "100%",
-    borderWidth: 4,
     paddingHorizontal: 8,
-    borderColor: colors.terraCotta,
     color: colors.terraCotta,
+    borderRadius: 10,
+    outline: "none",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

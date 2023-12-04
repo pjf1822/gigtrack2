@@ -1,5 +1,6 @@
 import Toast from "react-native-root-toast";
 import { createGig, deleteGig, fetchSingleGig, updateGig } from "./api";
+import { colors } from "./theme";
 
 export const getSingleGig = async (id, setPageData) => {
   try {
@@ -15,7 +16,7 @@ export const handleCreateGig = async (values, getAllGigs, toggleOverlay) => {
     if (response.message === "Gig created successfully!") {
       let toast = Toast.show("Gig created!", {
         duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
+        position: Toast.positions.BOTTOM,
         backgroundColor: colors.green,
         textColor: colors.beige,
         opacity: 1,
@@ -34,7 +35,7 @@ export const handleUpdateGig = async (id, values, navigation) => {
     if (response.message === "Gig updated successfully!") {
       let toast = Toast.show("Gig updated!", {
         duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
+        position: Toast.positions.BOTTOM,
         backgroundColor: colors.green,
         textColor: colors.beige,
         opacity: 1,
@@ -47,7 +48,7 @@ export const handleUpdateGig = async (id, values, navigation) => {
   } catch (error) {
     let toast = Toast.show("Could not update", {
       duration: Toast.durations.LONG,
-      position: Toast.positions.TOP,
+      position: Toast.positions.BOTTOM,
       backgroundColor: colors.terraCotta,
       textColor: colors.beige,
     });
@@ -60,9 +61,10 @@ export const handleDeleteGig = async (id, pageName, navigation, getAllGigs) => {
     if (response.message === "Gig deleted successfully!") {
       let toast = Toast.show("Gig deleted!", {
         duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
+        position: Toast.positions.BOTTOM,
         backgroundColor: colors.green,
         textColor: colors.beige,
+
         opacity: 1,
       });
       setTimeout(() => {
@@ -78,7 +80,7 @@ export const handleDeleteGig = async (id, pageName, navigation, getAllGigs) => {
   } catch (error) {
     let toast = Toast.show("Could not delete", {
       duration: Toast.durations.LONG,
-      position: Toast.positions.TOP,
+      position: Toast.positions.BOTTOM,
       backgroundColor: colors.terraCotta,
       textColor: colors.beige,
       opacity: 1,
