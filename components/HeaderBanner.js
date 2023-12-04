@@ -1,6 +1,12 @@
 import React from "react";
 import { Header, Icon, Image } from "@rneui/themed";
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+} from "react-native";
 import { heightPercentageToDP } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 import { colors, regFont } from "../theme";
@@ -36,7 +42,10 @@ export default function HeaderBanner() {
   return (
     <Header
       containerStyle={{
-        paddingTop: heightPercentageToDP(7),
+        paddingTop:
+          Platform.OS === "ios" && Platform.isPad
+            ? heightPercentageToDP(5)
+            : heightPercentageToDP(7),
         height: heightPercentageToDP(15),
         backgroundColor: colors.blue,
         borderBottomColor: colors.blue,
@@ -51,18 +60,35 @@ export default function HeaderBanner() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          ...(Platform.OS === "ios" && Platform.isPad
+            ? { transform: [{ translateY: -9 }] }
+            : {}),
         }}
         onPress={() => navigation.navigate("Home")}
       >
-        <Icon name="home" color={colors.green} />
+        <Icon
+          size={Platform.OS === "ios" && Platform.isPad ? 40 : undefined}
+          style={
+            Platform.OS === "ios" && Platform.isPad ? { marginLeft: 20 } : {}
+          }
+          name="home"
+          color={colors.green}
+        />
       </TouchableOpacity>
 
-      <View style={styles.centerComponentContainer}>
+      <View
+        style={
+          Platform.OS === "ios" && Platform.isPad
+            ? { transform: "translateY(9px)" }
+            : {}
+        }
+      >
         <Image
           source={require("../assets/logo-color.png")}
           style={{
-            width: 290,
-            height: 70,
+            ...(Platform.OS === "ios" && Platform.isPad
+              ? { width: 390, height: 70 }
+              : { width: 290, height: 70 }),
           }}
         />
       </View>
@@ -70,10 +96,15 @@ export default function HeaderBanner() {
       <View
         style={{
           marginTop: 4,
+          ...(Platform.OS === "ios" && Platform.isPad
+            ? { transform: [{ translateY: -9 }] }
+            : {}),
+
           height: "100%",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          marginRight: Platform.OS === "ios" && Platform.isPad ? 10 : {},
         }}
       >
         <Text
@@ -81,12 +112,21 @@ export default function HeaderBanner() {
             color: colors.green,
             fontFamily: regFont.fontFamily,
             marginBottom: 5,
+            fontSize: Platform.OS === "ios" && Platform.isPad ? 20 : {},
           }}
         >
           {user && user?.displayName}
         </Text>
         <TouchableOpacity onPress={handleSignOutAndNavigate}>
-          <Text style={[styles.text, regFont.fontFamily]}>Sign Out</Text>
+          <Text
+            style={[
+              styles.text,
+              regFont.fontFamily,
+              { fontSize: Platform.OS === "ios" && Platform.isPad ? 17 : {} },
+            ]}
+          >
+            Sign Out
+          </Text>
         </TouchableOpacity>
       </View>
     </Header>

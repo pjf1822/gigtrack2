@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
 } from "react-native";
 import CurrencyInput from "react-native-currency-input";
 import { Button } from "@rneui/themed";

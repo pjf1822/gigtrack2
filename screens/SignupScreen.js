@@ -1,4 +1,11 @@
-import { View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Image,
+  Platform,
+} from "react-native";
 import React, { useState } from "react";
 import { useUser } from "../UserContext";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
@@ -139,7 +146,14 @@ const SignupScreen = () => {
         }}
         resizeMode="contain"
       />
-      <View style={{ width: "80%" }}>
+      <View
+        style={{
+          width: "80%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <TextInput
           style={email !== "" ? styles.input : styles.inputEmpty}
           placeholder="Email"
@@ -167,20 +181,34 @@ const SignupScreen = () => {
           placeholderTextColor={colors.terraCotta}
         />
         <TouchableOpacity
-          style={[isSignupDisabled ? styles.disabledButton : styles.button]}
+          style={[
+            isSignupDisabled ? styles.disabledButton : styles.button,
+            {
+              borderWidth: 3,
+              borderColor: isSignupDisabled ? colors.terraCotta : colors.beige,
+            },
+          ]}
           onPress={signUp}
         >
           <Text
-            style={
-              isSignupDisabled ? styles.buttonDisabledText : styles.buttonText
-            }
+            style={[
+              isSignupDisabled ? styles.buttonDisabledText : styles.buttonText,
+            ]}
           >
             Signup
           </Text>
         </TouchableOpacity>
       </View>
 
-      <View style={{ marginBottom: 40, width: "80%" }}>
+      <View
+        style={{
+          marginBottom: 40,
+          width: "80%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("Login")}
@@ -204,6 +232,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     backgroundColor: colors.beige,
     borderRadius: 10,
+    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
   },
   inputEmpty: {
     height: 40,
@@ -212,6 +241,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     backgroundColor: colors.beige,
     borderRadius: 10,
+    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
   },
   button: {
     backgroundColor: colors.green,
@@ -224,6 +254,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     outline: "none",
     borderRadius: 10,
+    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
   },
   disabledButton: {
     backgroundColor: colors.beige,
@@ -236,6 +267,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
   },
   buttonDisabledText: {
     color: colors.terraCotta,
