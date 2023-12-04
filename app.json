@@ -4,12 +4,12 @@
     "slug": "expo-two",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/hijab.jpg",
+    "icon": "./assets/logo-color.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/hijab.jpg",
+      "image": "./assets/logo-color.png",
       "resizeMode": "contain",
-      "backgroundColor": "#F4F1DE"
+      "backgroundColor": "#3D405B"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/logo-color.png",
         "backgroundColor": "#F4F1DE"
       }
     },
