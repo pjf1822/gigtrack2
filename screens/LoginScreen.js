@@ -1,4 +1,4 @@
-import { View, TextInput, StyleSheet, Button, Text } from "react-native";
+import { View, TextInput, StyleSheet, Text, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
@@ -87,12 +87,22 @@ const LoginScreen = () => {
     <View
       style={{
         paddingTop: 100,
+        display: "flex",
         flex: 1,
         justifyContent: "space-between",
         backgroundColor: colors.beige,
+        // alignItems: "center",
+        flexDirection: "column",
       }}
     >
       <View>
+        <Image
+          source={require("../assets/logo-color.png")}
+          style={{ width: "100%", height: 100, borderRadius: 10 }}
+          resizeMode="contain"
+        />
+      </View>
+      <View style={{ width: "80%" }}>
         <TextInput
           style={email !== "" ? styles.input : styles.inputEmpty}
           placeholder="Email"
