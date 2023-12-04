@@ -36,8 +36,8 @@ export default function HeaderBanner() {
   return (
     <Header
       containerStyle={{
-        paddingTop: heightPercentageToDP(5),
-        height: heightPercentageToDP(14),
+        paddingTop: heightPercentageToDP(7),
+        height: heightPercentageToDP(15),
         backgroundColor: colors.blue,
         borderBottomColor: colors.blue,
         borderBottomWidth: 3,
@@ -62,7 +62,7 @@ export default function HeaderBanner() {
           source={require("../assets/logo-color.png")}
           style={{
             width: 290,
-            height: 80,
+            height: 70,
           }}
         />
       </View>
