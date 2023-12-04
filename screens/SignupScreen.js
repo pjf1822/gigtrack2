@@ -65,7 +65,7 @@ const SignupScreen = () => {
       await AsyncStorage.setItem("userCredentials", userCredentials);
       let toast = Toast.show("Account created!", {
         duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
+        position: Toast.positions.Bottom,
         backgroundColor: colors.green,
         textColor: colors.beige,
         opacity: 1,
@@ -93,8 +93,20 @@ const SignupScreen = () => {
             opacity: 1,
           }
         );
+      } else if (
+        error.message === "Firebase: Error (auth/network-request-failed)."
+      ) {
+        let toast = Toast.show(
+          "Password should be at least 6 characters long",
+          {
+            duration: Toast.durations.LONG,
+            position: Toast.positions.TOP,
+            backgroundColor: colors.terraCotta,
+            textColor: colors.beige,
+            opacity: 1,
+          }
+        );
       } else {
-        console.log(error.message, "thi si the firbase problem");
         let toast = Toast.show(error.message, {
           duration: Toast.durations.LONG,
           position: Toast.positions.TOP,
