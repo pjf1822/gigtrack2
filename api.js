@@ -1,9 +1,7 @@
-const serverIp = "192.168.50.224"; // Your machine's local IP address
-
 const fetchGigs = async (email) => {
   try {
     const res = await fetch(
-      `http://${serverIp}:8000/api/gigs/getall?email=${encodeURIComponent(
+      `https://gigtrackserver.onrender.com/api/gigs/getall?email=${encodeURIComponent(
         email
       )}`,
       {
@@ -26,7 +24,9 @@ const fetchGigs = async (email) => {
 
 const fetchSingleGig = async (_id) => {
   try {
-    const res = await fetch(`http://${serverIp}:8000/api/gigs/${_id}`);
+    const res = await fetch(
+      `https://gigtrackserver.onrender.com/api/gigs/${_id}`
+    );
 
     if (!res.ok) {
       throw new Error("Failed to fetch gig");
@@ -40,13 +40,16 @@ const fetchSingleGig = async (_id) => {
 };
 const createGig = async (payload) => {
   try {
-    const res = await fetch(`http://${serverIp}:8000/api/gigs/create`, {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `https://gigtrackserver.onrender.com/api/gigs/create`,
+      {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!res.ok) {
       console.error(`Server error: ${res.status} - ${res.statusText}`);
@@ -64,13 +67,16 @@ const createGig = async (payload) => {
 
 const updateGig = async (_id, payload) => {
   try {
-    const res = await fetch(`http://${serverIp}:8000/api/gigs/${_id}`, {
-      method: "PUT",
-      body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `https://gigtrackserver.onrender.com/api/gigs/${_id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!res.ok) {
       throw new Error("Something went wrong");
@@ -85,9 +91,12 @@ const updateGig = async (_id, payload) => {
 
 const deleteGig = async (_id) => {
   try {
-    const res = await fetch(`http://${serverIp}:8000/api/gigs/${_id}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      `https://gigtrackserver.onrender.com/api/gigs/${_id}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (!res.ok) {
       throw new Error("Failed to delete gig");
