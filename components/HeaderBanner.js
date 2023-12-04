@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Icon } from "@rneui/themed";
+import { Header, Icon, Image } from "@rneui/themed";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import { heightPercentageToDP } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
@@ -36,50 +36,60 @@ export default function HeaderBanner() {
   return (
     <Header
       containerStyle={{
-        paddingTop: heightPercentageToDP(7),
-        height: heightPercentageToDP(12),
+        paddingTop: heightPercentageToDP(5),
+        height: heightPercentageToDP(14),
         backgroundColor: colors.blue,
         borderBottomColor: colors.blue,
         borderBottomWidth: 3,
         display: user ? "flex" : "none",
       }}
-      centerComponent={{
-        text: "GIG TRACK",
+    >
+      <TouchableOpacity
+        style={{
+          marginTop: 4,
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        onPress={() => navigation.navigate("Home")}
+      >
+        <Icon name="home" color={colors.green} />
+      </TouchableOpacity>
 
-        style: {
-          color: colors.beige,
-          fontSize: 28,
-          fontFamily: regFont.fontFamily,
-        },
-      }}
-      leftComponent={
-        <TouchableOpacity
-          style={{ marginTop: 4, transform: [{ translate: [5, 4] }] }}
-          onPress={() => navigation.navigate("Home")}
+      <View style={styles.centerComponentContainer}>
+        <Image
+          source={require("../assets/logo-color.png")}
+          style={{
+            width: 290,
+            height: 80,
+          }}
+        />
+      </View>
+
+      <View
+        style={{
+          marginTop: 4,
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text
+          style={{
+            color: colors.green,
+            fontFamily: regFont.fontFamily,
+            marginBottom: 5,
+          }}
         >
-          <Icon name="home" color={colors.beige} />
+          {user && user?.displayName}
+        </Text>
+        <TouchableOpacity onPress={handleSignOutAndNavigate}>
+          <Text style={[styles.text, regFont.fontFamily]}>Sign Out</Text>
         </TouchableOpacity>
-      }
-      rightComponent={
-        <View>
-          <TouchableOpacity
-            style={{ marginTop: 4 }}
-            onPress={handleSignOutAndNavigate}
-          >
-            <Text style={[styles.text, regFont.fontFamily]}>Sign Out</Text>
-          </TouchableOpacity>
-          <Text
-            style={{
-              marginBottom: 10,
-              color: colors.beige,
-              fontFamily: regFont.fontFamily,
-            }}
-          >
-            {user && user?.displayName}
-          </Text>
-        </View>
-      }
-    />
+      </View>
+    </Header>
   );
 }
 

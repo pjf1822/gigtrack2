@@ -48,8 +48,8 @@ export default function App() {
   if (!appIsReady) {
     return (
       <SplashScreenImage
-        source={require("./assets/hijab.jpg")}
-        resizeMode="contain"
+        source={require("./assets/logo-color.png")}
+        resizeMode="center"
       />
     );
   }
@@ -79,9 +79,5 @@ const MainContent = () => {
 };
 
 const SplashScreenImage = ({ source, resizeMode }) => (
-  <Image
-    source={source}
-    resizeMode={resizeMode}
-    style={{ flex: 1, width: undefined, height: undefined }}
-  />
+  <Image source={source} resizeMode={resizeMode} />
 );
