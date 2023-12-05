@@ -105,7 +105,7 @@ const LoginScreen = () => {
       <Image
         source={require("../assets/logo-no-background.png")}
         style={{
-          width: "60%",
+          width: "61%",
           height: 80,
           borderRadius: 10,
         }}
