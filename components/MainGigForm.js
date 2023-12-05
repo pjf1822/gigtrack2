@@ -210,12 +210,18 @@ const styles = StyleSheet.create({
   },
   astrikWarning: {
     color: colors.terraCotta,
-    fontSize: 12,
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { fontSize: 14 }
+      : { fontSize: 12 }),
     fontFamily: regFont.fontFamily,
   },
   label: {
-    fontSize: 16,
-    marginBottom: 5,
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { fontSize: 18 }
+      : { fontSize: 16 }),
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { marginBottom: 7 }
+      : { marginBottom: 5 }),
     color: colors.beige,
     fontFamily: regFont.fontFamily,
   },
