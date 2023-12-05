@@ -53,28 +53,57 @@ export default function HeaderBanner() {
         display: user ? "flex" : "none",
       }}
     >
-      <TouchableOpacity
+      <View
         style={{
           marginTop: 4,
           height: "100%",
           display: "flex",
-          justifyContent: "center",
+          flexDirection: "row",
           alignItems: "center",
-          ...(Platform.OS === "ios" && Platform.isPad
-            ? { transform: [{ translateY: -9 }] }
-            : {}),
+          justifyContent: "center",
         }}
-        onPress={() => navigation.navigate("Home")}
       >
-        <Icon
-          size={Platform.OS === "ios" && Platform.isPad ? 40 : undefined}
-          style={
-            Platform.OS === "ios" && Platform.isPad ? { marginLeft: 20 } : {}
-          }
-          name="home"
-          color={colors.green}
-        />
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            ...(Platform.OS === "ios" && Platform.isPad
+              ? { transform: [{ translateY: -9 }] }
+              : {}),
+          }}
+          onPress={() => navigation.navigate("Home")}
+        >
+          <Icon
+            size={Platform.OS === "ios" && Platform.isPad ? 40 : undefined}
+            style={
+              Platform.OS === "ios" && Platform.isPad ? { marginLeft: 20 } : {}
+            }
+            name="home"
+            color={colors.green}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            marginTop: 4,
+            height: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            ...(Platform.OS === "ios" && Platform.isPad
+              ? { transform: [{ translateY: -9 }] }
+              : {}),
+          }}
+          onPress={() => navigation.navigate("Options")}
+        >
+          <Icon
+            size={Platform.OS === "ios" && Platform.isPad ? 40 : undefined}
+            style={
+              Platform.OS === "ios" && Platform.isPad ? { marginLeft: 20 } : {}
+            }
+            name="settings"
+            color={colors.green}
+          />
+        </TouchableOpacity>
+      </View>
 
       <View
         style={

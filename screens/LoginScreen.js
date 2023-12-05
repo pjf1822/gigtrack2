@@ -208,7 +208,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     outline: "none",
     borderRadius: 10,
-    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { width: 400 }
+      : { minWidth: "100%" }),
   },
   disabledButton: {
     backgroundColor: colors.beige,
@@ -221,7 +223,9 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { width: 400 }
+      : { minWidth: "100%" }),
   },
   buttonDisabledText: {
     color: colors.terraCotta,
