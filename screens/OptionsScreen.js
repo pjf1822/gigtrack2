@@ -11,10 +11,17 @@ import { colors, regFont } from "../theme";
 import { useUser } from "../UserContext";
 import Toast from "react-native-root-toast";
 import { sendPasswordResetEmail, updateProfile } from "firebase/auth";
+import { Overlay } from "@rneui/themed";
+import DeleteAccountModal from "../components/DeleteAccountModal";
 
 const OptionsScreen = () => {
   const { user, setUser } = useUser();
   const [displayName, setDisplayName] = useState("");
+  const [visible, setVisible] = useState(false);
+
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  };
 
   const updateUserDisplayName = async () => {
     try {
@@ -45,7 +52,7 @@ const OptionsScreen = () => {
       await sendPasswordResetEmail(user?.auth, user?.email);
       Toast.show("Password reset email sent. Please check your email.", {
         duration: Toast.durations.LONG,
-        position: Toast.positions.CENTER,
+        position: Toast.positions.BOTTOM,
         backgroundColor: colors.green,
         textColor: colors.beige,
         opacity: 1,
@@ -54,18 +61,27 @@ const OptionsScreen = () => {
       console.log(error.message);
       Toast.show("Something went wrong", {
         duration: Toast.durations.LONG,
-        position: Toast.positions.CENTER,
+        position: Toast.positions.BOTTOM,
         backgroundColor: colors.terraCotta,
         textColor: colors.beige,
         opacity: 1,
       });
     }
-
-    console.log("dfd");
   };
 
   return (
     <View style={styles.optionsPageWrapper}>
+      <Overlay
+        isVisible={visible}
+        onBackdropPress={toggleOverlay}
+        overlayStyle={styles.overlay}
+      >
+        <DeleteAccountModal
+          user={user}
+          setUser={setUser}
+          toggleOverlay={toggleOverlay}
+        />
+      </Overlay>
       <Text style={styles.header}>Account Details </Text>
       <View style={styles.formWrapper}>
         <View style={styles.entryWrapper}>
@@ -84,7 +100,7 @@ const OptionsScreen = () => {
             <Text>update Password</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={toggleOverlay}>
           <Text style={styles.deleteAccountText}>Delete Account</Text>
         </TouchableOpacity>
       </View>
@@ -124,6 +140,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.beige,
     borderRadius: 10,
     ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
+  },
+  overlay: {
+    width: "93%",
+    maxHeight: "93%",
+    backgroundColor: colors.blue,
+    borderRadius: "10%",
   },
 });
 
