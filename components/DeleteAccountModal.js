@@ -37,6 +37,12 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
   const deleteAccount = async () => {
     try {
       const currentUser = auth?.currentUser;
+      if (email !== "" && password !== "") {
+        // If email and password are provided, reauthenticate before deletion
+        const credentials = EmailAuthProvider.credential(email, password);
+        await signInWithEmailAndPassword(auth, email, password);
+        await reauthenticateWithCredential(currentUser, credentials);
+      }
       await deleteUser(currentUser);
       setUser(null);
       Toast.show("Account Deleted!", {

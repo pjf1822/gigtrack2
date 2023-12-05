@@ -86,12 +86,12 @@ const OptionsScreen = () => {
       <View style={styles.formWrapper}>
         <View style={styles.entryWrapper}>
           <Text style={styles.label}>Email Account</Text>
-          <Text style={styles.text}>{user.email}</Text>
+          <Text style={styles.text}>{user?.email}</Text>
         </View>
         <View style={styles.entryWrapper}>
           <View style={styles.entryWrapper}>
             <Text style={styles.label}>Display Name</Text>
-            <Text style={styles.text}>{user.displayName}</Text>
+            <Text style={styles.text}>{user?.displayName}</Text>
           </View>
         </View>
         <View
