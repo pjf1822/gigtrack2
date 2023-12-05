@@ -2,6 +2,9 @@
   "expo": {
     "name": "expo-two",
     "slug": "expo-two",
+    "android": {
+      "package": "com.gigtrackusa"
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo-color.png",

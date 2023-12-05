@@ -156,7 +156,7 @@ export default function HeaderBanner() {
               styles.text,
               { fontFamily: regFont.fontFamily },
 
-              Platform.OS === "ios" && Platform.isPad && { fontSize: 17 }, // Use spread only when the condition is true
+              Platform.OS === "ios" && Platform.isPad && { fontSize: 17 },
             ]}
           >
             Sign Out
