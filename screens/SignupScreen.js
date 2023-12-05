@@ -77,6 +77,7 @@ const SignupScreen = () => {
         textColor: colors.beige,
         opacity: 1,
       });
+
       navigation.navigate("Home");
     } catch (error) {
       if (error.message === "Firebase: Error (auth/invalid-email).") {

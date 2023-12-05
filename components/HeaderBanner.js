@@ -97,7 +97,9 @@ export default function HeaderBanner() {
           <Icon
             size={Platform.OS === "ios" && Platform.isPad ? 40 : undefined}
             style={
-              Platform.OS === "ios" && Platform.isPad ? { marginLeft: 20 } : {}
+              Platform.OS === "ios" && Platform.isPad
+                ? { marginLeft: 20 }
+                : { marginLeft: 8 }
             }
             name="settings"
             color={colors.green}
@@ -141,7 +143,9 @@ export default function HeaderBanner() {
             color: colors.green,
             fontFamily: regFont.fontFamily,
             marginBottom: 5,
-            fontSize: Platform.OS === "ios" && Platform.isPad ? 20 : {},
+            ...(Platform.OS === "ios" && Platform.isPad
+              ? { fontSize: 20 }
+              : {}),
           }}
         >
           {user && user?.displayName}
@@ -150,8 +154,9 @@ export default function HeaderBanner() {
           <Text
             style={[
               styles.text,
-              regFont.fontFamily,
-              { fontSize: Platform.OS === "ios" && Platform.isPad ? 17 : {} },
+              { fontFamily: regFont.fontFamily },
+
+              Platform.OS === "ios" && Platform.isPad && { fontSize: 17 }, // Use spread only when the condition is true
             ]}
           >
             Sign Out
