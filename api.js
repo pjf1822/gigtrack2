@@ -110,11 +110,12 @@ const deleteGig = async (_id) => {
 };
 
 export const deleteAllGigsByEmail = async (email) => {
+  console.log(email, "the email has been passed in");
   try {
     const res = await fetch(
-      `https://gigtrackserver.onrender.com/api/users?email=${encodeURIComponent(
+      `https://gigtrackserver.onrender.com/api/gigs/allGigs/${encodeURIComponent(
         email
-      )}/gigs`,
+      )}`,
       {
         method: "DELETE",
       }

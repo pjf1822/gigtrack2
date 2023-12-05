@@ -27,47 +27,52 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
 
   const deleteAccount = async () => {
     try {
-      if (user) {
-        // const credentials = EmailAuthProvider.credential(email, password);
-        // await signInWithEmailAndPassword(auth, email, password);
-        // await deleteUser(user);
-        // await reauthenticateWithCredential(user, credentials);
+      if (!email === "" || !password === "") {
+        const credentials = EmailAuthProvider.credential(email, password);
+        const response = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+      }
 
-        await deleteUser(auth.currentUser);
-        setUser(null);
-        toggleOverlay();
-        Toast.show("Account Deleted!", {
+      await deleteUser(user);
+      await reauthenticateWithCredential(user, credentials);
+      setUser(null);
+      await deleteAllGigsByEmail(user?.email);
+
+      toggleOverlay();
+      Toast.show("Account Deleted!", {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.BOTTOM,
+        backgroundColor: colors.green,
+        textColor: colors.beige,
+        opacity: 1,
+      });
+
+      setTimeout(() => {
+        navigation.navigate("Signup");
+      }, 1000);
+    } catch (error) {
+      console.error("Error deleting account:", error);
+
+      if (error.message.includes("auth/requires-recent-login")) {
+        Toast.show("Please try again with email and password filled out", {
           duration: Toast.durations.LONG,
-          position: Toast.positions.BOTTOM,
-          backgroundColor: colors.green,
-          textColor: colors.beige,
-          opacity: 1,
-        });
-        await deleteAllGigsByEmail(user?.email);
-
-        setTimeout(() => {
-          navigation.navigate("Signup");
-        }, 1000);
-
-        Toast.show("Account Deleted Succesfully", {
-          duration: Toast.durations.LONG,
-          position: Toast.positions.BOTTOM,
-          backgroundColor: colors.green,
+          position: Toast.positions.TOP,
+          backgroundColor: colors.terraCotta,
           textColor: colors.beige,
           opacity: 1,
         });
       } else {
-        console.error("User object is not available");
+        Toast.show("Could not delete account", {
+          duration: Toast.durations.LONG,
+          position: Toast.positions.BOTTOM,
+          backgroundColor: colors.terraCotta,
+          textColor: colors.beige,
+          opacity: 1,
+        });
       }
-    } catch (error) {
-      console.error("Error deleting account:", error.message);
-      Toast.show("Could not delete account", {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.BOTTOM,
-        backgroundColor: colors.terraCotta,
-        textColor: colors.beige,
-        opacity: 1,
-      });
     }
   };
 
