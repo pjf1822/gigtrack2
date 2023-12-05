@@ -19,6 +19,7 @@ const OptionsScreen = () => {
   const [displayName, setDisplayName] = useState("");
   const [visible, setVisible] = useState(false);
 
+  console.log(user?.email, "the user email ");
   const toggleOverlay = () => {
     setVisible(!visible);
   };

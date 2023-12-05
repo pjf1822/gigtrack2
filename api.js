@@ -109,4 +109,26 @@ const deleteGig = async (_id) => {
   }
 };
 
+export const deleteAllGigsByEmail = async (email) => {
+  try {
+    const res = await fetch(
+      `https://gigtrackserver.onrender.com/api/users?email=${encodeURIComponent(
+        email
+      )}/gigs`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to delete user gigs");
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export { fetchGigs, fetchSingleGig, createGig, updateGig, deleteGig };
