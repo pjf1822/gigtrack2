@@ -39,9 +39,6 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
       const currentUser = auth?.currentUser;
       await deleteUser(currentUser);
       setUser(null);
-      await deleteAllGigsByEmail(currentUser?.email);
-
-      toggleOverlay();
       Toast.show("Account Deleted!", {
         duration: Toast.durations.LONG,
         position: Toast.positions.BOTTOM,
@@ -49,6 +46,9 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
         textColor: colors.beige,
         opacity: 1,
       });
+      await deleteAllGigsByEmail(currentUser?.email);
+
+      toggleOverlay();
       navigation.navigate("Signup");
     } catch (error) {
       console.error("Error deleting account:", error);

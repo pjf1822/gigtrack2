@@ -50,6 +50,7 @@ const LoginScreen = () => {
       });
       await AsyncStorage.setItem("userCredentials", userCredentials);
       setUser(response.user);
+      navigation.navigate("Home");
     } catch (error) {
       console.log("Sign-in error:", error.message);
 
