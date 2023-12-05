@@ -17,6 +17,7 @@ import {
   reauthenticateWithCredential,
 } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
+import { deleteAllGigsByEmail } from "../api";
 
 const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
   const [email, setEmail] = useState("");
@@ -42,6 +43,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
           textColor: colors.beige,
           opacity: 1,
         });
+        await deleteAllGigsByEmail(user?.email);
 
         setTimeout(() => {
           navigation.navigate("Signup");
