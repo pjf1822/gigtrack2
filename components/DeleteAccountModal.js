@@ -25,21 +25,21 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
   const auth = getAuth();
   const navigation = useNavigation();
 
+  // if (!email === "" || !password === "") {
+  //   const credentials = EmailAuthProvider.credential(email, password);
+  //   const response = await signInWithEmailAndPassword(
+  //     auth,
+  //     email,
+  //     password
+  //   );
+  //   await reauthenticateWithCredential(currentUser, credentials);
+  // }
   const deleteAccount = async () => {
     try {
-      if (!email === "" || !password === "") {
-        const credentials = EmailAuthProvider.credential(email, password);
-        const response = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-      }
-
-      await deleteUser(user);
-      await reauthenticateWithCredential(user, credentials);
+      const currentUser = auth?.currentUser;
+      await deleteUser(currentUser);
       setUser(null);
-      await deleteAllGigsByEmail(user?.email);
+      await deleteAllGigsByEmail(currentUser?.email);
 
       toggleOverlay();
       Toast.show("Account Deleted!", {
@@ -49,10 +49,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
         textColor: colors.beige,
         opacity: 1,
       });
-
-      setTimeout(() => {
-        navigation.navigate("Signup");
-      }, 1000);
+      navigation.navigate("Signup");
     } catch (error) {
       console.error("Error deleting account:", error);
 
