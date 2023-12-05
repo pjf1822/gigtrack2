@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import { colors, regFont } from "../theme";
 import { ListItem, Badge, Button } from "@rneui/themed";
 import { handleDeleteGig } from "../gigUtils";
@@ -82,7 +82,10 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
               flexDirection: "row",
               textAlign: "left",
               color: colors.blue,
-              fontSize: itemDate < today ? 14 : 16,
+
+              ...(Platform.OS === "ios" && Platform.isPad
+                ? { fontSize: 20 }
+                : { fontSize: itemDate < today ? 14 : 16 }),
               fontFamily: regFont.fontFamily,
             },
           ]}
@@ -107,6 +110,9 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
               padding: 2,
               marginBottom: 4,
               fontFamily: regFont?.fontFamily,
+              ...(Platform.OS === "ios" && Platform.isPad
+                ? { transform: [{ scale: 1.2 }] }
+                : {}),
             }}
           />
           <Badge
@@ -117,6 +123,9 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
                 ? colors.green
                 : colors.terraCotta,
               fontFamily: regFont.fontFamily,
+              ...(Platform.OS === "ios" && Platform.isPad
+                ? { transform: [{ scale: 1.2 }] }
+                : {}),
             }}
           />
         </ListItem.Content>
@@ -145,10 +154,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   datesFont: {
-    fontSize: 14,
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { fontSize: 18 }
+      : { fontSize: 14 }),
+
     color: colors.blue,
     fontFamily: regFont.fontFamily,
   },
+
   editFont: {
     transform: [{ translateY: 3 }],
   },

@@ -1,4 +1,11 @@
-import { View, TextInput, StyleSheet, Text, Image } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Text,
+  Image,
+  Platform,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
@@ -98,13 +105,20 @@ const LoginScreen = () => {
       <Image
         source={require("../assets/logo-no-background.png")}
         style={{
-          width: "60%",
+          width: "61%",
           height: 80,
           borderRadius: 10,
         }}
         resizeMode="contain"
       />
-      <View style={{ width: "80%" }}>
+      <View
+        style={{
+          width: "80%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <TextInput
           style={email !== "" ? styles.input : styles.inputEmpty}
           placeholder="Email"
@@ -119,7 +133,13 @@ const LoginScreen = () => {
           secureTextEntry={true}
         />
         <TouchableOpacity
-          style={[isLoginDisabled ? styles.disabledButton : styles.button]}
+          style={[
+            isLoginDisabled ? styles.disabledButton : styles.button,
+            {
+              borderWidth: 3,
+              borderColor: isLoginDisabled ? colors.terraCotta : colors.beige,
+            },
+          ]}
           onPress={signIn}
         >
           <Text
@@ -134,9 +154,17 @@ const LoginScreen = () => {
           <Text style={styles.forgotPasswordText}>Forgot Password</Text>
         </TouchableOpacity>
       </View>
-      <View style={{ marginBottom: 40, width: "80%" }}>
+      <View
+        style={{
+          marginBottom: 40,
+          width: "80%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <TouchableOpacity
-          style={styles.button}
+          style={[styles.button]}
           onPress={() => navigation.navigate("Signup")}
         >
           <Text style={{ color: colors.beige }}>Go to Signup Page</Text>
@@ -158,6 +186,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     backgroundColor: colors.beige,
     borderRadius: 10,
+    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
   },
   inputEmpty: {
     height: 40,
@@ -166,6 +195,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     backgroundColor: colors.beige,
     borderRadius: 10,
+    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
   },
   button: {
     backgroundColor: colors.green,
@@ -178,6 +208,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     outline: "none",
     borderRadius: 10,
+    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
   },
   disabledButton: {
     backgroundColor: colors.beige,
@@ -190,6 +221,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
   },
   buttonDisabledText: {
     color: colors.terraCotta,
