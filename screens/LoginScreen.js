@@ -50,6 +50,7 @@ const LoginScreen = () => {
       });
       await AsyncStorage.setItem("userCredentials", userCredentials);
       setUser(response.user);
+      navigation.navigate("Home");
     } catch (error) {
       console.log("Sign-in error:", error.message);
 
@@ -208,7 +209,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     outline: "none",
     borderRadius: 10,
-    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { width: 400 }
+      : { minWidth: "100%" }),
   },
   disabledButton: {
     backgroundColor: colors.beige,
@@ -221,7 +224,9 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { width: 400 }
+      : { minWidth: "100%" }),
   },
   buttonDisabledText: {
     color: colors.terraCotta,

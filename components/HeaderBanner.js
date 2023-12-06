@@ -53,34 +53,65 @@ export default function HeaderBanner() {
         display: user ? "flex" : "none",
       }}
     >
-      <TouchableOpacity
+      <View
         style={{
           marginTop: 4,
           height: "100%",
           display: "flex",
-          justifyContent: "center",
+          flexDirection: "row",
           alignItems: "center",
-          ...(Platform.OS === "ios" && Platform.isPad
-            ? { transform: [{ translateY: -9 }] }
-            : {}),
+          justifyContent: "center",
         }}
-        onPress={() => navigation.navigate("Home")}
       >
-        <Icon
-          size={Platform.OS === "ios" && Platform.isPad ? 40 : undefined}
-          style={
-            Platform.OS === "ios" && Platform.isPad ? { marginLeft: 20 } : {}
-          }
-          name="home"
-          color={colors.green}
-        />
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            ...(Platform.OS === "ios" && Platform.isPad
+              ? { transform: [{ translateY: -9 }] }
+              : {}),
+          }}
+          onPress={() => navigation.navigate("Home")}
+        >
+          <Icon
+            size={Platform.OS === "ios" && Platform.isPad ? 40 : undefined}
+            style={
+              Platform.OS === "ios" && Platform.isPad ? { marginLeft: 20 } : {}
+            }
+            name="home"
+            color={colors.green}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            marginTop: 4,
+            height: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            ...(Platform.OS === "ios" && Platform.isPad
+              ? { transform: [{ translateY: -9 }] }
+              : {}),
+          }}
+          onPress={() => navigation.navigate("Options")}
+        >
+          <Icon
+            size={Platform.OS === "ios" && Platform.isPad ? 40 : undefined}
+            style={
+              Platform.OS === "ios" && Platform.isPad
+                ? { marginLeft: 20 }
+                : { marginLeft: 8, transform: "translateY(-2px)" }
+            }
+            name="settings"
+            color={colors.green}
+          />
+        </TouchableOpacity>
+      </View>
 
       <View
         style={
           Platform.OS === "ios" && Platform.isPad
             ? { transform: "translateY(9px)" }
-            : {}
+            : { transform: "translateY(10px)" }
         }
       >
         <Image
@@ -88,7 +119,7 @@ export default function HeaderBanner() {
           style={{
             ...(Platform.OS === "ios" && Platform.isPad
               ? { width: 390, height: 70 }
-              : { width: 290, height: 70 }),
+              : { width: 250, height: 50 }),
           }}
         />
       </View>
@@ -112,7 +143,9 @@ export default function HeaderBanner() {
             color: colors.green,
             fontFamily: regFont.fontFamily,
             marginBottom: 5,
-            fontSize: Platform.OS === "ios" && Platform.isPad ? 20 : {},
+            ...(Platform.OS === "ios" && Platform.isPad
+              ? { fontSize: 20 }
+              : {}),
           }}
         >
           {user && user?.displayName}
@@ -121,8 +154,9 @@ export default function HeaderBanner() {
           <Text
             style={[
               styles.text,
-              regFont.fontFamily,
-              { fontSize: Platform.OS === "ios" && Platform.isPad ? 17 : {} },
+              { fontFamily: regFont.fontFamily },
+
+              Platform.OS === "ios" && Platform.isPad && { fontSize: 17 },
             ]}
           >
             Sign Out

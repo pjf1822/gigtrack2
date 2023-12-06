@@ -6,6 +6,7 @@ import DetailScreen from "../screens/DetailScreen";
 import LoginScreen from "../screens/LoginScreen";
 import { useUser } from "../UserContext";
 import SignupScreen from "../screens/SignupScreen";
+import OptionsScreen from "../screens/OptionsScreen";
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ const StackNavigator = () => {
         <Stack.Screen name="Home" component={HomeScreen} />
       )}
       <Stack.Screen name="Details" component={DetailScreen} />
+      <Stack.Screen name="Options" component={OptionsScreen} />
     </Stack.Navigator>
   );
 };
