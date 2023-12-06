@@ -69,7 +69,8 @@ export default function MainGigForm({
             <View
               style={{
                 padding: 10,
-                borderRadius: "10%",
+                borderRadius:
+                  Platform.OS === "ios" && Platform.isPad ? "10%" : 0,
               }}
             >
               <Text style={styles.label}>Day Rate:</Text>
@@ -197,7 +198,6 @@ const styles = StyleSheet.create({
   formWrapper: {
     backgroundColor: colors.blue,
     padding: 10,
-    borderRadius: "10%",
   },
   textInput: {
     height: 40,
