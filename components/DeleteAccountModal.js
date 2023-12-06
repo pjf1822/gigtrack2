@@ -80,8 +80,8 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
   };
 
   return (
-    <View>
-      <TextInput
+    <View style={{}}>
+      {/* <TextInput
         style={styles.inputStyle}
         value={email}
         onChangeText={(text) => setEmail(text)}
@@ -93,10 +93,59 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
         onChangeText={(text) => setPassword(text)}
         placeholder="Enter your password"
         secureTextEntry={true}
-      />
-      <TouchableOpacity onPress={deleteAccount}>
-        <Text>ARE YOU SURE</Text>
-      </TouchableOpacity>
+      /> */}
+      <Text
+        style={{
+          color: colors.beige,
+          width: "100%",
+        }}
+      >
+        ARE YOU SURE ?
+      </Text>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <TouchableOpacity
+          style={{
+            height: 80,
+            // width: 100,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onPress={deleteAccount}
+        >
+          <Text
+            style={{
+              color: colors.terraCotta,
+              width: "100%",
+            }}
+          >
+            YES
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onPress={toggleOverlay}
+        >
+          <Text
+            style={{
+              color: colors.beige,
+              width: "100%",
+            }}
+          >
+            NO
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
