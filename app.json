@@ -16,9 +16,12 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.pjf1822.expotwo"
+      "bundleIdentifier": "com.pjf1822.expotwo",
+       "buildNumber": "2"
     },
     "android": {
+      "package": "com.gigtrackusa",
+
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo-color.png",
         "backgroundColor": "#F4F1DE"

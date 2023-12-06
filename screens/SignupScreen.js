@@ -9,12 +9,12 @@ import {
 import React, { useState } from "react";
 import { useUser } from "../UserContext";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
-import { useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
 import Toast from "react-native-root-toast";
 import { colors } from "../theme";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 const SignupScreen = () => {
   const [email, setEmail] = useState("");
@@ -77,6 +77,8 @@ const SignupScreen = () => {
         textColor: colors.beige,
         opacity: 1,
       });
+
+      navigation.navigate("Home");
     } catch (error) {
       if (error.message === "Firebase: Error (auth/invalid-email).") {
         let toast = Toast.show("Invalid Email", {
@@ -113,6 +115,16 @@ const SignupScreen = () => {
             opacity: 1,
           }
         );
+      } else if (
+        error.message === "Firebase: Error (auth/email-already-in-use)."
+      ) {
+        let toast = Toast.show("An account under that name already exists", {
+          duration: Toast.durations.LONG,
+          position: Toast.positions.TOP,
+          backgroundColor: colors.terraCotta,
+          textColor: colors.beige,
+          opacity: 1,
+        });
       } else {
         let toast = Toast.show(error.message, {
           duration: Toast.durations.LONG,
