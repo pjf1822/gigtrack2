@@ -5,6 +5,7 @@ import {
   Text,
   Image,
   Platform,
+  ScrollView,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
@@ -92,86 +93,88 @@ const LoginScreen = () => {
     }
   };
   return (
-    <View
-      style={{
-        paddingTop: 180,
-        display: "flex",
-        flex: 1,
-        justifyContent: "space-between",
-        backgroundColor: colors.blue,
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-    >
-      <Image
-        source={require("../assets/logo-no-background.png")}
-        style={{
-          width: "61%",
-          height: 80,
-          borderRadius: 10,
-        }}
-        resizeMode="contain"
-      />
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View
         style={{
-          width: "80%",
+          paddingTop: 180,
           display: "flex",
-          justifyContent: "center",
+          flex: 1,
+          justifyContent: "space-between",
+          backgroundColor: colors.blue,
           alignItems: "center",
+          flexDirection: "column",
         }}
       >
-        <TextInput
-          style={email !== "" ? styles.input : styles.inputEmpty}
-          placeholder="Email"
-          onChangeText={(text) => setEmail(text)}
-          placeholderTextColor={colors.terraCotta}
+        <Image
+          source={require("../assets/logo-no-background.png")}
+          style={{
+            width: "61%",
+            height: 80,
+            borderRadius: 10,
+          }}
+          resizeMode="contain"
         />
-        <TextInput
-          style={password !== "" ? styles.input : styles.inputEmpty}
-          placeholder="Password"
-          onChangeText={(text) => setPassword(text)}
-          placeholderTextColor={colors.terraCotta}
-          secureTextEntry={true}
-        />
-        <TouchableOpacity
-          style={[
-            isLoginDisabled ? styles.disabledButton : styles.button,
-            {
-              borderWidth: 3,
-              borderColor: isLoginDisabled ? colors.terraCotta : colors.beige,
-            },
-          ]}
-          onPress={signIn}
+        <View
+          style={{
+            width: "80%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          <Text
-            style={
-              isLoginDisabled ? styles.buttonDisabledText : styles.buttonText
-            }
+          <TextInput
+            style={email !== "" ? styles.input : styles.inputEmpty}
+            placeholder="Email"
+            onChangeText={(text) => setEmail(text)}
+            placeholderTextColor={colors.terraCotta}
+          />
+          <TextInput
+            style={password !== "" ? styles.input : styles.inputEmpty}
+            placeholder="Password"
+            onChangeText={(text) => setPassword(text)}
+            placeholderTextColor={colors.terraCotta}
+            secureTextEntry={true}
+          />
+          <TouchableOpacity
+            style={[
+              isLoginDisabled ? styles.disabledButton : styles.button,
+              {
+                borderWidth: 3,
+                borderColor: isLoginDisabled ? colors.terraCotta : colors.beige,
+              },
+            ]}
+            onPress={signIn}
           >
-            Login
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleForgotPassword}>
-          <Text style={styles.forgotPasswordText}>Forgot Password</Text>
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          marginBottom: 40,
-          width: "80%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <TouchableOpacity
-          style={[styles.button]}
-          onPress={() => navigation.navigate("Signup")}
+            <Text
+              style={
+                isLoginDisabled ? styles.buttonDisabledText : styles.buttonText
+              }
+            >
+              Login
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleForgotPassword}>
+            <Text style={styles.forgotPasswordText}>Forgot Password</Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            marginBottom: 40,
+            width: "80%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          <Text style={{ color: colors.beige }}>Go to Signup Page</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button]}
+            onPress={() => navigation.navigate("Signup")}
+          >
+            <Text style={{ color: colors.beige }}>Go to Signup Page</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

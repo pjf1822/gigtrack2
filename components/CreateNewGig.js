@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
     width: "93%",
     maxHeight: "93%",
     backgroundColor: colors.blue,
-    borderRadius: "10%",
+    borderRadius: Platform.OS === "ios" && Platform.isPad ? "10%" : 0,
   },
 });
