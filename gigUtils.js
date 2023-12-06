@@ -10,7 +10,12 @@ export const getSingleGig = async (id, setPageData) => {
     console.error("An error occurred while fetching the transactions:", error);
   }
 };
-export const handleCreateGig = async (values, getAllGigs, toggleOverlay) => {
+export const handleCreateGig = async (
+  values,
+  getAllGigs,
+  toggleOverlay,
+  allGigs
+) => {
   try {
     const response = await createGig(values);
     if (response.message === "Gig created successfully!") {
@@ -21,7 +26,17 @@ export const handleCreateGig = async (values, getAllGigs, toggleOverlay) => {
         textColor: colors.beige,
         opacity: 1,
       });
-      setTimeout(() => {}, 1000);
+      setTimeout(() => {
+        if (allGigs?.length === 0) {
+          let toast = Toast.show("Swipe each gig to edit or delete!", {
+            duration: Toast.durations.LONG,
+            position: Toast.positions.CENTER,
+            backgroundColor: colors.green,
+            textColor: colors.beige,
+            opacity: 1,
+          });
+        }
+      }, 1000);
     }
     await getAllGigs();
 

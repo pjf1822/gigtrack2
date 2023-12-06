@@ -48,6 +48,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
       toggleOverlay();
       navigation.navigate("Signup");
     } catch (error) {
+      console.log(error.message);
       if (error.message.includes("auth/requires-recent-login")) {
         setOpenCreds(true);
         Toast.show("Please try again with email and password filled out", {
@@ -58,6 +59,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
           opacity: 1,
         });
       } else if (error.message.includes("(auth/invalid-email)")) {
+        console.log(error.message);
         Toast.show("Incorrect Credentials", {
           duration: Toast.durations.LONG,
           position: Toast.positions.TOP,
@@ -67,6 +69,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
         });
       }
       {
+        console.log(error.message);
         Toast.show("Could not delete account", {
           duration: Toast.durations.LONG,
           position: Toast.positions.BOTTOM,

@@ -4,7 +4,7 @@ import { View, StyleSheet, Platform, Text } from "react-native";
 import MainGigForm from "./MainGigForm";
 import { colors, regFont } from "../theme";
 
-export const CreateNewGig = ({ getAllGigs }) => {
+export const CreateNewGig = ({ getAllGigs, allGigs }) => {
   const [visible, setVisible] = useState(false);
 
   const toggleOverlay = () => {
@@ -26,6 +26,7 @@ export const CreateNewGig = ({ getAllGigs }) => {
       >
         <MainGigForm
           getAllGigs={getAllGigs}
+          allGigs={allGigs}
           formType={"create"}
           toggleOverlay={toggleOverlay}
           employer={""}
