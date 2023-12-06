@@ -27,6 +27,7 @@ export default function MainGigForm({
   navigation,
   getAllGigs,
   toggleOverlay,
+  allGigs,
 }) {
   const { user } = useUser();
 
@@ -59,7 +60,12 @@ export default function MainGigForm({
               values?.rate === null ? "0" : values?.rate?.toString();
             const updatedValues = { ...values, rate: rateAsString };
             if (formType === "create") {
-              handleCreateGig(updatedValues, getAllGigs, toggleOverlay);
+              handleCreateGig(
+                updatedValues,
+                getAllGigs,
+                toggleOverlay,
+                allGigs
+              );
             } else {
               handleUpdateGig(itemId, updatedValues, navigation);
             }

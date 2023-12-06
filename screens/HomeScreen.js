@@ -26,15 +26,6 @@ export default function HomeScreen({ navigation }) {
         return rest;
       });
 
-      if (filteredData.length === 1) {
-        let toast = Toast.show("Swipe each gig to edit or delete!", {
-          duration: Toast.durations.LONG,
-          position: Toast.positions.CENTER,
-          backgroundColor: colors.green,
-          textColor: colors.beige,
-          opacity: 1,
-        });
-      }
       setAllGigs(filteredData);
     } catch (error) {
       console.error(
@@ -74,7 +65,9 @@ export default function HomeScreen({ navigation }) {
           />
         )}
         renderSectionHeader={RenderSectionHeader}
-        ListFooterComponent={<CreateNewGig getAllGigs={getAllGigs} />}
+        ListFooterComponent={
+          <CreateNewGig getAllGigs={getAllGigs} allGigs={allGigs} />
+        }
       />
     </View>
   );
