@@ -101,8 +101,8 @@ export default function HeaderBanner() {
             size={Platform.OS === "ios" && Platform.isPad ? 40 : undefined}
             style={
               Platform.OS === "ios" && Platform.isPad
-                ? { marginLeft: 20 }
-                : { marginLeft: 8, transform: "translateY(-2px)" }
+                ? { marginLeft: 17 }
+                : { marginLeft: 5, transform: "translateY(-2px)" }
             }
             name="settings"
             color={colors.green}

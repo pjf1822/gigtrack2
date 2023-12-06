@@ -81,7 +81,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
 
   return (
     <View style={{}}>
-      {/* <TextInput
+      <TextInput
         style={styles.inputStyle}
         value={email}
         onChangeText={(text) => setEmail(text)}
@@ -93,7 +93,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
         onChangeText={(text) => setPassword(text)}
         placeholder="Enter your password"
         secureTextEntry={true}
-      /> */}
+      />
       <Text
         style={{
           color: colors.beige,
