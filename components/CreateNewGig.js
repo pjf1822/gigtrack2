@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Overlay } from "@rneui/themed";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 import MainGigForm from "./MainGigForm";
 import { colors, regFont } from "../theme";
 
@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
     width: "93%",
     maxHeight: "93%",
     backgroundColor: colors.blue,
-    borderRadius: "10%",
+    borderRadius: Platform.OS === "ios" && Platform.isPad ? "10%" : 0,
   },
 });
