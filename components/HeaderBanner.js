@@ -43,9 +43,12 @@ export default function HeaderBanner() {
     <Header
       containerStyle={{
         paddingTop:
-          Platform.OS === "ios" && Platform.isPad
-            ? heightPercentageToDP(5)
-            : heightPercentageToDP(7),
+          Platform.OS === "ios"
+            ? Platform.isPad
+              ? heightPercentageToDP(5)
+              : heightPercentageToDP(7)
+            : heightPercentageToDP(2),
+
         height: heightPercentageToDP(15),
         backgroundColor: colors.blue,
         borderBottomColor: colors.blue,
@@ -109,9 +112,11 @@ export default function HeaderBanner() {
 
       <View
         style={
-          Platform.OS === "ios" && Platform.isPad
-            ? { transform: "translateY(9px)" }
-            : { transform: "translateY(10px)" }
+          Platform.OS === "ios"
+            ? Platform.isPad
+              ? { transform: [{ translateY: 9 }] }
+              : { transform: [{ translateY: 10 }] }
+            : { transform: [{ translateY: 20 }] }
         }
       >
         <Image
