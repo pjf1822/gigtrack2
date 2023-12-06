@@ -46,7 +46,7 @@ export default function HeaderBanner() {
           Platform.OS === "ios"
             ? Platform.isPad
               ? heightPercentageToDP(5)
-              : heightPercentageToDP(7)
+              : heightPercentageToDP(6)
             : heightPercentageToDP(2),
 
         height: heightPercentageToDP(15),
@@ -58,7 +58,7 @@ export default function HeaderBanner() {
     >
       <View
         style={{
-          marginTop: 4,
+          marginTop: 0,
           height: "100%",
           display: "flex",
           flexDirection: "row",
@@ -115,7 +115,7 @@ export default function HeaderBanner() {
           Platform.OS === "ios"
             ? Platform.isPad
               ? { transform: [{ translateY: 9 }] }
-              : { transform: [{ translateY: -2 }] }
+              : { transform: [{ translateY: -3 }] }
             : { transform: [{ translateY: 20 }] }
         }
       >
@@ -134,7 +134,7 @@ export default function HeaderBanner() {
           marginTop: 4,
           ...(Platform.OS === "ios" && Platform.isPad
             ? { transform: [{ translateY: -9 }] }
-            : {}),
+            : { transform: [{ translateY: -10 }] }),
 
           height: "100%",
           display: "flex",
