@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "GIGTRACKUSA",
-    "slug": "GIGTRACKUSA",
+    "slug": "expo-two",
     "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/logo-color.png",
