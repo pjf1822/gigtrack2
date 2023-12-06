@@ -99,7 +99,7 @@ export default function HeaderBanner() {
             style={
               Platform.OS === "ios" && Platform.isPad
                 ? { marginLeft: 20 }
-                : { marginLeft: 8 }
+                : { marginLeft: 8, transform: "translateY(-2px)" }
             }
             name="settings"
             color={colors.green}
@@ -111,7 +111,7 @@ export default function HeaderBanner() {
         style={
           Platform.OS === "ios" && Platform.isPad
             ? { transform: "translateY(9px)" }
-            : {}
+            : { transform: "translateY(10px)" }
         }
       >
         <Image
@@ -119,7 +119,7 @@ export default function HeaderBanner() {
           style={{
             ...(Platform.OS === "ios" && Platform.isPad
               ? { width: 390, height: 70 }
-              : { width: 290, height: 70 }),
+              : { width: 250, height: 50 }),
           }}
         />
       </View>
