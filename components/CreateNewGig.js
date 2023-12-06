@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Overlay } from "@rneui/themed";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 import MainGigForm from "./MainGigForm";
 import { colors, regFont } from "../theme";
 

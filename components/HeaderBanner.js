@@ -115,7 +115,7 @@ export default function HeaderBanner() {
           Platform.OS === "ios"
             ? Platform.isPad
               ? { transform: [{ translateY: 9 }] }
-              : { transform: [{ translateY: 10 }] }
+              : { transform: [{ translateY: -2 }] }
             : { transform: [{ translateY: 20 }] }
         }
       >
