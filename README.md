@@ -4,3 +4,7 @@ This is a simple app to keep track of what jobs you have worked and what you hav
 Peter Forbes 
 pjf18222@gmail.com
 7819275600
+
+
+Privacy Policy of the app: 
+https://www.termsfeed.com/live/10a30c75-6404-4956-9c56-b96b7855c56d
