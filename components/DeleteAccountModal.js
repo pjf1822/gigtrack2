@@ -22,23 +22,14 @@ import { deleteAllGigsByEmail } from "../api";
 const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [openCreds, setOpenCreds] = useState(false);
   const auth = getAuth();
   const navigation = useNavigation();
 
-  // if (!email === "" || !password === "") {
-  //   const credentials = EmailAuthProvider.credential(email, password);
-  //   const response = await signInWithEmailAndPassword(
-  //     auth,
-  //     email,
-  //     password
-  //   );
-  //   await reauthenticateWithCredential(currentUser, credentials);
-  // }
   const deleteAccount = async () => {
     try {
       const currentUser = auth?.currentUser;
       if (email !== "" && password !== "") {
-        // If email and password are provided, reauthenticate before deletion
         const credentials = EmailAuthProvider.credential(email, password);
         await signInWithEmailAndPassword(auth, email, password);
         await reauthenticateWithCredential(currentUser, credentials);
@@ -57,9 +48,8 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
       toggleOverlay();
       navigation.navigate("Signup");
     } catch (error) {
-      console.error("Error deleting account:", error);
-
       if (error.message.includes("auth/requires-recent-login")) {
+        setOpenCreds(true);
         Toast.show("Please try again with email and password filled out", {
           duration: Toast.durations.LONG,
           position: Toast.positions.TOP,
@@ -67,7 +57,16 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
           textColor: colors.beige,
           opacity: 1,
         });
-      } else {
+      } else if (error.message.includes("(auth/invalid-email)")) {
+        Toast.show("Incorrect Credentials", {
+          duration: Toast.durations.LONG,
+          position: Toast.positions.TOP,
+          backgroundColor: colors.terraCotta,
+          textColor: colors.beige,
+          opacity: 1,
+        });
+      }
+      {
         Toast.show("Could not delete account", {
           duration: Toast.durations.LONG,
           position: Toast.positions.BOTTOM,
@@ -82,17 +81,21 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
   return (
     <View style={{}}>
       <TextInput
+        disabled={openCreds}
         style={styles.inputStyle}
         value={email}
         onChangeText={(text) => setEmail(text)}
         placeholder="Enter your email"
+        placeholderTextColor={openCreds ? colors.green : "gray"}
       />
       <TextInput
+        disabled={openCreds}
         style={styles.inputStyle}
         value={password}
         onChangeText={(text) => setPassword(text)}
         placeholder="Enter your password"
         secureTextEntry={true}
+        placeholderTextColor={openCreds ? colors.green : "gray"}
       />
       <Text
         style={{
@@ -113,7 +116,6 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
         <TouchableOpacity
           style={{
             height: 120,
-            // width: 100,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -155,6 +157,17 @@ export default DeleteAccountModal;
 
 const styles = StyleSheet.create({
   inputStyle: {
+    height: 40,
+    width: "100%",
+    borderColor: colors.blue,
+    borderWidth: 2,
+    marginBottom: 12,
+    paddingHorizontal: 8,
+    backgroundColor: colors.beige,
+    borderRadius: 10,
+    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
+  },
+  disabledInputStyle: {
     height: 40,
     width: "100%",
     borderColor: colors.blue,

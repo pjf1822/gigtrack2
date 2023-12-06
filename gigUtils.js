@@ -24,6 +24,7 @@ export const handleCreateGig = async (values, getAllGigs, toggleOverlay) => {
       setTimeout(() => {}, 1000);
     }
     await getAllGigs();
+
     toggleOverlay();
   } catch (error) {
     console.error("Error creating gig:", error);
