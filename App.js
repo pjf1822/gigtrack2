@@ -16,17 +16,12 @@ export default function App() {
   useEffect(() => {
     async function prepare() {
       try {
-        // Pre-load fonts, make any API calls you need to do here
-        // await Font.loadAsync(Entypo.font);
-
         await Font.loadAsync({
           Mont: require("./assets/Montserrat/static/Montserrat-Regular.ttf"),
         });
-        // await new Promise((resolve) => setTimeout(resolve, 400));
       } catch (e) {
         console.warn(e);
       } finally {
-        // Tell the application to render
         setAppIsReady(true);
       }
     }

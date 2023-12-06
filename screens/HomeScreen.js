@@ -10,6 +10,7 @@ import { RenderSectionHeader } from "../components/RenderSectionHeader";
 import { colors } from "../theme";
 import NoGigs from "../components/NoGigs";
 import { useUser } from "../UserContext";
+import Toast from "react-native-root-toast";
 
 export default function HomeScreen({ navigation }) {
   const [sections, setSections] = useState([]);
@@ -25,6 +26,15 @@ export default function HomeScreen({ navigation }) {
         return rest;
       });
 
+      if (filteredData.length >= 1 && filteredData.length <= 3) {
+        let toast = Toast.show("Swipe each gig to edit or delete!", {
+          duration: Toast.durations.LONG,
+          position: Toast.positions.CENTER,
+          backgroundColor: colors.green,
+          textColor: colors.beige,
+          opacity: 1,
+        });
+      }
       setAllGigs(filteredData);
     } catch (error) {
       console.error(
