@@ -133,7 +133,7 @@ export default function HeaderBanner() {
         style={{
           marginTop: 4,
           ...(Platform.OS === "ios" && Platform.isPad
-            ? { transform: [{ translateY: -9 }] }
+            ? { transform: [{ translateY: -8 }] }
             : { transform: [{ translateY: -10 }] }),
 
           height: "100%",
