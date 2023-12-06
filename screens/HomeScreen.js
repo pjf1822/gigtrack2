@@ -26,7 +26,7 @@ export default function HomeScreen({ navigation }) {
         return rest;
       });
 
-      if (filteredData.length >= 1 && filteredData.length <= 3) {
+      if (filteredData.length === 1) {
         let toast = Toast.show("Swipe each gig to edit or delete!", {
           duration: Toast.durations.LONG,
           position: Toast.positions.CENTER,
