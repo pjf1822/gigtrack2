@@ -98,6 +98,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
         style={{
           color: colors.beige,
           width: "100%",
+          textAlign: "center",
         }}
       >
         ARE YOU SURE ?
@@ -111,7 +112,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
       >
         <TouchableOpacity
           style={{
-            height: 80,
+            height: 120,
             // width: 100,
             display: "flex",
             justifyContent: "center",
