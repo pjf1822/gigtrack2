@@ -35,9 +35,12 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
       rightContent={(reset) => (
         <Button
           title="Delete"
-          onPress={() =>
-            handleDeleteGig(item._id, "HomePage", navigation, getAllGigs)
-          }
+          onPress={() => {
+            handleDeleteGig(item._id, "HomePage", navigation, getAllGigs);
+            setTimeout(() => {
+              reset();
+            }, 500);
+          }}
           icon={{ name: "delete", color: colors.beige }}
           buttonStyle={{
             minHeight: "100%",

@@ -143,18 +143,21 @@ export default function HeaderBanner() {
           marginRight: Platform.OS === "ios" && Platform.isPad ? 10 : {},
         }}
       >
-        <Text
-          style={{
-            color: colors.green,
-            fontFamily: regFont.fontFamily,
-            marginBottom: 5,
-            ...(Platform.OS === "ios" && Platform.isPad
-              ? { fontSize: 20 }
-              : {}),
-          }}
-        >
-          {user && user?.displayName}
-        </Text>
+        {user.displayName && (
+          <Text
+            style={{
+              color: colors.green,
+              fontFamily: regFont.fontFamily,
+              marginBottom: 5,
+              ...(Platform.OS === "ios" && Platform.isPad
+                ? { fontSize: 20 }
+                : {}),
+            }}
+          >
+            {user && user?.displayName}
+          </Text>
+        )}
+
         <TouchableOpacity onPress={handleSignOutAndNavigate}>
           <Text
             style={[
