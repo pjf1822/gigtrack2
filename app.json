@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.pjf1822.expotwo",
-       "buildNumber": "1.0.0" 
+       "buildNumber": "2"
     },
     "android": {
       "package": "com.gigtrackusa",
