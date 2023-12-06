@@ -46,7 +46,7 @@ export default function HeaderBanner() {
           Platform.OS === "ios"
             ? Platform.isPad
               ? heightPercentageToDP(5)
-              : heightPercentageToDP(6)
+              : heightPercentageToDP(8)
             : heightPercentageToDP(2),
 
         height: heightPercentageToDP(15),
