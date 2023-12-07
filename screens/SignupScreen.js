@@ -5,11 +5,11 @@ import {
   Text,
   Image,
   Platform,
+  TextInput,
 } from "react-native";
 import React, { useState } from "react";
 import { useUser } from "../UserContext";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
-import { TextInput } from "react-native-gesture-handler";
 import Toast from "react-native-root-toast";
 import { colors } from "../theme";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
