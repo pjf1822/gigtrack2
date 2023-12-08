@@ -6,7 +6,7 @@ const MyTextInput = ({
   value,
   placeholder,
   onChangeText,
-  placeholderTextColor,
+  placeholderTextColor = "black",
   secureTextEntry = false,
 }) => {
   return (

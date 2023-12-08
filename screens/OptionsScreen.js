@@ -14,6 +14,7 @@ import { getAuth, sendPasswordResetEmail, updateProfile } from "firebase/auth";
 import { Overlay } from "@rneui/themed";
 import DeleteAccountModal from "../components/DeleteAccountModal";
 import { showToast } from "../helpers";
+import MyTextInput from "../components/MyTextInput";
 
 const auth = getAuth();
 
@@ -93,14 +94,15 @@ const OptionsScreen = () => {
             <Text style={styles.label}>Display Name</Text>
             <Text style={styles.text}>{user?.displayName}</Text>
           </View>
-          <TouchableOpacity onPress={updateUserDisplayName}>
-            <Text> Update user name</Text>
-          </TouchableOpacity>
-          <TextInput
-            onChangeText={(value) => setDisplayName(value)}
-            placeholder="your new display name"
-          />
         </View>
+        <TouchableOpacity onPress={updateUserDisplayName}>
+          <Text> Update user name</Text>
+        </TouchableOpacity>
+        <MyTextInput
+          value={displayName}
+          placeholder="your new display name"
+          onChangeText={(value) => setDisplayName(value)}
+        />
         <View
           style={{
             height: "65%",
