@@ -17,6 +17,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { showToast } from "../helpers";
 import MyTextInput from "../components/MyTextInput";
+import MyButton from "../components/MyButton";
 
 const SignupScreen = () => {
   const [email, setEmail] = useState("");
@@ -28,7 +29,7 @@ const SignupScreen = () => {
   const { setUser } = useUser();
   const navigation = useNavigation();
 
-  const isSignupDisabled = !email || !displayName || !password || !password2;
+  const isSignupDisabled = !email || !password || !password2;
 
   const signUp = async () => {
     if (isSignupDisabled) {
@@ -159,27 +160,14 @@ const SignupScreen = () => {
           value={password2}
           placeholder="Type Your Password Again"
           onChangeText={(text) => setPassword2(text)}
-          placeholderTextColor={colors.terraCotta}
           secureTextEntry={true}
+          placeholderTextColor={colors.terraCotta}
         />
-        <TouchableOpacity
-          style={[
-            isSignupDisabled ? styles.disabledButton : styles.button,
-            {
-              borderWidth: 3,
-              borderColor: isSignupDisabled ? colors.terraCotta : colors.beige,
-            },
-          ]}
+        <MyButton
+          isDisabled={isSignupDisabled}
           onPress={signUp}
-        >
-          <Text
-            style={[
-              isSignupDisabled ? styles.buttonDisabledText : styles.buttonText,
-            ]}
-          >
-            Signup
-          </Text>
-        </TouchableOpacity>
+          text="Sign up"
+        />
       </View>
 
       <View
@@ -191,52 +179,13 @@ const SignupScreen = () => {
           alignItems: "center",
         }}
       >
-        <TouchableOpacity
-          style={styles.button}
+        <MyButton
           onPress={() => navigation.navigate("Login")}
-        >
-          <Text style={{ color: colors.beige }}>Go to Login Page</Text>
-        </TouchableOpacity>
+          text="Go to Login Page"
+        />
       </View>
     </View>
   );
 };
 
 export default SignupScreen;
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: colors.green,
-    height: 40,
-    width: "100%",
-    paddingHorizontal: 8,
-    color: colors.beige,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    outline: "none",
-    borderRadius: 10,
-    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
-  },
-  disabledButton: {
-    backgroundColor: colors.beige,
-    height: 40,
-    width: "100%",
-    paddingHorizontal: 8,
-    color: colors.terraCotta,
-    borderRadius: 10,
-    outline: "none",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
-  },
-  buttonDisabledText: {
-    color: colors.terraCotta,
-    fontWeight: "bold",
-  },
-  buttonText: {
-    color: colors.beige,
-    fontWeight: "bold",
-  },
-});

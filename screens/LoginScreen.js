@@ -21,6 +21,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../theme";
 import { showToast } from "../helpers";
 import MyTextInput from "../components/MyTextInput";
+import MyButton from "../components/MyButton";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -125,24 +126,12 @@ const LoginScreen = () => {
             placeholderTextColor={colors.terraCotta}
             secureTextEntry={true}
           />
-          <TouchableOpacity
-            style={[
-              isLoginDisabled ? styles.disabledButton : styles.button,
-              {
-                borderWidth: 3,
-                borderColor: isLoginDisabled ? colors.terraCotta : colors.beige,
-              },
-            ]}
+
+          <MyButton
+            isDisabled={isLoginDisabled}
             onPress={signIn}
-          >
-            <Text
-              style={
-                isLoginDisabled ? styles.buttonDisabledText : styles.buttonText
-              }
-            >
-              Login
-            </Text>
-          </TouchableOpacity>
+            text="Login"
+          />
           <TouchableOpacity onPress={handleForgotPassword}>
             <Text style={styles.forgotPasswordText}>Forgot Password</Text>
           </TouchableOpacity>
@@ -156,12 +145,10 @@ const LoginScreen = () => {
             alignItems: "center",
           }}
         >
-          <TouchableOpacity
-            style={[styles.button]}
+          <MyButton
             onPress={() => navigation.navigate("Signup")}
-          >
-            <Text style={{ color: colors.beige }}>Go to Signup Page</Text>
-          </TouchableOpacity>
+            text="Go to Signup Page"
+          />
         </View>
       </View>
     </ScrollView>
@@ -171,44 +158,6 @@ const LoginScreen = () => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: colors.green,
-    height: 40,
-    width: "100%",
-    paddingHorizontal: 8,
-    color: colors.beige,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    outline: "none",
-    borderRadius: 10,
-    ...(Platform.OS === "ios" && Platform.isPad
-      ? { width: 400 }
-      : { minWidth: "100%" }),
-  },
-  disabledButton: {
-    backgroundColor: colors.beige,
-    height: 40,
-    width: "100%",
-    paddingHorizontal: 8,
-    color: colors.terraCotta,
-    borderRadius: 10,
-    outline: "none",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    ...(Platform.OS === "ios" && Platform.isPad
-      ? { width: 400 }
-      : { minWidth: "100%" }),
-  },
-  buttonDisabledText: {
-    color: colors.terraCotta,
-    fontWeight: "bold",
-  },
-  buttonText: {
-    color: colors.beige,
-    fontWeight: "bold",
-  },
   forgotPasswordText: {
     color: colors.terraCotta,
     fontSize: 14,
