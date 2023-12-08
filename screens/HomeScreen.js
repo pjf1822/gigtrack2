@@ -10,7 +10,6 @@ import { RenderSectionHeader } from "../components/RenderSectionHeader";
 import { colors } from "../theme";
 import NoGigs from "../components/NoGigs";
 import { useUser } from "../UserContext";
-import Toast from "react-native-root-toast";
 
 export default function HomeScreen({ navigation }) {
   const [sections, setSections] = useState([]);

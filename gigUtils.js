@@ -43,7 +43,7 @@ export const handleUpdateGig = async (id, values, navigation) => {
   try {
     const response = await updateGig(id, values);
     if (response.message === "Gig updated successfully!") {
-      showToast("Gig Update!", Toast.positions.BOTTOM, colors.green);
+      showToast("Gig Updated!", Toast.positions.BOTTOM, colors.green);
 
       setTimeout(() => {
         navigation.removeListener;

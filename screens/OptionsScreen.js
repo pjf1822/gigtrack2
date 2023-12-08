@@ -10,9 +10,12 @@ import React, { useEffect, useState } from "react";
 import { colors, regFont } from "../theme";
 import { useUser } from "../UserContext";
 import Toast from "react-native-root-toast";
-import { sendPasswordResetEmail, updateProfile } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail, updateProfile } from "firebase/auth";
 import { Overlay } from "@rneui/themed";
 import DeleteAccountModal from "../components/DeleteAccountModal";
+import { showToast } from "../helpers";
+
+const auth = getAuth();
 
 const OptionsScreen = () => {
   const { user, setUser } = useUser();
@@ -25,8 +28,9 @@ const OptionsScreen = () => {
 
   const updateUserDisplayName = async () => {
     try {
-      if (user) {
-        await updateProfile(user, {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        await updateProfile(currentUser, {
           displayName: displayName,
         });
 
@@ -50,22 +54,18 @@ const OptionsScreen = () => {
   const updatePassword = async () => {
     try {
       await sendPasswordResetEmail(user?.auth, user?.email);
-      Toast.show("Password reset email sent. Please check your email.", {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
-        backgroundColor: colors.green,
-        textColor: colors.beige,
-        opacity: 1,
-      });
+      showToast(
+        "Password reset email sent. Please check your email.",
+        Toast.positions.TOP,
+        colors.terraCotta
+      );
     } catch (error) {
       console.log(error.message);
-      Toast.show("Something went wrong", {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
-        backgroundColor: colors.terraCotta,
-        textColor: colors.beige,
-        opacity: 1,
-      });
+      showToast(
+        "Something went wrong",
+        Toast.positions.BOTTOM,
+        colors.terraCotta
+      );
     }
   };
 
@@ -93,6 +93,13 @@ const OptionsScreen = () => {
             <Text style={styles.label}>Display Name</Text>
             <Text style={styles.text}>{user?.displayName}</Text>
           </View>
+          <TouchableOpacity onPress={updateUserDisplayName}>
+            <Text> Update user name</Text>
+          </TouchableOpacity>
+          <TextInput
+            onChangeText={(value) => setDisplayName(value)}
+            placeholder="your new display name"
+          />
         </View>
         <View
           style={{
