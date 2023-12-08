@@ -13,6 +13,7 @@ import { colors, regFont } from "../theme";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
 import { useUser } from "../UserContext";
 import Toast from "react-native-root-toast";
+import { showToast } from "../helpers";
 
 export default function HeaderBanner() {
   const navigation = useNavigation();
@@ -28,13 +29,7 @@ export default function HeaderBanner() {
 
   const handleSignOutAndNavigate = async () => {
     await signOut();
-    let toast = Toast.show("Signed out successfully!", {
-      duration: Toast.durations.LONG,
-      position: Toast.positions.TOP,
-      backgroundColor: colors.green,
-      textColor: colors.beige,
-      opacity: 1,
-    });
+    showToast("Signed out successfully!", Toast.positions.BOTTOM, colors.green);
     setTimeout(() => {}, 1000);
     navigation.navigate("Login");
   };

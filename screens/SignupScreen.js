@@ -15,6 +15,7 @@ import { colors } from "../theme";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { showToast } from "../helpers";
 
 const SignupScreen = () => {
   const [email, setEmail] = useState("");
@@ -30,23 +31,21 @@ const SignupScreen = () => {
 
   const signUp = async () => {
     if (isSignupDisabled) {
-      let toast = Toast.show("Please fill out all of the fields", {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
-        backgroundColor: colors.terraCotta,
-        textColor: colors.beige,
-        opacity: 1,
-      });
+      showToast(
+        "Please fill out all of the fields!",
+        Toast.positions.BOTTOM,
+        colors.terraCotta
+      );
+
       return;
     }
     if (password !== password2) {
-      let toast = Toast.show("Passwords dont match", {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
-        backgroundColor: colors.terraCotta,
-        textColor: colors.beige,
-        opacity: 1,
-      });
+      showToast(
+        "Passwords don't match",
+        Toast.positions.TOP,
+        colors.terraCotta
+      );
+
       return;
     }
 
@@ -70,69 +69,39 @@ const SignupScreen = () => {
       });
 
       await AsyncStorage.setItem("userCredentials", userCredentials);
-      let toast = Toast.show("Account created!", {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.Bottom,
-        backgroundColor: colors.green,
-        textColor: colors.beige,
-        opacity: 1,
-      });
+      showToast("Account created!", Toast.positions.CENTER, colors.green);
 
       navigation.navigate("Home");
     } catch (error) {
       if (error.message === "Firebase: Error (auth/invalid-email).") {
-        let toast = Toast.show("Invalid Email", {
-          duration: Toast.durations.LONG,
-          position: Toast.positions.TOP,
-          backgroundColor: colors.terraCotta,
-          textColor: colors.beige,
-          opacity: 1,
-        });
+        showToast("Invalid Email", Toast.positions.TOP, colors.terraCotta);
       } else if (
         error.message ===
         "Firebase: Password should be at least 6 characters (auth/weak-password)."
       ) {
-        let toast = Toast.show(
-          "Password should be at least 6 characters long",
-          {
-            duration: Toast.durations.LONG,
-            position: Toast.positions.TOP,
-            backgroundColor: colors.terraCotta,
-            textColor: colors.beige,
-            opacity: 1,
-          }
+        showToast(
+          "Passwords should be at least 6 characters long",
+          Toast.positions.TOP,
+          colors.terraCotta
         );
       } else if (
         error.message === "Firebase: Error (auth/network-request-failed)."
       ) {
-        let toast = Toast.show(
-          "Password should be at least 6 characters long",
-          {
-            duration: Toast.durations.LONG,
-            position: Toast.positions.TOP,
-            backgroundColor: colors.terraCotta,
-            textColor: colors.beige,
-            opacity: 1,
-          }
+        showToast(
+          "Passwords should be at least 6 characters long",
+          Toast.positions.TOP,
+          colors.terraCotta
         );
       } else if (
         error.message === "Firebase: Error (auth/email-already-in-use)."
       ) {
-        let toast = Toast.show("An account under that name already exists", {
-          duration: Toast.durations.LONG,
-          position: Toast.positions.TOP,
-          backgroundColor: colors.terraCotta,
-          textColor: colors.beige,
-          opacity: 1,
-        });
+        showToast(
+          "An account under that name already exists",
+          Toast.positions.TOP,
+          colors.terraCotta
+        );
       } else {
-        let toast = Toast.show(error.message, {
-          duration: Toast.durations.LONG,
-          position: Toast.positions.TOP,
-          backgroundColor: colors.terraCotta,
-          textColor: colors.beige,
-          opacity: 1,
-        });
+        showToast(error.message, Toast.positions.TOP, colors.terraCotta);
       }
     }
   };

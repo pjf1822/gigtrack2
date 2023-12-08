@@ -19,6 +19,7 @@ import Toast from "react-native-root-toast";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../theme";
+import { showToast } from "../helpers";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -34,14 +35,7 @@ const LoginScreen = () => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
       if (response?.user?.email) {
-        let toast = Toast.show("Sign-in successful!", {
-          duration: Toast.durations.LONG,
-          position: Toast.positions.TOP,
-          backgroundColor: colors.green,
-          textColor: colors.beige,
-          opacity: 1,
-        });
-
+        showToast("Sign-in Successful!", Toast.positions.BOTTOM, colors.green);
         setTimeout(() => {}, 1000);
       }
 
@@ -55,13 +49,11 @@ const LoginScreen = () => {
     } catch (error) {
       console.log("Sign-in error:", error.message);
 
-      let toast = Toast.show("Sign-in failed. Check your credentials.", {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
-        backgroundColor: colors.terraCotta,
-        textColor: colors.beige,
-        opacity: 1,
-      });
+      showToast(
+        "Sign-in failed. Check your credentials",
+        Toast.positions.BOTTOM,
+        colors.terraCotta
+      );
     }
   };
 
@@ -69,26 +61,22 @@ const LoginScreen = () => {
     try {
       await sendPasswordResetEmail(auth, email);
 
-      let toast = Toast.show("Sent a reset email successfully!", {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
-        backgroundColor: colors.green,
-        textColor: colors.beige,
-        opcaity: 1,
-      });
+      showToast(
+        "Sent a reset email successfully!",
+        Toast.positions.BOTTOM,
+        colors.green
+      );
     } catch (error) {
       console.error("Password reset error:", error.message);
       if (
         error.message === "Firebase: Error (auth/missing-email)." ||
         "Firebase: Error (auth/invalid-email)."
       ) {
-        let toast = Toast.show("We dont have an account with this email", {
-          duration: Toast.durations.LONG,
-          position: Toast.positions.TOP,
-          backgroundColor: colors.terraCotta,
-          textColor: colors.beige,
-          opcaity: 1,
-        });
+        showToast(
+          "We don't have an account with this email!",
+          Toast.positions.BOTTOM,
+          colors.terraCotta
+        );
       }
     }
   };

@@ -1,3 +1,6 @@
+import Toast from "react-native-root-toast";
+import { colors } from "./theme";
+
 // format the data
 export const generateSections = (dataList) => {
   const now = new Date();
@@ -46,4 +49,14 @@ export const generateSections = (dataList) => {
       return acc;
     }, [])
     .sort((a, b) => b.weight - a.weight);
+};
+
+export const showToast = (message, position, backgroundColor) => {
+  return Toast.show(message, {
+    duration: Toast.durations.LONG,
+    position,
+    backgroundColor,
+    textColor: colors.beige,
+    opacity: 1,
+  });
 };
