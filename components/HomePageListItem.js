@@ -96,7 +96,7 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
           {item?.employer}
         </ListItem.Title>
       </ListItem.Content>
-      {item?.rate && itemDate < today && (
+      {item?.rate && itemDate <= today && (
         <ListItem.Content style={{ flex: 2 }}>
           <ListItem.Title style={styles.datesFont}>
             {item?.rate}$

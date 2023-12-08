@@ -2,9 +2,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderBanner from "./components/HeaderBanner";
-import * as SplashScreen from "expo-splash-screen";
-import { useState, useEffect, useCallback } from "react";
-import { Image, ActivityIndicator, View } from "react-native";
+import { useState, useEffect } from "react";
+import { ActivityIndicator, View } from "react-native";
 import { UserProvider, useUser } from "./UserContext";
 import StackNavigator from "./components/StackNavigator";
 import { colors } from "./theme";
@@ -13,6 +12,7 @@ import * as Font from "expo-font";
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
   // SPLASH SCREEN THINGS
+
   useEffect(() => {
     async function prepare() {
       try {
@@ -28,12 +28,6 @@ export default function App() {
 
     prepare();
   }, []);
-
-  const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-      await SplashScreen.hideAsync();
-    }
-  }, [appIsReady]);
 
   if (!appIsReady) {
     return <Loader />;
@@ -62,10 +56,6 @@ const MainContent = () => {
     </>
   );
 };
-
-const SplashScreenImage = ({ source, resizeMode }) => (
-  <Image source={source} resizeMode={resizeMode} />
-);
 
 const Loader = () => (
   <View
