@@ -82,7 +82,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
   };
 
   return (
-    <View style={{}}>
+    <View>
       <TextInput
         disabled={openCreds}
         style={styles.inputStyle}
