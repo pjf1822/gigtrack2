@@ -16,6 +16,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { showToast } from "../helpers";
+import MyTextInput from "../components/MyTextInput";
 
 const SignupScreen = () => {
   const [email, setEmail] = useState("");
@@ -135,31 +136,31 @@ const SignupScreen = () => {
           alignItems: "center",
         }}
       >
-        <TextInput
-          style={email !== "" ? styles.input : styles.inputEmpty}
+        <MyTextInput
+          value={email}
           placeholder="Email"
-          placeholderTextColor={colors.terraCotta}
           onChangeText={(text) => setEmail(text)}
-        />
-        <TextInput
-          style={displayName !== "" ? styles.input : styles.inputEmpty}
-          placeholder="User name"
           placeholderTextColor={colors.terraCotta}
-          onChangeText={(text) => setDisplayName(text)}
         />
-        <TextInput
-          style={password !== "" ? styles.input : styles.inputEmpty}
+        <MyTextInput
+          value={displayName}
+          placeholder="User name"
+          onChangeText={(text) => setDisplayName(text)}
+          placeholderTextColor={colors.terraCotta}
+        />
+        <MyTextInput
+          value={password}
           placeholder="Password"
           placeholderTextColor={colors.terraCotta}
           onChangeText={(text) => setPassword(text)}
           secureTextEntry={true}
         />
-        <TextInput
-          style={password2 !== "" ? styles.input : styles.inputEmpty}
+        <MyTextInput
+          value={password2}
           placeholder="Type Your Password Again"
           onChangeText={(text) => setPassword2(text)}
-          secureTextEntry={true}
           placeholderTextColor={colors.terraCotta}
+          secureTextEntry={true}
         />
         <TouchableOpacity
           style={[
@@ -204,26 +205,6 @@ const SignupScreen = () => {
 export default SignupScreen;
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    width: "100%",
-    borderColor: colors.blue,
-    borderWidth: 2,
-    marginBottom: 12,
-    paddingHorizontal: 8,
-    backgroundColor: colors.beige,
-    borderRadius: 10,
-    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
-  },
-  inputEmpty: {
-    height: 40,
-    width: "100%",
-    marginBottom: 12,
-    paddingHorizontal: 8,
-    backgroundColor: colors.beige,
-    borderRadius: 10,
-    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
-  },
   button: {
     backgroundColor: colors.green,
     height: 40,

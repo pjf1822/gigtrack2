@@ -20,6 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../theme";
 import { showToast } from "../helpers";
+import MyTextInput from "../components/MyTextInput";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -51,7 +52,7 @@ const LoginScreen = () => {
 
       showToast(
         "Sign-in failed. Check your credentials",
-        Toast.positions.BOTTOM,
+        Toast.positions.TOP,
         colors.terraCotta
       );
     }
@@ -110,14 +111,15 @@ const LoginScreen = () => {
             alignItems: "center",
           }}
         >
-          <TextInput
-            style={email !== "" ? styles.input : styles.inputEmpty}
+          <MyTextInput
+            value={email}
             placeholder="Email"
             onChangeText={(text) => setEmail(text)}
             placeholderTextColor={colors.terraCotta}
           />
-          <TextInput
-            style={password !== "" ? styles.input : styles.inputEmpty}
+
+          <MyTextInput
+            value={password}
             placeholder="Password"
             onChangeText={(text) => setPassword(text)}
             placeholderTextColor={colors.terraCotta}
@@ -169,26 +171,6 @@ const LoginScreen = () => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    width: "100%",
-    borderColor: colors.blue,
-    borderWidth: 2,
-    marginBottom: 12,
-    paddingHorizontal: 8,
-    backgroundColor: colors.beige,
-    borderRadius: 10,
-    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
-  },
-  inputEmpty: {
-    height: 40,
-    width: "100%",
-    marginBottom: 12,
-    paddingHorizontal: 8,
-    backgroundColor: colors.beige,
-    borderRadius: 10,
-    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
-  },
   button: {
     backgroundColor: colors.green,
     height: 40,
