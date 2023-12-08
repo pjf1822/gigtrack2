@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   if (!authCompleted) {
-    return null; // or loading indicator
+    return null;
   }
 
   return (
