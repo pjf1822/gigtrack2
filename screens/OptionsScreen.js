@@ -88,7 +88,7 @@ const OptionsScreen = () => {
       ></View>
       <View style={styles.formWrapper}>
         <View style={styles.entryWrapper}>
-          <Text style={styles.label}>Email Account</Text>
+          <Text style={styles.label}>Email Account:</Text>
           <Text style={styles.text}>{user?.email}</Text>
         </View>
         <View style={styles.entryWrapper}>
@@ -99,22 +99,24 @@ const OptionsScreen = () => {
           style={{
             height: "65%",
             display: "flex",
-            justifyContent: "flex-start",
+            justifyContent: "space-between",
             marginTop: 10,
             width: "50%",
           }}
         >
-          <TextInput
-            placeholder="Your new display name"
-            value={displayName}
-            onChangeText={(value) => setDisplayName(value)}
-            style={[styles.input, { fontFamily: regFont.fontFamily }]}
-          />
-          <MyButton2
-            onPress={updateUserDisplayName}
-            text="Update Username"
-            textColor={colors.green}
-          />
+          <View>
+            <TextInput
+              placeholder="Your new display name"
+              value={displayName}
+              onChangeText={(value) => setDisplayName(value)}
+              style={[styles.input, { fontFamily: regFont.fontFamily }]}
+            />
+            <MyButton2
+              onPress={updateUserDisplayName}
+              text="Update Username"
+              textColor={colors.green}
+            />
+          </View>
           <View style={{ paddingTop: 80 }}>
             <MyButton2
               onPress={updatePassword}
