@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TextInput, Platform } from "react-native";
 import React, { useEffect, useState } from "react";
 import { colors, regFont } from "../theme";
 import { useUser } from "../UserContext";
@@ -78,46 +78,55 @@ const OptionsScreen = () => {
         />
       </Overlay>
       <Text style={styles.header}>Account Details </Text>
+      <View
+        style={{
+          height: 2,
+          backgroundColor: colors.beige,
+          width: "110%",
+          transform: "translateX(-20px)",
+        }}
+      ></View>
       <View style={styles.formWrapper}>
         <View style={styles.entryWrapper}>
           <Text style={styles.label}>Email Account</Text>
           <Text style={styles.text}>{user?.email}</Text>
         </View>
         <View style={styles.entryWrapper}>
-          <View style={styles.entryWrapper}>
-            <Text style={styles.label}>Display Name:</Text>
-            <Text style={styles.text}>{user?.displayName}</Text>
-          </View>
+          <Text style={styles.label}>Display Name:</Text>
+          <Text style={styles.text}>{user?.displayName}</Text>
         </View>
-        <MyButton2
-          onPress={updateUserDisplayName}
-          text="Update Username"
-          textColor={colors.green}
-        />
-        <MyTextInput
-          value={displayName}
-          placeholder="Your new display name"
-          onChangeText={(value) => setDisplayName(value)}
-          placeholderTextColor={colors.green}
-        />
         <View
           style={{
             height: "65%",
             display: "flex",
             justifyContent: "flex-start",
-            marginTop: 30,
+            marginTop: 10,
+            width: "50%",
           }}
         >
+          <TextInput
+            placeholder="Your new display name"
+            value={displayName}
+            onChangeText={(value) => setDisplayName(value)}
+            style={[styles.input, { fontFamily: regFont.fontFamily }]}
+          />
           <MyButton2
-            onPress={updatePassword}
-            text="Update Password"
+            onPress={updateUserDisplayName}
+            text="Update Username"
             textColor={colors.green}
           />
-          <MyButton2
-            onPress={toggleOverlay}
-            text="Delete Account"
-            textColor={colors.terraCotta}
-          />
+          <View style={{ paddingTop: 80 }}>
+            <MyButton2
+              onPress={updatePassword}
+              text="Update Password"
+              textColor={colors.green}
+            />
+            <MyButton2
+              onPress={toggleOverlay}
+              text="Delete Account"
+              textColor={colors.terraCotta}
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -135,10 +144,11 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "flex-start",
+    width: "100%",
   },
   header: {
     color: colors.beige,
-    fontSize: 40,
+    fontSize: 35,
     fontFamily: regFont.fontFamily,
     marginBottom: 20,
   },
@@ -146,12 +156,13 @@ const styles = StyleSheet.create({
     color: colors.beige,
     fontSize: 30,
     fontFamily: regFont.fontFamily,
-    marginBottom: 8,
+    marginBottom: 5,
   },
   text: { color: colors.green, fontSize: 25, fontFamily: regFont.fontFamily },
   entryWrapper: {
     paddingTop: 15,
     paddingBottom: 5,
+    width: "100%",
   },
   deleteAccountText: {
     fontSize: 25,
@@ -162,6 +173,15 @@ const styles = StyleSheet.create({
     maxHeight: "93%",
     backgroundColor: colors.blue,
     borderRadius: "10%",
+  },
+  input: {
+    height: 40,
+    borderColor: colors.green,
+    borderWidth: 2,
+    marginBottom: 12,
+    padding: 12,
+    backgroundColor: colors.beige,
+    borderRadius: 10,
   },
 });
 

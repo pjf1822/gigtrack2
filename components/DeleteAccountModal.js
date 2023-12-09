@@ -107,6 +107,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
           color: colors.beige,
           width: "100%",
           textAlign: "center",
+          marginTop: 20,
         }}
       >
         ARE YOU SURE ?
@@ -118,7 +119,6 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
           justifyContent: "space-evenly",
         }}
       >
-        {/* <MyButton2 isDisabled={false} onPress={deleteAccount} text="YES" /> */}
         <TouchableOpacity
           style={{
             height: 120,
