@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.green,
     height: 40,
-    width: "100%",
     paddingHorizontal: 8,
     color: colors.beige,
     display: "flex",
@@ -36,13 +35,12 @@ const styles = StyleSheet.create({
     outline: "none",
     borderRadius: 10,
     ...(Platform.OS === "ios" && Platform.isPad
-      ? { width: 400 }
+      ? { minWidth: "75%" }
       : { minWidth: "100%" }),
   },
   disabledButton: {
     backgroundColor: colors.beige,
     height: 40,
-    width: "100%",
     paddingHorizontal: 8,
     color: colors.terraCotta,
     borderRadius: 10,
@@ -51,7 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     ...(Platform.OS === "ios" && Platform.isPad
-      ? { width: 400 }
+      ? { minWidth: "75%" }
       : { minWidth: "100%" }),
   },
   buttonText: {

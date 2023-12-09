@@ -147,7 +147,7 @@ const SignupScreen = () => {
           value={displayName}
           placeholder="User name"
           onChangeText={(text) => setDisplayName(text)}
-          placeholderTextColor={colors.terraCotta}
+          placeholderTextColor={"black"}
         />
         <MyTextInput
           value={password}

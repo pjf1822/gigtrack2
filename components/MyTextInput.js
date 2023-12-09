@@ -30,18 +30,19 @@ const styles = StyleSheet.create({
     backgroundColor: colors.beige,
     borderRadius: 10,
     ...(Platform.OS === "ios" && Platform.isPad
-      ? { width: 400 }
-      : { width: "100%" }),
+      ? { minWidth: "75%" }
+      : { minWidth: "100%" }),
   },
   inputEmpty: {
     height: 40,
+
     marginBottom: 12,
     paddingHorizontal: 8,
     backgroundColor: colors.beige,
     borderRadius: 10,
     ...(Platform.OS === "ios" && Platform.isPad
-      ? { width: 400 }
-      : { width: "100%" }),
+      ? { minWidth: "75%" }
+      : { minWidth: "100%" }),
   },
 });
 

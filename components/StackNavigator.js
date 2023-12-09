@@ -8,6 +8,7 @@ import { useUser } from "../UserContext";
 import OptionsScreen from "../screens/OptionsScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Spinner from "react-native-loading-spinner-overlay";
+import { colors } from "../theme";
 
 const Stack = createStackNavigator();
 
@@ -28,7 +29,7 @@ const StackNavigator = () => {
       <Spinner
         visible={loading}
         textContent={"Loading..."}
-        textStyle={{ color: "#FFF" }}
+        textStyle={{ color: colors.beige }}
       />
     );
   }
