@@ -20,17 +20,15 @@ export const handleCreateGig = async (
   try {
     const response = await createGig(values);
     if (response.message === "Gig created successfully!") {
-      showToast("Gig created!", Toast.positions.BOTTOM, colors.green);
-
-      setTimeout(() => {
-        if (allGigs?.length === 0) {
-          showToast(
-            "Swipe each gig to edit or delete!",
-            Toast.positions.CENTER,
-            colors.green
-          );
-        }
-      }, 1000);
+      if (allGigs?.length === 0) {
+        showToast(
+          "Swipe each gig to edit or delete!",
+          Toast.positions.CENTER,
+          colors.green
+        );
+      } else {
+        showToast("Gig created!", Toast.positions.BOTTOM, colors.green);
+      }
     }
     await getAllGigs();
 
