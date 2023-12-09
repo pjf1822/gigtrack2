@@ -1,4 +1,3 @@
-import { View, StyleSheet, Text, Image, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
@@ -9,11 +8,10 @@ import {
 import { useUser } from "../UserContext";
 import Toast from "react-native-root-toast";
 import { useNavigation } from "@react-navigation/native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../theme";
 import { showToast } from "../helpers";
-import MyTextInput from "../components/MyTextInput";
-import MyButton from "../components/MyButton";
+
+import LoginSignup from "../components/LoginSignup";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -74,81 +72,17 @@ const LoginScreen = () => {
     }
   };
   return (
-    // <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-    <View
-      style={{
-        paddingTop: 180,
-        display: "flex",
-        flex: 1,
-        justifyContent: "space-between",
-        backgroundColor: colors.blue,
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-    >
-      <Image
-        source={require("../assets/logo-no-background.png")}
-        style={{
-          width: "61%",
-          height: 80,
-          borderRadius: 10,
-        }}
-        resizeMode="contain"
-      />
-      <View
-        style={{
-          width: "80%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <MyTextInput
-          value={email}
-          placeholder="Email"
-          onChangeText={(text) => setEmail(text)}
-          placeholderTextColor={colors.terraCotta}
-        />
-
-        <MyTextInput
-          value={password}
-          placeholder="Password"
-          onChangeText={(text) => setPassword(text)}
-          placeholderTextColor={colors.terraCotta}
-          secureTextEntry={true}
-        />
-
-        <MyButton isDisabled={isLoginDisabled} onPress={signIn} text="Login" />
-        <TouchableOpacity onPress={handleForgotPassword}>
-          <Text style={styles.forgotPasswordText}>Forgot Password</Text>
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          marginBottom: 40,
-          width: "80%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <MyButton
-          onPress={() => navigation.navigate("Signup")}
-          text="Go to Signup Page"
-        />
-      </View>
-    </View>
-    // </ScrollView>
+    <LoginSignup
+      loginOrSignup={"Login"}
+      email={email}
+      password={password}
+      setEmail={setEmail}
+      setPassword={setPassword}
+      formFunction={signIn}
+      functionDisabled={isLoginDisabled}
+      handleForgotPassword={handleForgotPassword}
+    />
   );
 };
 
 export default LoginScreen;
-
-const styles = StyleSheet.create({
-  forgotPasswordText: {
-    color: colors.terraCotta,
-    fontSize: 14,
-    textAlign: "center",
-    marginTop: 15,
-  },
-});

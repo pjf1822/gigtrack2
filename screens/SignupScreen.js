@@ -1,12 +1,4 @@
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  Image,
-  Platform,
-  TextInput,
-} from "react-native";
+import { View, Image } from "react-native";
 import React, { useState } from "react";
 import { useUser } from "../UserContext";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
@@ -18,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import { showToast } from "../helpers";
 import MyTextInput from "../components/MyTextInput";
 import MyButton from "../components/MyButton";
+import LoginSignup from "../components/LoginSignup";
 
 const SignupScreen = () => {
   const [email, setEmail] = useState("");
@@ -109,82 +102,19 @@ const SignupScreen = () => {
   };
 
   return (
-    <View
-      style={{
-        paddingTop: 180,
-        display: "flex",
-        flex: 1,
-        justifyContent: "space-between",
-        backgroundColor: colors.blue,
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-    >
-      <Image
-        source={require("../assets/logo-no-background.png")}
-        style={{
-          width: "60%",
-          height: 80,
-          borderRadius: 10,
-        }}
-        resizeMode="contain"
-      />
-      <View
-        style={{
-          width: "80%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <MyTextInput
-          value={email}
-          placeholder="Email"
-          onChangeText={(text) => setEmail(text)}
-          placeholderTextColor={colors.terraCotta}
-        />
-        <MyTextInput
-          value={displayName}
-          placeholder="User name"
-          onChangeText={(text) => setDisplayName(text)}
-          placeholderTextColor={"black"}
-        />
-        <MyTextInput
-          value={password}
-          placeholder="Password"
-          placeholderTextColor={colors.terraCotta}
-          onChangeText={(text) => setPassword(text)}
-          secureTextEntry={true}
-        />
-        <MyTextInput
-          value={password2}
-          placeholder="Type Your Password Again"
-          onChangeText={(text) => setPassword2(text)}
-          secureTextEntry={true}
-          placeholderTextColor={colors.terraCotta}
-        />
-        <MyButton
-          isDisabled={isSignupDisabled}
-          onPress={signUp}
-          text="Sign up"
-        />
-      </View>
-
-      <View
-        style={{
-          marginBottom: 40,
-          width: "80%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <MyButton
-          onPress={() => navigation.navigate("Login")}
-          text="Go to Login Page"
-        />
-      </View>
-    </View>
+    <LoginSignup
+      loginOrSignup={"Signup"}
+      email={email}
+      password={password}
+      displayName={displayName}
+      password2={password2}
+      setEmail={setEmail}
+      setPassword={setPassword}
+      setDisplayName={setDisplayName}
+      setPassword2={setPassword2}
+      formFunction={signUp}
+      functionDisabled={isSignupDisabled}
+    />
   );
 };
 
