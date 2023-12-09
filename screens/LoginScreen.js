@@ -36,8 +36,9 @@ const LoginScreen = () => {
   const signIn = async () => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
+      console.log(response, "the response");
       if (response?.user?.email) {
-        showToast("Sign-in Successful!", Toast.positions.BOTTOM, colors.green);
+        showToast("Sign-in Successful!", Toast.positions.TOP, colors.green);
         setTimeout(() => {}, 1000);
       }
 

@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/HomeScreen";
@@ -19,17 +18,13 @@ const StackNavigator = () => {
         headerShown: false,
       }}
     >
-      {!user ? (
-        <>
-          <Stack.Screen name="Login">
-            {(props) => <LoginScreen {...props} />}
-          </Stack.Screen>
-          <Stack.Screen name="Signup">
-            {(props) => <SignupScreen {...props} />}
-          </Stack.Screen>
-        </>
-      ) : (
+      {user ? (
         <Stack.Screen name="Home" component={HomeScreen} />
+      ) : (
+        <>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Signup" component={SignupScreen} />
+        </>
       )}
       <Stack.Screen name="Details" component={DetailScreen} />
       <Stack.Screen name="Options" component={OptionsScreen} />

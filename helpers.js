@@ -52,7 +52,6 @@ export const generateSections = (dataList) => {
 };
 
 export const showToast = (message, position, backgroundColor) => {
-  console.log("hey");
   return Toast.show(message, {
     duration: Toast.durations.LONG,
     position,
