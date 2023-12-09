@@ -70,10 +70,11 @@ export default function HomeScreen({ navigation }) {
           />
         )}
         renderSectionHeader={RenderSectionHeader}
-        ListFooterComponent={
-          <CreateNewGig getAllGigs={getAllGigs} allGigs={allGigs} />
-        }
+        // ListFooterComponent={
+        //   <CreateNewGig getAllGigs={getAllGigs} allGigs={allGigs} />
+        // }
       />
+      <CreateNewGig getAllGigs={getAllGigs} allGigs={allGigs} />
     </View>
   );
 }

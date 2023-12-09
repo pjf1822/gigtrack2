@@ -39,6 +39,7 @@ export const CreateNewGig = ({ getAllGigs, allGigs }) => {
 const styles = StyleSheet.create({
   button: {
     margin: 10,
+    marginBottom: 40,
     backgroundColor: colors.green,
     color: colors.beige,
   },
