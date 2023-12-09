@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  Platform,
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { colors, regFont } from "../theme";
 import { useUser } from "../UserContext";
@@ -15,6 +8,7 @@ import { Overlay } from "@rneui/themed";
 import DeleteAccountModal from "../components/DeleteAccountModal";
 import { showToast } from "../helpers";
 import MyTextInput from "../components/MyTextInput";
+import MyButton2 from "../components/MyButton2";
 
 const auth = getAuth();
 
@@ -91,17 +85,20 @@ const OptionsScreen = () => {
         </View>
         <View style={styles.entryWrapper}>
           <View style={styles.entryWrapper}>
-            <Text style={styles.label}>Display Name</Text>
+            <Text style={styles.label}>Display Name:</Text>
             <Text style={styles.text}>{user?.displayName}</Text>
           </View>
         </View>
-        <TouchableOpacity onPress={updateUserDisplayName}>
-          <Text> Update user name</Text>
-        </TouchableOpacity>
+        <MyButton2
+          onPress={updateUserDisplayName}
+          text="Update Username"
+          textColor={colors.green}
+        />
         <MyTextInput
           value={displayName}
-          placeholder="your new display name"
+          placeholder="Your new display name"
           onChangeText={(value) => setDisplayName(value)}
+          placeholderTextColor={colors.green}
         />
         <View
           style={{
@@ -111,27 +108,16 @@ const OptionsScreen = () => {
             marginTop: 30,
           }}
         >
-          <TouchableOpacity
-            style={styles.touchableWrapper}
+          <MyButton2
             onPress={updatePassword}
-          >
-            <Text style={[styles.touchable, { color: colors.green }]}>
-              Update Password
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.touchableWrapper,
-              Platform.OS === "ios" && Platform.isPad
-                ? { marginTop: 20 }
-                : { marginTop: 0 },
-            ]}
+            text="Update Password"
+            textColor={colors.green}
+          />
+          <MyButton2
             onPress={toggleOverlay}
-          >
-            <Text style={[styles.touchable, { color: colors.terraCotta }]}>
-              Delete Account
-            </Text>
-          </TouchableOpacity>
+            text="Delete Account"
+            textColor={colors.terraCotta}
+          />
         </View>
       </View>
     </View>
@@ -169,21 +155,6 @@ const styles = StyleSheet.create({
   },
   deleteAccountText: {
     fontSize: 25,
-    fontFamily: regFont.fontFamily,
-  },
-  touchableWrapper: {
-    backgroundColor: colors.beige,
-    marginBottom: 25,
-    padding: 12,
-    borderRadius: 25,
-    display: "flex",
-    alignItems: "center",
-  },
-
-  touchable: {
-    ...(Platform.OS === "ios" && Platform.isPad
-      ? { fontSize: 25 }
-      : { fontSize: 15 }),
     fontFamily: regFont.fontFamily,
   },
   overlay: {

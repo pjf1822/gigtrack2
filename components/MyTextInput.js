@@ -23,23 +23,25 @@ const MyTextInput = ({
 const styles = StyleSheet.create({
   input: {
     height: 40,
-    width: "100%",
     borderColor: colors.blue,
     borderWidth: 2,
     marginBottom: 12,
     paddingHorizontal: 8,
     backgroundColor: colors.beige,
     borderRadius: 10,
-    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { width: 400 }
+      : { width: "100%" }),
   },
   inputEmpty: {
     height: 40,
-    width: "100%",
     marginBottom: 12,
     paddingHorizontal: 8,
     backgroundColor: colors.beige,
     borderRadius: 10,
-    ...(Platform.OS === "ios" && Platform.isPad ? { width: 400 } : {}),
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { width: 400 }
+      : { width: "100%" }),
   },
 });
 

@@ -3,7 +3,7 @@ import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../theme";
 
-const MyButton = ({ isDisabled = false, onPress, text }) => {
+const MyButton = ({ isDisabled, onPress, text }) => {
   const buttonStyles = [
     isDisabled ? styles.disabledButton : styles.button,
     {

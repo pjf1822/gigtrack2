@@ -1,12 +1,4 @@
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  Text,
-  Image,
-  Platform,
-  ScrollView,
-} from "react-native";
+import { View, StyleSheet, Text, Image, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
@@ -36,7 +28,6 @@ const LoginScreen = () => {
   const signIn = async () => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      console.log(response, "the response");
       if (response?.user?.email) {
         showToast("Sign-in Successful!", Toast.positions.TOP, colors.green);
         setTimeout(() => {}, 1000);
@@ -70,7 +61,6 @@ const LoginScreen = () => {
         colors.green
       );
     } catch (error) {
-      console.error("Password reset error:", error.message);
       if (
         error.message === "Firebase: Error (auth/missing-email)." ||
         "Firebase: Error (auth/invalid-email)."

@@ -18,6 +18,7 @@ import {
 } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { deleteAllGigsByEmail } from "../api";
+import MyButton2 from "./MyButton2";
 
 const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
   const [email, setEmail] = useState("");
@@ -91,6 +92,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
         placeholder="Enter your email"
         placeholderTextColor={openCreds ? colors.green : "gray"}
       />
+
       <TextInput
         disabled={openCreds}
         style={styles.inputStyle}
@@ -116,6 +118,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
           justifyContent: "space-evenly",
         }}
       >
+        {/* <MyButton2 isDisabled={false} onPress={deleteAccount} text="YES" /> */}
         <TouchableOpacity
           style={{
             height: 120,
