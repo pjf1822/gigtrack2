@@ -1,18 +1,16 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  Platform,
-} from "react-native";
+import { View, Text, StyleSheet, TextInput, Platform } from "react-native";
 import React, { useEffect, useState } from "react";
 import { colors, regFont } from "../theme";
 import { useUser } from "../UserContext";
 import Toast from "react-native-root-toast";
-import { sendPasswordResetEmail, updateProfile } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail, updateProfile } from "firebase/auth";
 import { Overlay } from "@rneui/themed";
 import DeleteAccountModal from "../components/DeleteAccountModal";
+import { showToast } from "../helpers";
+import MyTextInput from "../components/MyTextInput";
+import MyButton2 from "../components/MyButton2";
+
+const auth = getAuth();
 
 const OptionsScreen = () => {
   const { user, setUser } = useUser();
@@ -25,8 +23,9 @@ const OptionsScreen = () => {
 
   const updateUserDisplayName = async () => {
     try {
-      if (user) {
-        await updateProfile(user, {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        await updateProfile(currentUser, {
           displayName: displayName,
         });
 
@@ -50,22 +49,18 @@ const OptionsScreen = () => {
   const updatePassword = async () => {
     try {
       await sendPasswordResetEmail(user?.auth, user?.email);
-      Toast.show("Password reset email sent. Please check your email.", {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
-        backgroundColor: colors.green,
-        textColor: colors.beige,
-        opacity: 1,
-      });
+      showToast(
+        "Password reset email sent. Please check your email.",
+        Toast.positions.TOP,
+        colors.terraCotta
+      );
     } catch (error) {
       console.log(error.message);
-      Toast.show("Something went wrong", {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
-        backgroundColor: colors.terraCotta,
-        textColor: colors.beige,
-        opacity: 1,
-      });
+      showToast(
+        "Something went wrong",
+        Toast.positions.BOTTOM,
+        colors.terraCotta
+      );
     }
   };
 
@@ -83,46 +78,57 @@ const OptionsScreen = () => {
         />
       </Overlay>
       <Text style={styles.header}>Account Details </Text>
+      <View
+        style={{
+          height: 2,
+          backgroundColor: colors.beige,
+          width: "110%",
+          transform: "translateX(-20px)",
+        }}
+      ></View>
       <View style={styles.formWrapper}>
         <View style={styles.entryWrapper}>
-          <Text style={styles.label}>Email Account</Text>
+          <Text style={styles.label}>Email Account:</Text>
           <Text style={styles.text}>{user?.email}</Text>
         </View>
         <View style={styles.entryWrapper}>
-          <View style={styles.entryWrapper}>
-            <Text style={styles.label}>Display Name</Text>
-            <Text style={styles.text}>{user?.displayName}</Text>
-          </View>
+          <Text style={styles.label}>Display Name:</Text>
+          <Text style={styles.text}>{user?.displayName}</Text>
         </View>
         <View
           style={{
             height: "65%",
             display: "flex",
-            justifyContent: "flex-start",
-            marginTop: 30,
+            justifyContent: "space-between",
+            marginTop: 10,
+            width: "50%",
           }}
         >
-          <TouchableOpacity
-            style={styles.touchableWrapper}
-            onPress={updatePassword}
-          >
-            <Text style={[styles.touchable, { color: colors.green }]}>
-              Update Password
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.touchableWrapper,
-              Platform.OS === "ios" && Platform.isPad
-                ? { marginTop: 20 }
-                : { marginTop: 0 },
-            ]}
-            onPress={toggleOverlay}
-          >
-            <Text style={[styles.touchable, { color: colors.terraCotta }]}>
-              Delete Account
-            </Text>
-          </TouchableOpacity>
+          <View>
+            <TextInput
+              placeholder="Your new display name"
+              value={displayName}
+              onChangeText={(value) => setDisplayName(value)}
+              style={[styles.input, { fontFamily: regFont.fontFamily }]}
+            />
+            <MyButton2
+              onPress={updateUserDisplayName}
+              text="Update Username"
+              textColor={colors.green}
+            />
+          </View>
+          <View style={{ paddingTop: 80 }}>
+            <MyButton2
+              onPress={updatePassword}
+              text="Update Password"
+              textColor={colors.green}
+            />
+            <MyButton2
+              onPress={toggleOverlay}
+              text="Delete Account"
+              textColor={colors.terraCotta}
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -140,10 +146,11 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "flex-start",
+    width: "100%",
   },
   header: {
     color: colors.beige,
-    fontSize: 40,
+    fontSize: 35,
     fontFamily: regFont.fontFamily,
     marginBottom: 20,
   },
@@ -151,30 +158,16 @@ const styles = StyleSheet.create({
     color: colors.beige,
     fontSize: 30,
     fontFamily: regFont.fontFamily,
-    marginBottom: 8,
+    marginBottom: 5,
   },
   text: { color: colors.green, fontSize: 25, fontFamily: regFont.fontFamily },
   entryWrapper: {
     paddingTop: 15,
     paddingBottom: 5,
+    width: "100%",
   },
   deleteAccountText: {
     fontSize: 25,
-    fontFamily: regFont.fontFamily,
-  },
-  touchableWrapper: {
-    backgroundColor: colors.beige,
-    marginBottom: 25,
-    padding: 12,
-    borderRadius: 25,
-    display: "flex",
-    alignItems: "center",
-  },
-
-  touchable: {
-    ...(Platform.OS === "ios" && Platform.isPad
-      ? { fontSize: 25 }
-      : { fontSize: 15 }),
     fontFamily: regFont.fontFamily,
   },
   overlay: {
@@ -182,6 +175,15 @@ const styles = StyleSheet.create({
     maxHeight: "93%",
     backgroundColor: colors.blue,
     borderRadius: "10%",
+  },
+  input: {
+    height: 40,
+    borderColor: colors.green,
+    borderWidth: 2,
+    marginBottom: 12,
+    padding: 12,
+    backgroundColor: colors.beige,
+    borderRadius: 10,
   },
 });
 

@@ -13,6 +13,7 @@ import { colors, regFont } from "../theme";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
 import { useUser } from "../UserContext";
 import Toast from "react-native-root-toast";
+import { showToast } from "../helpers";
 
 export default function HeaderBanner() {
   const navigation = useNavigation();
@@ -28,13 +29,7 @@ export default function HeaderBanner() {
 
   const handleSignOutAndNavigate = async () => {
     await signOut();
-    let toast = Toast.show("Signed out successfully!", {
-      duration: Toast.durations.LONG,
-      position: Toast.positions.TOP,
-      backgroundColor: colors.green,
-      textColor: colors.beige,
-      opacity: 1,
-    });
+    showToast("Signed out successfully!", Toast.positions.TOP, colors.green);
     setTimeout(() => {}, 1000);
     navigation.navigate("Login");
   };
@@ -48,61 +43,31 @@ export default function HeaderBanner() {
               ? heightPercentageToDP(5)
               : heightPercentageToDP(8)
             : heightPercentageToDP(2),
-
         height: heightPercentageToDP(15),
         backgroundColor: colors.blue,
         borderBottomColor: colors.blue,
         borderBottomWidth: 3,
         display: user ? "flex" : "none",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <View
-        style={{
-          marginTop: 0,
-          height: "100%",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <TouchableOpacity
-          style={{
-            ...(Platform.OS === "ios" && Platform.isPad
-              ? { transform: [{ translateY: -9 }] }
-              : {}),
-          }}
-          onPress={() => navigation.navigate("Home")}
-        >
+      <View style={styles.iconWrapper}>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <Icon
             size={Platform.OS === "ios" && Platform.isPad ? 40 : undefined}
-            style={
-              Platform.OS === "ios" && Platform.isPad ? { marginLeft: 20 } : {}
-            }
             name="home"
             color={colors.green}
           />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            marginTop: 4,
-            height: "100%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            ...(Platform.OS === "ios" && Platform.isPad
-              ? { transform: [{ translateY: -9 }] }
-              : {}),
-          }}
-          onPress={() => navigation.navigate("Options")}
-        >
+        <TouchableOpacity onPress={() => navigation.navigate("Options")}>
           <Icon
             size={Platform.OS === "ios" && Platform.isPad ? 40 : undefined}
             style={
               Platform.OS === "ios" && Platform.isPad
                 ? { marginLeft: 17 }
-                : { marginLeft: 5, transform: "translateY(-2px)" }
+                : { marginLeft: 5 }
             }
             name="settings"
             color={colors.green}
@@ -110,49 +75,23 @@ export default function HeaderBanner() {
         </TouchableOpacity>
       </View>
 
-      <View
-        style={
-          Platform.OS === "ios"
-            ? Platform.isPad
-              ? { transform: [{ translateY: 9 }] }
-              : { transform: [{ translateY: -3 }] }
-            : { transform: [{ translateY: 20 }] }
-        }
-      >
+      <View style={styles.imageWrapper}>
         <Image
           source={require("../assets/logo-color.png")}
           style={{
             ...(Platform.OS === "ios" && Platform.isPad
-              ? { width: 390, height: 70 }
-              : { width: 250, height: 50 }),
+              ? { width: 400, height: 100 }
+              : { width: 200, height: 50 }),
           }}
         />
       </View>
-
-      <View
-        style={{
-          marginTop: 4,
-          ...(Platform.OS === "ios" && Platform.isPad
-            ? { transform: [{ translateY: -8 }] }
-            : { transform: [{ translateY: -10 }] }),
-
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginRight: Platform.OS === "ios" && Platform.isPad ? 10 : {},
-        }}
-      >
+      <View style={styles.signoutWrapper}>
         {user.displayName && (
           <Text
-            style={{
-              color: colors.green,
-              fontFamily: regFont.fontFamily,
-              marginBottom: 5,
-              ...(Platform.OS === "ios" && Platform.isPad
-                ? { fontSize: 20 }
-                : {}),
-            }}
+            style={[
+              styles.text,
+              Platform.OS === "ios" && Platform.isPad && { fontSize: 22 },
+            ]}
           >
             {user && user?.displayName}
           </Text>
@@ -162,9 +101,7 @@ export default function HeaderBanner() {
           <Text
             style={[
               styles.text,
-              { fontFamily: regFont.fontFamily },
-
-              Platform.OS === "ios" && Platform.isPad && { fontSize: 17 },
+              Platform.OS === "ios" && Platform.isPad && { fontSize: 22 },
             ]}
           >
             Sign Out
@@ -179,5 +116,26 @@ const styles = StyleSheet.create({
   text: {
     color: colors.terraCotta,
     fontFamily: regFont.fontFamily,
+  },
+  iconWrapper: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
+  },
+  imageWrapper: {
+    width: "100%",
+    height: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  signoutWrapper: {
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+    alignItems: "center",
   },
 });

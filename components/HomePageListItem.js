@@ -96,7 +96,7 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
           {item?.employer}
         </ListItem.Title>
       </ListItem.Content>
-      {item?.rate && itemDate < today && (
+      {item?.rate && itemDate <= today && (
         <ListItem.Content style={{ flex: 2 }}>
           <ListItem.Title style={styles.datesFont}>
             {item?.rate}$
@@ -111,11 +111,15 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
             badgeStyle={{
               backgroundColor: item?.paid ? colors.green : colors.terraCotta,
               padding: 2,
-              marginBottom: 4,
+
               fontFamily: regFont?.fontFamily,
               ...(Platform.OS === "ios" && Platform.isPad
-                ? { transform: [{ scale: 1.2 }] }
-                : {}),
+                ? {
+                    transform: [{ scale: 1.5 }],
+                    marginBottom: 12,
+                    marginRight: 10,
+                  }
+                : { marginBottom: 4 }),
             }}
           />
           <Badge
@@ -127,8 +131,12 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
                 : colors.terraCotta,
               fontFamily: regFont.fontFamily,
               ...(Platform.OS === "ios" && Platform.isPad
-                ? { transform: [{ scale: 1.2 }] }
-                : {}),
+                ? {
+                    transform: [{ scale: 1.5 }],
+                    marginBottom: 0,
+                    marginRight: 10,
+                  }
+                : { marginBottom: 4 }),
             }}
           />
         </ListItem.Content>
@@ -158,8 +166,8 @@ const styles = StyleSheet.create({
   },
   datesFont: {
     ...(Platform.OS === "ios" && Platform.isPad
-      ? { fontSize: 18 }
-      : { fontSize: 14 }),
+      ? { fontSize: 24 }
+      : { fontSize: 15 }),
 
     color: colors.blue,
     fontFamily: regFont.fontFamily,

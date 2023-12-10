@@ -10,7 +10,7 @@ import { RenderSectionHeader } from "../components/RenderSectionHeader";
 import { colors } from "../theme";
 import NoGigs from "../components/NoGigs";
 import { useUser } from "../UserContext";
-import Toast from "react-native-root-toast";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function HomeScreen({ navigation }) {
   const [sections, setSections] = useState([]);
@@ -38,6 +38,11 @@ export default function HomeScreen({ navigation }) {
   // EFFECT TO RUN THE INITAL API CALL
   useEffect(() => {
     getAllGigs();
+    AsyncStorage.setItem("firstTimeUser", "false")
+      .then(() => {})
+      .catch((error) => {
+        console.error("Error setting firstTimeUSer in AsyncStorage:", error);
+      });
   }, []);
 
   useEffect(() => {
@@ -65,10 +70,8 @@ export default function HomeScreen({ navigation }) {
           />
         )}
         renderSectionHeader={RenderSectionHeader}
-        ListFooterComponent={
-          <CreateNewGig getAllGigs={getAllGigs} allGigs={allGigs} />
-        }
       />
+      <CreateNewGig getAllGigs={getAllGigs} allGigs={allGigs} />
     </View>
   );
 }
