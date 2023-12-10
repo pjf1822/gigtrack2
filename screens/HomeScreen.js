@@ -19,7 +19,6 @@ export default function HomeScreen({ navigation }) {
 
   const getAllGigs = async () => {
     try {
-      console.log(user?.uid);
       const data = await fetchGigs(user?.uid);
 
       const filteredData = data?.map((item) => {

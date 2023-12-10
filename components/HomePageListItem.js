@@ -27,9 +27,7 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
             backgroundColor: colors.green,
             color: colors.beige,
           }}
-          titleStyle={{
-            fontFamily: regFont.fontFamily,
-          }}
+          titleStyle={styles.swipeButtonStyle}
         />
       )}
       rightContent={(reset) => (
@@ -47,9 +45,7 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
             backgroundColor: colors.terraCotta,
             color: colors.beige,
           }}
-          titleStyle={{
-            fontFamily: regFont.fontFamily,
-          }}
+          titleStyle={styles.swipeButtonStyle}
         />
       )}
       bottomDivider
@@ -60,9 +56,16 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
         flexDirection: "row",
       }}
     >
-      <ListItem.Content style={{ maxWidth: 80, flex: 2 }}>
+      <ListItem.Content
+        style={{
+          maxWidth: Platform.OS === "ios" && Platform.isPad ? 120 : 80,
+          flex: 2,
+        }}
+      >
         {itemDate > today ? (
-          <View style={styles.dateWrapper}>
+          <View
+            style={[styles.dateWrapper, { paddingTop: 10, paddingBottom: 10 }]}
+          >
             <Text style={styles.datesFont}>{monthNumber}</Text>
             <Text style={styles.datesFont}>/</Text>
             <Text style={styles.datesFont}>{dayOfMonth}</Text>
@@ -87,7 +90,7 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
               color: colors.blue,
 
               ...(Platform.OS === "ios" && Platform.isPad
-                ? { fontSize: 20 }
+                ? { fontSize: 24 }
                 : { fontSize: itemDate < today ? 14 : 16 }),
               fontFamily: regFont.fontFamily,
             },
@@ -163,6 +166,7 @@ const styles = StyleSheet.create({
   dateWrapper: {
     display: "flex",
     flexDirection: "row",
+    width: "100%",
   },
   datesFont: {
     ...(Platform.OS === "ios" && Platform.isPad
@@ -175,5 +179,10 @@ const styles = StyleSheet.create({
 
   editFont: {
     transform: [{ translateY: 3 }],
+  },
+  swipeButtonStyle: {
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { fontSize: 24 }
+      : { fontSize: 15 }),
   },
 });

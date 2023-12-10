@@ -1,5 +1,6 @@
 import Toast from "react-native-root-toast";
 import { colors } from "./theme";
+import { Platform } from "react-native";
 
 // format the data
 export const generateSections = (dataList) => {
@@ -58,5 +59,10 @@ export const showToast = (message, position, backgroundColor) => {
     backgroundColor,
     textColor: colors.beige,
     opacity: 1,
+    containerStyle: {
+      ...(Platform.OS === "ios" && Platform.isPad
+        ? { transform: [{ scale: 1.3 }] }
+        : {}),
+    },
   });
 };
