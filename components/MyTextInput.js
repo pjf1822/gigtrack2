@@ -22,7 +22,6 @@ const MyTextInput = ({
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
     borderColor: colors.blue,
     borderWidth: 2,
     marginBottom: 12,
@@ -30,19 +29,17 @@ const styles = StyleSheet.create({
     backgroundColor: colors.beige,
     borderRadius: 10,
     ...(Platform.OS === "ios" && Platform.isPad
-      ? { minWidth: "75%" }
-      : { minWidth: "100%" }),
+      ? { minWidth: "75%", height: 55, fontSize: 22 }
+      : { minWidth: "100%", height: 40, fontSize: 16 }),
   },
   inputEmpty: {
-    height: 40,
-
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { minWidth: "75%", height: 55, fontSize: 22 }
+      : { minWidth: "100%", height: 40, fontSize: 16 }),
     marginBottom: 12,
     paddingHorizontal: 8,
     backgroundColor: colors.beige,
     borderRadius: 10,
-    ...(Platform.OS === "ios" && Platform.isPad
-      ? { minWidth: "75%" }
-      : { minWidth: "100%" }),
   },
 });
 

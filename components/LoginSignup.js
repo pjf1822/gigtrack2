@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Platform } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import React from "react";
 import MyTextInput from "./MyTextInput";
@@ -23,22 +23,12 @@ const LoginSignup = ({
   const navigation = useNavigation();
 
   return (
-    <View
-      style={{
-        paddingTop: 180,
-        display: "flex",
-        flex: 1,
-        justifyContent: "space-between",
-        backgroundColor: colors.blue,
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-    >
+    <View style={styles.signupFormWrapper}>
       <Image
         source={require("../assets/logo-no-background.png")}
         style={{
           width: "60%",
-          height: 80,
+          height: 170,
           borderRadius: 10,
         }}
         resizeMode="contain"
@@ -122,5 +112,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "center",
     marginTop: 15,
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { fontSize: 22 }
+      : { fontSize: 16 }),
+  },
+  signupFormWrapper: {
+    paddingTop: 180,
+    display: "flex",
+    flex: 1,
+    justifyContent: "space-between",
+    backgroundColor: colors.blue,
+    alignItems: "center",
+    flexDirection: "column",
   },
 });

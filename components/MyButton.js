@@ -26,7 +26,6 @@ export default MyButton;
 const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.green,
-    height: 40,
     paddingHorizontal: 8,
     color: colors.beige,
     display: "flex",
@@ -35,12 +34,12 @@ const styles = StyleSheet.create({
     outline: "none",
     borderRadius: 10,
     ...(Platform.OS === "ios" && Platform.isPad
-      ? { minWidth: "75%" }
-      : { minWidth: "100%" }),
+      ? { minWidth: "75%", height: 55 }
+      : { minWidth: "100%", height: 40 }),
   },
   disabledButton: {
     backgroundColor: colors.beige,
-    height: 40,
+
     paddingHorizontal: 8,
     color: colors.terraCotta,
     borderRadius: 10,
@@ -49,15 +48,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     ...(Platform.OS === "ios" && Platform.isPad
-      ? { minWidth: "75%" }
-      : { minWidth: "100%" }),
+      ? { minWidth: "75%", height: 55 }
+      : { minWidth: "100%", height: 40 }),
   },
   buttonText: {
     color: colors.beige,
     fontWeight: "bold",
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { fontSize: 22 }
+      : { fontSize: 16 }),
   },
   buttonDisabledText: {
     color: colors.terraCotta,
     fontWeight: "bold",
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { fontSize: 22 }
+      : { fontSize: 16 }),
   },
 });

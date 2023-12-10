@@ -51,16 +51,7 @@ export default function HeaderBanner() {
         display: user ? "flex" : "none",
       }}
     >
-      <View
-        style={{
-          marginTop: 0,
-          height: "100%",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <View style={styles.iconWrapper}>
         <TouchableOpacity
           style={{
             ...(Platform.OS === "ios" && Platform.isPad
@@ -105,39 +96,18 @@ export default function HeaderBanner() {
         </TouchableOpacity>
       </View>
 
-      <View
-        style={
-          Platform.OS === "ios"
-            ? Platform.isPad
-              ? { transform: [{ translateY: 9 }] }
-              : { transform: [{ translateY: -3 }] }
-            : { transform: [{ translateY: 20 }] }
-        }
-      >
+      <View style={styles.imageWrapper}>
         <Image
           source={require("../assets/logo-color.png")}
           style={{
             ...(Platform.OS === "ios" && Platform.isPad
               ? { width: 390, height: 70 }
-              : { width: 250, height: 50 }),
+              : { width: 220, height: 50 }),
           }}
         />
       </View>
 
-      <View
-        style={{
-          marginTop: 4,
-          ...(Platform.OS === "ios" && Platform.isPad
-            ? { transform: [{ translateY: -8 }] }
-            : { transform: [{ translateY: -10 }] }),
-
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginRight: Platform.OS === "ios" && Platform.isPad ? 10 : {},
-        }}
-      >
+      <View style={styles.signoutWrapper}>
         {user.displayName && (
           <Text
             style={{
@@ -145,7 +115,7 @@ export default function HeaderBanner() {
               fontFamily: regFont.fontFamily,
               marginBottom: 5,
               ...(Platform.OS === "ios" && Platform.isPad
-                ? { fontSize: 20 }
+                ? { fontSize: 25 }
                 : {}),
             }}
           >
@@ -159,7 +129,8 @@ export default function HeaderBanner() {
               styles.text,
               { fontFamily: regFont.fontFamily },
 
-              Platform.OS === "ios" && Platform.isPad && { fontSize: 17 },
+              Platform.OS === "ios" &&
+                Platform.isPad && { fontSize: 22, marginTop: 6 },
             ]}
           >
             Sign Out
@@ -174,5 +145,37 @@ const styles = StyleSheet.create({
   text: {
     color: colors.terraCotta,
     fontFamily: regFont.fontFamily,
+  },
+  iconWrapper: {
+    marginTop: 0,
+    height: "100%",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "blue",
+    justifyContent: "space-evenly",
+    minWidth: 100,
+  },
+  signoutWrapper: {
+    flex: 1,
+    marginTop: 4,
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { transform: [{ translateY: -8 }] }
+      : { transform: [{ translateY: -10 }] }),
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: Platform.OS === "ios" && Platform.isPad ? 10 : {},
+  },
+  imageWrapper: {
+    width: "80%",
+    overflow: "hidden",
+    backgroundColor: "yellow",
+    ...(Platform.OS === "ios"
+      ? Platform.isPad
+        ? { transform: [{ translateY: 9 }] }
+        : { transform: [{ translateY: -3 }] }
+      : { transform: [{ translateY: 20 }] }),
   },
 });

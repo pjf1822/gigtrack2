@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     color: colors.beige,
   },
   buttonText: {
+    fontSize: Platform.OS === "ios" && Platform.isPad ? 30 : 18,
     fontFamily: regFont.fontFamily,
     color: colors.beige,
   },
