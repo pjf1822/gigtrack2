@@ -43,44 +43,26 @@ export default function HeaderBanner() {
               ? heightPercentageToDP(5)
               : heightPercentageToDP(8)
             : heightPercentageToDP(2),
-
         height: heightPercentageToDP(15),
         backgroundColor: colors.blue,
         borderBottomColor: colors.blue,
         borderBottomWidth: 3,
         display: user ? "flex" : "none",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <View style={styles.iconWrapper}>
-        <TouchableOpacity
-          style={{
-            ...(Platform.OS === "ios" && Platform.isPad
-              ? { transform: [{ translateY: -9 }] }
-              : {}),
-          }}
-          onPress={() => navigation.navigate("Home")}
-        >
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <Icon
             size={Platform.OS === "ios" && Platform.isPad ? 40 : undefined}
-            style={
-              Platform.OS === "ios" && Platform.isPad ? { marginLeft: 20 } : {}
-            }
             name="home"
             color={colors.green}
           />
         </TouchableOpacity>
         <TouchableOpacity
-          style={{
-            marginTop: 4,
-            height: "100%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            ...(Platform.OS === "ios" && Platform.isPad
-              ? { transform: [{ translateY: -9 }] }
-              : {}),
-          }}
+          style={{}}
           onPress={() => navigation.navigate("Options")}
         >
           <Icon
@@ -101,8 +83,8 @@ export default function HeaderBanner() {
           source={require("../assets/logo-color.png")}
           style={{
             ...(Platform.OS === "ios" && Platform.isPad
-              ? { width: 390, height: 70 }
-              : { width: 220, height: 50 }),
+              ? { width: 400, height: 100 }
+              : { width: 200, height: 50 }),
           }}
         />
       </View>
@@ -110,14 +92,12 @@ export default function HeaderBanner() {
       <View style={styles.signoutWrapper}>
         {user.displayName && (
           <Text
-            style={{
-              color: colors.green,
-              fontFamily: regFont.fontFamily,
-              marginBottom: 5,
-              ...(Platform.OS === "ios" && Platform.isPad
-                ? { fontSize: 25 }
-                : {}),
-            }}
+            style={[
+              styles.text,
+              { fontFamily: regFont.fontFamily },
+
+              Platform.OS === "ios" && Platform.isPad && { fontSize: 22 },
+            ]}
           >
             {user && user?.displayName}
           </Text>
@@ -129,8 +109,7 @@ export default function HeaderBanner() {
               styles.text,
               { fontFamily: regFont.fontFamily },
 
-              Platform.OS === "ios" &&
-                Platform.isPad && { fontSize: 22, marginTop: 6 },
+              Platform.OS === "ios" && Platform.isPad && { fontSize: 22 },
             ]}
           >
             Sign Out
@@ -147,35 +126,24 @@ const styles = StyleSheet.create({
     fontFamily: regFont.fontFamily,
   },
   iconWrapper: {
-    marginTop: 0,
-    height: "100%",
-    display: "flex",
     flexDirection: "row",
+    justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "blue",
-    justifyContent: "space-evenly",
-    minWidth: 100,
-  },
-  signoutWrapper: {
-    flex: 1,
-    marginTop: 4,
-    ...(Platform.OS === "ios" && Platform.isPad
-      ? { transform: [{ translateY: -8 }] }
-      : { transform: [{ translateY: -10 }] }),
+    width: "100%",
     height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: Platform.OS === "ios" && Platform.isPad ? 10 : {},
   },
   imageWrapper: {
-    width: "80%",
-    overflow: "hidden",
-    backgroundColor: "yellow",
-    ...(Platform.OS === "ios"
-      ? Platform.isPad
-        ? { transform: [{ translateY: 9 }] }
-        : { transform: [{ translateY: -3 }] }
-      : { transform: [{ translateY: 20 }] }),
+    width: "100%",
+    height: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  signoutWrapper: {
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+    alignItems: "center",
   },
 });
