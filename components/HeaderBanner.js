@@ -61,16 +61,13 @@ export default function HeaderBanner() {
             color={colors.green}
           />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{}}
-          onPress={() => navigation.navigate("Options")}
-        >
+        <TouchableOpacity onPress={() => navigation.navigate("Options")}>
           <Icon
             size={Platform.OS === "ios" && Platform.isPad ? 40 : undefined}
             style={
               Platform.OS === "ios" && Platform.isPad
                 ? { marginLeft: 17 }
-                : { marginLeft: 5, transform: "translateY(-2px)" }
+                : { marginLeft: 5 }
             }
             name="settings"
             color={colors.green}
@@ -88,14 +85,11 @@ export default function HeaderBanner() {
           }}
         />
       </View>
-
       <View style={styles.signoutWrapper}>
         {user.displayName && (
           <Text
             style={[
               styles.text,
-              { fontFamily: regFont.fontFamily },
-
               Platform.OS === "ios" && Platform.isPad && { fontSize: 22 },
             ]}
           >
@@ -107,8 +101,6 @@ export default function HeaderBanner() {
           <Text
             style={[
               styles.text,
-              { fontFamily: regFont.fontFamily },
-
               Platform.OS === "ios" && Platform.isPad && { fontSize: 22 },
             ]}
           >
