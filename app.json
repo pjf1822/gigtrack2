@@ -2,12 +2,12 @@
   "expo": {
     "name": "GIGTRACKUSA",
     "slug": "expo-two",
-    "version": "1.0.4",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/logo-color.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/logo-color.png",
+      "image": "./assets/logo-color-phone-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#3D405B"
     },
@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.pjf1822.expotwo",
-       "buildNumber": "6"
+       "buildNumber": "7"
     },
     "android": {
       "package": "com.gigtrackusa",

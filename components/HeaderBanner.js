@@ -101,7 +101,8 @@ export default function HeaderBanner() {
           <Text
             style={[
               styles.text,
-              Platform.OS === "ios" && Platform.isPad && { fontSize: 22 },
+              Platform.OS === "ios" &&
+                Platform.isPad && { fontSize: 22, marginTop: -10 },
             ]}
           >
             Sign Out

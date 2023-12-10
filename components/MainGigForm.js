@@ -162,7 +162,7 @@ export default function MainGigForm({
               {formType === "update" && (
                 <View
                   style={{
-                    height: "34%",
+                    // height: "34%",
                     display: "flex",
                     justifyContent: "flex-end",
                   }}
@@ -170,7 +170,7 @@ export default function MainGigForm({
                   <Button
                     buttonStyle={{
                       backgroundColor: colors.terraCotta,
-                      marginTop: 20,
+                      marginTop: 40,
                     }}
                     onPress={() => {
                       handleDeleteGig(itemId, "DetailsPage", navigation, "");
