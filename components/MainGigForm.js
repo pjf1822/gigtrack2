@@ -53,7 +53,7 @@ export default function MainGigForm({
             paid: paid || false,
             invoiced: invoiced || false,
             rate: rate ? parseFloat(rate) : 0,
-            email: user?.email,
+            userUid: user?.uid,
           }}
           onSubmit={(values) => {
             const rateAsString =
