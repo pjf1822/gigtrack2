@@ -1,5 +1,4 @@
-import { View, Image } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useUser } from "../UserContext";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
 import Toast from "react-native-root-toast";
@@ -8,8 +7,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { showToast } from "../helpers";
-import MyTextInput from "../components/MyTextInput";
-import MyButton from "../components/MyButton";
+
 import LoginSignup from "../components/LoginSignup";
 
 const SignupScreen = () => {
