@@ -27,7 +27,7 @@ export const handleCreateGig = async (
           colors.green
         );
       } else {
-        showToast("Gig created!", Toast.positions.BOTTOM, colors.green);
+        showToast("Gig created!", Toast.positions.TOP, colors.green);
       }
     }
     await getAllGigs();

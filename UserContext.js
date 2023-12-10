@@ -10,7 +10,6 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (authUser) => {
-      console.log("Firebase User Object:", authUser);
       setUser(authUser);
       setAuthCompleted(true);
     });

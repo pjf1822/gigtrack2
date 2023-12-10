@@ -7,7 +7,6 @@ import { getAuth, sendPasswordResetEmail, updateProfile } from "firebase/auth";
 import { Overlay } from "@rneui/themed";
 import DeleteAccountModal from "../components/DeleteAccountModal";
 import { showToast } from "../helpers";
-import MyTextInput from "../components/MyTextInput";
 import MyButton2 from "../components/MyButton2";
 
 const auth = getAuth();
