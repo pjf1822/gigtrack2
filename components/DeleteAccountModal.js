@@ -18,7 +18,6 @@ import {
 } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { deleteAllGigsByUserUid } from "../api";
-import MyButton2 from "./MyButton2";
 
 const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
   const [email, setEmail] = useState("");

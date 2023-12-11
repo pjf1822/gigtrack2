@@ -7,33 +7,19 @@ import SignupScreen from "../screens/SignupScreen";
 import { useUser } from "../UserContext";
 import OptionsScreen from "../screens/OptionsScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Spinner from "react-native-loading-spinner-overlay";
-import { colors } from "../theme";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   const { user } = useUser();
   const [firstTimeUser, setFirstTimeUser] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     AsyncStorage.getItem("firstTimeUser").then((value) => {
       setFirstTimeUser(value !== null ? false : true);
-      setLoading(false);
     });
   }, []);
-
-  if (loading) {
-    return (
-      <Spinner
-        visible={loading}
-        textContent={"Loading..."}
-        textStyle={{ color: colors.beige }}
-      />
-    );
-  }
-
   return (
     <Stack.Navigator
       screenOptions={{

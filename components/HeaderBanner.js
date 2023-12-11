@@ -30,8 +30,9 @@ export default function HeaderBanner() {
   const handleSignOutAndNavigate = async () => {
     await signOut();
     showToast("Signed out successfully!", Toast.positions.TOP, colors.green);
-    setTimeout(() => {}, 1000);
-    navigation.navigate("Login");
+    setTimeout(() => {
+      navigation.navigate("Login");
+    }, 1000);
   };
 
   return (

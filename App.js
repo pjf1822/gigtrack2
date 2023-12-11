@@ -3,7 +3,7 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderBanner from "./components/HeaderBanner";
 import { useState, useEffect } from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, View, Text } from "react-native";
 import { UserProvider, useUser } from "./UserContext";
 import StackNavigator from "./components/StackNavigator";
 import { colors } from "./theme";
