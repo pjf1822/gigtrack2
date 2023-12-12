@@ -41,9 +41,7 @@ export default function MainGigForm({
     <TouchableWithoutFeedback onPress={handleTouchableWithoutFeedbackPress}>
       <View
         style={[
-          formType !== "create"
-            ? [styles.nonLayoutWrapper, { height: "100%" }]
-            : "",
+          formType !== "create" ? styles.nonLayoutWrapper : "",
           styles.formWrapper,
         ]}
       >
@@ -55,7 +53,7 @@ export default function MainGigForm({
             paid: paid || false,
             invoiced: invoiced || false,
             rate: rate ? parseFloat(rate) : 0,
-            userUid: user?.uid,
+            email: user?.email,
           }}
           onSubmit={(values) => {
             const rateAsString =
@@ -94,11 +92,29 @@ export default function MainGigForm({
                 separator="."
                 precision={2}
                 minValue={0}
-                style={styles.textInput}
+                style={{
+                  fontFamily: regFont.fontFamily,
+                  height: 40,
+                  borderColor: colors.beige,
+                  borderWidth: 1,
+                  borderRadius: 5,
+                  paddingLeft: 10,
+                  marginBottom: 10,
+                  color: colors.beige,
+                }}
               />
               <Text style={styles.label}>Employer:</Text>
               <TextInput
-                style={styles.textInput}
+                style={{
+                  fontFamily: regFont.fontFamily,
+                  height: 40,
+                  borderColor: colors.beige,
+                  borderWidth: 1,
+                  borderRadius: 5,
+                  paddingLeft: 10,
+                  marginBottom: 10,
+                  color: colors.beige,
+                }}
                 onChangeText={handleChange("employer")}
                 onBlur={handleBlur("employer")}
                 value={values?.employer}
@@ -152,33 +168,29 @@ export default function MainGigForm({
               <Button
                 onPress={handleSubmit}
                 title={formType === "create" ? "Add Gig" : "Update Gig"}
-                style={{ paddingTop: 20 }}
+                style={{ paddingTop: 10 }}
                 disabled={!values?.employer}
                 buttonStyle={{
                   backgroundColor: colors.green,
                 }}
-                titleStyle={styles.buttonText}
+                titleStyle={{
+                  fontFamily: regFont.fontFamily,
+                }}
               />
               {formType === "update" && (
-                <View
-                  style={{
-                    // height: "34%",
-                    display: "flex",
-                    justifyContent: "flex-end",
+                <Button
+                  buttonStyle={{
+                    backgroundColor: colors.terraCotta,
+                    marginTop: 20,
                   }}
-                >
-                  <Button
-                    buttonStyle={{
-                      backgroundColor: colors.terraCotta,
-                      marginTop: 40,
-                    }}
-                    onPress={() => {
-                      handleDeleteGig(itemId, "DetailsPage", navigation, "");
-                    }}
-                    title="Delete Gig"
-                    titleStyle={styles.buttonText}
-                  />
-                </View>
+                  onPress={() => {
+                    handleDeleteGig(itemId, "DetailsPage", navigation, "");
+                  }}
+                  title="Delete Gig"
+                  titleStyle={{
+                    fontFamily: regFont.fontFamily,
+                  }}
+                />
               )}
             </View>
           )}
@@ -192,39 +204,37 @@ const styles = StyleSheet.create({
   formWrapper: {
     backgroundColor: colors.blue,
     padding: 10,
-    display: "flex",
   },
   textInput: {
+    height: 40,
     borderColor: colors.beige,
     borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 10,
-
+    marginBottom: 10,
     color: colors.beige,
-    ...(Platform.OS === "ios" && Platform.isPad
-      ? { fontSize: 22, height: 60, marginBottom: 18 }
-      : { fontSize: 16, height: 40, marginBottom: 10 }),
   },
   astrikWarning: {
-    marginBottom: 16,
     color: colors.terraCotta,
     ...(Platform.OS === "ios" && Platform.isPad
-      ? { fontSize: 16 }
+      ? { fontSize: 14 }
       : { fontSize: 12 }),
     fontFamily: regFont.fontFamily,
   },
   label: {
     ...(Platform.OS === "ios" && Platform.isPad
-      ? { fontSize: 22, marginBottom: 10 }
-      : { fontSize: 16, marginBottom: 5 }),
-
+      ? { fontSize: 18 }
+      : { fontSize: 16 }),
+    ...(Platform.OS === "ios" && Platform.isPad
+      ? { marginBottom: 7 }
+      : { marginBottom: 5 }),
     color: colors.beige,
     fontFamily: regFont.fontFamily,
   },
 
   switchWrapper: {
-    marginTop: 10,
-    marginBottom: 20,
+    marginTop: 0,
+    marginBottom: 0,
     marginLeft: 13,
     marginRight: 13,
     display: "flex",
@@ -239,9 +249,5 @@ const styles = StyleSheet.create({
   },
   rateWrapper: {
     border: colors.beige,
-  },
-  buttonText: {
-    fontSize: Platform.OS === "ios" && Platform.isPad ? 28 : 18,
-    fontFamily: regFont.fontFamily,
   },
 });

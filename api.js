@@ -1,8 +1,8 @@
-const fetchGigs = async (userUid) => {
+const fetchGigs = async (email) => {
   try {
     const res = await fetch(
-      `https://gigtrackserver.onrender.com/api/gigs/getall?userUid=${encodeURIComponent(
-        userUid
+      `https://gigtrackserver.onrender.com/api/gigs/getall?email=${encodeURIComponent(
+        email
       )}`,
       {
         method: "GET",
@@ -38,7 +38,6 @@ const fetchSingleGig = async (_id) => {
     throw error;
   }
 };
-
 const createGig = async (payload) => {
   try {
     const res = await fetch(
@@ -110,11 +109,11 @@ const deleteGig = async (_id) => {
   }
 };
 
-export const deleteAllGigsByUserUid = async (userUid) => {
+export const deleteAllGigsByEmail = async (email) => {
   try {
     const res = await fetch(
       `https://gigtrackserver.onrender.com/api/gigs/allGigs/${encodeURIComponent(
-        userUid
+        email
       )}`,
       {
         method: "DELETE",

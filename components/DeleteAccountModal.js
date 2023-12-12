@@ -17,8 +17,7 @@ import {
   reauthenticateWithCredential,
 } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
-import { deleteAllGigsByUserUid } from "../api";
-import MyButton2 from "./MyButton2";
+import { deleteAllGigsByEmail } from "../api";
 
 const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
   const [email, setEmail] = useState("");
@@ -44,7 +43,7 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
         textColor: colors.beige,
         opacity: 1,
       });
-      await deleteAllGigsByUserUid(currentUser?.uid);
+      await deleteAllGigsByEmail(currentUser?.email);
 
       toggleOverlay();
       navigation.navigate("Signup");
@@ -92,7 +91,6 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
         placeholder="Enter your email"
         placeholderTextColor={openCreds ? colors.green : "gray"}
       />
-
       <TextInput
         disabled={openCreds}
         style={styles.inputStyle}
@@ -107,7 +105,6 @@ const DeleteAccountModal = ({ user, setUser, toggleOverlay }) => {
           color: colors.beige,
           width: "100%",
           textAlign: "center",
-          marginTop: 20,
         }}
       >
         ARE YOU SURE ?
