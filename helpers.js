@@ -1,7 +1,3 @@
-import Toast from "react-native-root-toast";
-import { colors } from "./theme";
-import { Platform } from "react-native";
-
 // format the data
 export const generateSections = (dataList) => {
   const now = new Date();
@@ -50,19 +46,4 @@ export const generateSections = (dataList) => {
       return acc;
     }, [])
     .sort((a, b) => b.weight - a.weight);
-};
-
-export const showToast = (message, position, backgroundColor) => {
-  return Toast.show(message, {
-    duration: Toast.durations.LONG,
-    position,
-    backgroundColor,
-    textColor: colors.beige,
-    opacity: 1,
-    containerStyle: {
-      ...(Platform.OS === "ios" && Platform.isPad
-        ? { transform: [{ scale: 1.3 }] }
-        : {}),
-    },
-  });
 };

@@ -27,7 +27,9 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
             backgroundColor: colors.green,
             color: colors.beige,
           }}
-          titleStyle={styles.swipeButtonStyle}
+          titleStyle={{
+            fontFamily: regFont.fontFamily,
+          }}
         />
       )}
       rightContent={(reset) => (
@@ -45,7 +47,9 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
             backgroundColor: colors.terraCotta,
             color: colors.beige,
           }}
-          titleStyle={styles.swipeButtonStyle}
+          titleStyle={{
+            fontFamily: regFont.fontFamily,
+          }}
         />
       )}
       bottomDivider
@@ -56,16 +60,9 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
         flexDirection: "row",
       }}
     >
-      <ListItem.Content
-        style={{
-          maxWidth: Platform.OS === "ios" && Platform.isPad ? 120 : 80,
-          flex: 2,
-        }}
-      >
+      <ListItem.Content style={{ maxWidth: 80, flex: 2 }}>
         {itemDate > today ? (
-          <View
-            style={[styles.dateWrapper, { paddingTop: 10, paddingBottom: 10 }]}
-          >
+          <View style={styles.dateWrapper}>
             <Text style={styles.datesFont}>{monthNumber}</Text>
             <Text style={styles.datesFont}>/</Text>
             <Text style={styles.datesFont}>{dayOfMonth}</Text>
@@ -90,7 +87,7 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
               color: colors.blue,
 
               ...(Platform.OS === "ios" && Platform.isPad
-                ? { fontSize: 24 }
+                ? { fontSize: 20 }
                 : { fontSize: itemDate < today ? 14 : 16 }),
               fontFamily: regFont.fontFamily,
             },
@@ -99,7 +96,7 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
           {item?.employer}
         </ListItem.Title>
       </ListItem.Content>
-      {item?.rate && itemDate <= today && (
+      {item?.rate && itemDate < today && (
         <ListItem.Content style={{ flex: 2 }}>
           <ListItem.Title style={styles.datesFont}>
             {item?.rate}$
@@ -114,15 +111,11 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
             badgeStyle={{
               backgroundColor: item?.paid ? colors.green : colors.terraCotta,
               padding: 2,
-
+              marginBottom: 4,
               fontFamily: regFont?.fontFamily,
               ...(Platform.OS === "ios" && Platform.isPad
-                ? {
-                    transform: [{ scale: 1.5 }],
-                    marginBottom: 12,
-                    marginRight: 10,
-                  }
-                : { marginBottom: 4 }),
+                ? { transform: [{ scale: 1.2 }] }
+                : {}),
             }}
           />
           <Badge
@@ -134,12 +127,8 @@ export const HomePageListItem = ({ item, navigation, getAllGigs }) => {
                 : colors.terraCotta,
               fontFamily: regFont.fontFamily,
               ...(Platform.OS === "ios" && Platform.isPad
-                ? {
-                    transform: [{ scale: 1.5 }],
-                    marginBottom: 0,
-                    marginRight: 10,
-                  }
-                : { marginBottom: 4 }),
+                ? { transform: [{ scale: 1.2 }] }
+                : {}),
             }}
           />
         </ListItem.Content>
@@ -166,12 +155,11 @@ const styles = StyleSheet.create({
   dateWrapper: {
     display: "flex",
     flexDirection: "row",
-    width: "100%",
   },
   datesFont: {
     ...(Platform.OS === "ios" && Platform.isPad
-      ? { fontSize: 24 }
-      : { fontSize: 15 }),
+      ? { fontSize: 18 }
+      : { fontSize: 14 }),
 
     color: colors.blue,
     fontFamily: regFont.fontFamily,
@@ -179,10 +167,5 @@ const styles = StyleSheet.create({
 
   editFont: {
     transform: [{ translateY: 3 }],
-  },
-  swipeButtonStyle: {
-    ...(Platform.OS === "ios" && Platform.isPad
-      ? { fontSize: 24 }
-      : { fontSize: 15 }),
   },
 });

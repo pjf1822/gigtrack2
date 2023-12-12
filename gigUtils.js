@@ -1,7 +1,6 @@
 import Toast from "react-native-root-toast";
 import { createGig, deleteGig, fetchSingleGig, updateGig } from "./api";
 import { colors } from "./theme";
-import { showToast } from "./helpers";
 
 export const getSingleGig = async (id, setPageData) => {
   try {
@@ -20,15 +19,24 @@ export const handleCreateGig = async (
   try {
     const response = await createGig(values);
     if (response.message === "Gig created successfully!") {
-      if (allGigs?.length === 0) {
-        showToast(
-          "Swipe each gig to edit or delete!",
-          Toast.positions.CENTER,
-          colors.green
-        );
-      } else {
-        showToast("Gig created!", Toast.positions.TOP, colors.green);
-      }
+      let toast = Toast.show("Gig created!", {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.BOTTOM,
+        backgroundColor: colors.green,
+        textColor: colors.beige,
+        opacity: 1,
+      });
+      setTimeout(() => {
+        if (allGigs?.length === 0) {
+          let toast = Toast.show("Swipe each gig to edit or delete!", {
+            duration: Toast.durations.LONG,
+            position: Toast.positions.CENTER,
+            backgroundColor: colors.green,
+            textColor: colors.beige,
+            opacity: 1,
+          });
+        }
+      }, 1000);
     }
     await getAllGigs();
 
@@ -41,15 +49,25 @@ export const handleUpdateGig = async (id, values, navigation) => {
   try {
     const response = await updateGig(id, values);
     if (response.message === "Gig updated successfully!") {
-      showToast("Gig Updated!", Toast.positions.BOTTOM, colors.green);
-
+      let toast = Toast.show("Gig updated!", {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.BOTTOM,
+        backgroundColor: colors.green,
+        textColor: colors.beige,
+        opacity: 1,
+      });
       setTimeout(() => {
         navigation.removeListener;
         navigation.goBack();
       }, 1000);
     }
   } catch (error) {
-    showToast("Could not update", Toast.positions.BOTTOM, colors.terraCotta);
+    let toast = Toast.show("Could not update", {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.BOTTOM,
+      backgroundColor: colors.terraCotta,
+      textColor: colors.beige,
+    });
   }
 };
 
@@ -57,8 +75,14 @@ export const handleDeleteGig = async (id, pageName, navigation, getAllGigs) => {
   try {
     const response = await deleteGig(id);
     if (response.message === "Gig deleted successfully!") {
-      showToast("Gig deleted!", Toast.positions.BOTTOM, colors.terraCotta);
+      let toast = Toast.show("Gig deleted!", {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.BOTTOM,
+        backgroundColor: colors.green,
+        textColor: colors.beige,
 
+        opacity: 1,
+      });
       setTimeout(() => {
         navigation.removeListener;
         if (pageName === "DetailsPage") {
@@ -70,6 +94,12 @@ export const handleDeleteGig = async (id, pageName, navigation, getAllGigs) => {
       }
     }
   } catch (error) {
-    showToast("Could not delete", Toast.positions.BOTTOM, colors.terraCotta);
+    let toast = Toast.show("Could not delete", {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.BOTTOM,
+      backgroundColor: colors.terraCotta,
+      textColor: colors.beige,
+      opacity: 1,
+    });
   }
 };
